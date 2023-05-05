@@ -4,7 +4,7 @@ import logo from '../../Assets/images/logo.jpeg'
 
 export default function Navbar() {
     return (
-        <nav class="navbar navbar-expand-lg navbar-dark py-3 bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark  bg-primary">
             <div class="container">
                <Link class="navbar-brand" to='/'> <img className='' src={logo} alt="" width={45}/></Link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
