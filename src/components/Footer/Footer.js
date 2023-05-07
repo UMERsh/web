@@ -9,13 +9,13 @@ export default function Footer() {
   <>
    <div className="container-fluid">
     <div className="row">
-      <div className="col-3 bg-dark text-white ">
+      <div className="col-12 col-md-3 bg-dark text-white ">
          <img className='py-2' src={logo} alt="" width='50px' /> <b>NBCBurewala</b>
           <p >Neeli Bar Club Burewala since its inception <br /> has grown to a membership strength of <br /> about 600.</p>   
              
       </div>
       
-      <div className="col-3 bg-dark text-white">
+      <div className="col-12 col-md-3 bg-dark text-white">
           <h3>Quick Links</h3>
           <ul>
             <Link to='' className='text-decoration-none'><li className='text-white text-decoration-none'>Home</li></Link>
@@ -26,7 +26,7 @@ export default function Footer() {
           </ul>
              
       </div>
-      <div className="col-3 bg-dark text-white">
+      <div className="col-12 col-md-3 bg-dark text-white">
          <h3>Facilities </h3>
           <ul>
           <Link to='' className='text-decoration-none'><li className='text-white '>Sports</li></Link>
@@ -36,7 +36,7 @@ export default function Footer() {
              <li></li>
             </ul>             
       </div>
-      <div className="col-3 bg-dark text-white">
+      <div className="col-12 col-md-3 bg-dark text-white">
             <h3>Get In Touch</h3>
           <p>Neeli Bar Club Burewala since its inception <br /> has grown to a membership strength of <br /> about 600.</p>   
              

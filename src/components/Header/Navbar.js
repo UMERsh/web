@@ -1,8 +1,25 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../Assets/images/logo.jpeg'
+import { signOut } from 'firebase/auth';
+import { auth, firestore } from 'config/Firebase';
+import { useAuthContext } from 'context/AuthContext';
+import { collection, getDocs, query, where } from 'firebase/firestore/lite';
 
 export default function Navbar() {
+    const { isAuthenticated, setIsAuthenticated, userRole } = useAuthContext()
+    const navigate = useNavigate()
+
+    // handle logout
+    const handleLogout = () => {
+        signOut(auth).then(() => {
+            setIsAuthenticated(false)
+            console.log("Sign-out successful");
+            navigate('/')
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
     return (
         <nav class="navbar navbar-expand-lg navbar-dark  bg-primary">
             <div class="container">
@@ -34,9 +51,23 @@ export default function Navbar() {
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <Link className='btn btn-info' to='/auth/login'>Login</Link>
-                        </li>
+                        {userRole === "manager"
+                            ? <li class="nav-item">
+                                <Link class="nav-link me-3" to='/management'>Management</Link>
+                            </li>
+                            : ""
+                        }
+
+
+                        {isAuthenticated
+                            ? <li class="nav-item">
+                                <button className='btn btn-info' onClick={handleLogout}>Logout</button>
+                            </li>
+                            : <li class="nav-item">
+                                <Link className='btn btn-info' to='/auth/login'>Login</Link>
+                            </li>
+                        }
+
                     </ul>
 
                 </div>

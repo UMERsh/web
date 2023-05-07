@@ -1,4 +1,5 @@
 $primary:#184e77;
+$info:#00afb9;
 @import './scss/bootstrap';
 #root{
     display: flex;
@@ -8,4 +9,11 @@ $primary:#184e77;
 main{
     background-color: #d9ed92;
     flex: 1 0 auto;
+}
+::-webkit-scrollbar{
+    background-color: white;
+    width: 15px;   
+}
+::-webkit-scrollbar-thumb{
+    background-color:#bcbcbc;
 }

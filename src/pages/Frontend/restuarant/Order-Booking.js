@@ -1,6 +1,8 @@
 import { firestore } from 'config/Firebase';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore/lite';
-import React, { useState } from 'react'
+import { addDoc, collection, getDocs, query, serverTimestamp, where } from 'firebase/firestore/lite';
+import React, { useEffect, useRef, useState } from 'react'
+import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
+import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 
 const intitalState = {
   date: "",
@@ -25,6 +27,34 @@ const intitalState = {
 }
 export default function OrderBooking() {
   const [state, setState] = useState(intitalState)
+  const [data, setData] = useState([])
+  const [documents, setDocuments] = useState([])
+  const [isAmount, setAmount] = useState(0)
+  const [quantity, setQuantity] = useState(1)
+  const amount_ref = useRef()
+
+
+  useEffect(() => {
+    gettingData()
+  }, [])
+
+  const gettingData = async () => {
+
+
+    let array = []
+    const querySnapshot = await getDocs(collection(firestore, "Items"));
+    querySnapshot.forEach((doc) => {
+      array.push(doc.data())
+      setDocuments(array)
+    });
+  }
+
+
+
+
+
+
+
 
   // handle Change
   const handleChange = e => {
@@ -52,7 +82,8 @@ export default function OrderBooking() {
     order_code = order_code.trim()
     item_title = item_title.trim()
     quantity = quantity.trim()
-    amount = amount.trim()
+    // amount = amount.trim()
+
 
     const formData = {
       date,
@@ -77,22 +108,54 @@ export default function OrderBooking() {
       id: window.getRandomId()
     }
 
-
-
-
     console.log('state', formData)
-    try {
-      const docRef = await addDoc(collection(firestore, "order-booking"), formData);
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+    // try {
+    //   const docRef = await addDoc(collection(firestore, "order-booking"), formData);
+    //   console.log("Document written with ID: ", docRef.id);
+    // } catch (e) {
+    //   console.error("Error adding document: ", e);
+    // }
 
+  }
+  // handleOrderType
+  const handleOrderType = async (e) => {
+    let orderType = e.target.value
+    state.order_type = orderType;
 
-
+    console.log('orderType', orderType)
+    let array = []
+    const q = query(collection(firestore, "Items"), where("item_type", "==", orderType));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // let data = { firebaseId: doc.id, ...doc.data() }
+      array.push(doc.data())
+      setData(array)
+    });
+    // setIsLoading(false)
 
   }
 
+  // handleItemPrice
+  const handleItemPrice = (e) => {
+    const { value } = e.target
+    // console.log(value);
+    state.item_title = value
+    let filteredData = documents.filter((data, i) => {
+      return data.item_name === value
+    })
+    state.amount = Number(filteredData[0].item_price);
+    setAmount(Number(filteredData[0].item_price))
+    // console.log());
+  }
+  // handleAmount
+  const handleAmount = () => {
+
+  }
+
+  // console.log(data);
+  // data.map((options, i) => {
+  //   return console.log(options.item_name);
+  // })
 
 
   return (
@@ -190,11 +253,10 @@ export default function OrderBooking() {
                 <div className="row mt-4 gx-2">
                   <div className="col-4 col-md-2 ">
                     <label htmlFor="order-type" class="form-label">Order Type</label>
-                    <select class="form-select" id='order-type' name='order_type' onChange={handleChange} aria-label="Default select example">
-                      <option defaultValue>Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" id='order-type' name='order_type' onChange={handleOrderType} aria-label="Default select example">
+                      <option defaultValue="food"></option>
+                      <option value="food">food</option>
+                      <option value="product">product</option>
                     </select>
                   </div>
                   <div className="col-4 col-md-1  ">
@@ -203,20 +265,25 @@ export default function OrderBooking() {
                   </div>
                   <div className="col-4 ">
                     <label htmlFor="item-title" class="form-label">Item Title</label>
-                    <select class="form-select" id='item-title' name='item_title' onChange={handleChange} aria-label="Default select example">
-                      <option defaultValue>Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" id='item-title' name='item_title' onChange={handleItemPrice} aria-label="Default select example">
+                      <option value="">Please Select Items</option>
+                      {data.map((options, i) => {
+                        return <option value={options.item_name} key={i}>{options.item_name}</option>
+                      })}
                     </select>
                   </div>
                   <div className="col mt-4 mt-md-0">
                     <label htmlFor="quantity" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" id="quantity" name='quantity' onChange={handleChange} />
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" id="quantity" name='quantity' onChange={handleAmount} aria-describedby="basic-addon2" />
+                      <span class="input-group-text p-0" id="basic-addon2" ><ArrowDropUpRoundedIcon /></span>
+                      <span class="input-group-text p-0" id="basic-addon2"><ArrowDropDownRoundedIcon /></span>
+                    </div>
+                    {/* <input type="number" class="form-control" id="quantity" name='quantity' onChange={handleAmount} /> */}
                   </div>
                   <div className="col mt-4 mt-md-0">
                     <label htmlFor="amount" class="form-label">Amount</label>
-                    <input type="text" class="form-control" id="amount" name='amount' onChange={handleChange} />
+                    <input type="text" class="form-control" id="amount" name='amount' readOnly value={isAmount} />
                   </div>
                 </div>
                 <div className="row mt-4">

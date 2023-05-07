@@ -1,12 +1,71 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { auth, firestore } from 'config/Firebase'
+import { useAuthContext } from 'context/AuthContext'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { collection, getDocs, query, where } from 'firebase/firestore/lite'
+import { Link, useNavigate } from 'react-router-dom'
+
+const initialState = { email: "", password: "", user_role: "" }
 
 export default function Login() {
+    const [state, setState] = useState(initialState)
+    const [documents, setDocuments] = useState([])
+    const { setIsAuthenticated } = useAuthContext()
+    const [isLoading, setIsLoading] = useState(false)
+    const navigate = useNavigate()
 
-    const handleChange = () => {
+    useEffect(() => {
+        gettingData()
+    }, [])
 
+    const gettingData = async () => {
+        let array = []
+        const querySnapshot = await getDocs(collection(firestore, "users"));
+        querySnapshot.forEach((doc) => {
+            array.push(doc.data())
+            setDocuments(array)
+        });
     }
-    const handleSubmit = () => {
+
+    //  handleChangez
+    const handleChange = e => {
+        const { name, value } = e.target;
+        setState(s => ({ ...s, [name]: value }))
+    }
+
+    //  handleSubmit
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let { email, password, user_role } = state
+
+        if (user_role === "") {
+            user_role = "manager"
+        }
+
+        let userRole = documents.filter((data, i) => {
+            return data.email == email
+        })
+
+        if (!userRole[0]) {
+            return window.toastify(`This email doesn't exists`, "error")
+        } else {
+            if (user_role !== userRole[0].user_role) {
+                return window.toastify(`This email is registered for ${userRole[0].user_role}`, "error")
+            } else {
+                setIsLoading(true)
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        setIsAuthenticated(true)
+                        window.toastify("Logged in successfully", "success")
+                        navigate('/')
+                    })
+                    .catch((error) => {
+                        window.toastify(error.message, "error")
+                    });
+                setIsLoading(false)
+            }
+        }
+
     }
 
     return (
@@ -19,21 +78,21 @@ export default function Login() {
                             <form className='pb-4' onSubmit={handleSubmit}>
                                 <div className=" mb-3 ">
                                     {/* <label htmlFor="floatingInput" className='text-secondary'>Email address</label> */}
-                                    <input type="email" className="form-control " id="email" name='email' onChange={handleChange} placeholder="name@example.com" />
+                                    <input type="email" className="form-control " id="email" name='email' onChange={handleChange} placeholder="Enter Email Here..." />
                                 </div>
-                                <div className=" mb-3">
+                                <div className=" mb-4">
                                     {/* <label htmlFor="floatingPassword" className='text-secondary'>Password</label> */}
-                                    <input type="password" className="form-control " id="password" name='password' onChange={handleChange} placeholder="Password" />
+                                    <input type="password" className="form-control " id="password" name='password' onChange={handleChange} placeholder="Enter Password Here..." />
                                 </div>
-                                <div className="row">
-                                    <div className="col-3 d-flex align-items-center">
-                                        <label htmlFor="user-status " className='fw-bold'>Login as a:</label>
+                                <div className="row ">
+                                    <div className="col-6 col-md-3 d-flex align-items-center">
+                                        <label htmlFor="user-role " className='fw-bold'>Login as:</label>
                                     </div>
-                                    <div className="col">
-                                        <select class="form-select " id='user-status' aria-label="Default select example">
-                                            <option selected>Manager</option>
-                                            <option >Staff</option>
-                                            <option >Clients</option>
+                                    <div className="col-6 col-md-9">
+                                        <select class="form-select " id='user-role' name='user_role' onChange={handleChange} aria-label="Default select example">
+                                            <option value="manager" >Manager</option>
+                                            <option value="client">Client</option>
+                                            <option value="staff">Staff</option>
                                         </select>
                                     </div>
                                 </div>
@@ -41,8 +100,15 @@ export default function Login() {
                                 <div className='text-start my-5 mx-2'>
                                     <Link to="/auth/forgot-password" className='text-primary'>Forgot password?</Link>
                                 </div>
-                                <button className="btn btn-primary w-50 rounded-0 text-white signin ">LOGIN</button>
-                                <div className='mt-5 mx-2'>
+                                <div className="text-center">
+                                    <button className="btn btn-primary  w-50 rounded-0 text-white " disabled={isLoading}>
+                                        {isLoading
+                                            ? <div class="spinner-grow spinner-grow-sm text-light" role="status"></div>
+                                            : "LOGIN"
+                                        }
+                                    </button>
+                                </div>
+                                <div className='text-center mt-5 mx-2'>
                                     <span>Don't have account?</span>
                                     <Link to="/auth/register" className=' mx-2 text-primary '>Register</Link>
                                 </div>
