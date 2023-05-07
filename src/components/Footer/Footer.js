@@ -1,6 +1,9 @@
 import React from 'react'
 // logo
 import logo from '../../Assets/images/logo.jpeg'
+import location from '../../Assets/images/loc.png'
+import dial from '../../Assets/images/telephone-plus.svg'
+import mail from '../../Assets/images/envelope.svg'
 // Link
 import { Link } from 'react-router-dom';
 export default function Footer() {
@@ -38,8 +41,9 @@ export default function Footer() {
       </div>
       <div className="col-12 col-md-3 bg-dark text-white">
             <h3>Get In Touch</h3>
-          <p>Neeli Bar Club Burewala since its inception <br /> has grown to a membership strength of <br /> about 600.</p>   
-             
+             <img src={location}alt="" width={30}/> <br />
+            <Link className='text-decoration-none text-white' to=''> <img className='py-4' src={dial} alt="" /> <i className='px-3 '>0309-3344452</i> </Link> <br />
+            <Link className='text-decoration-none text-white' to=''> <img className='py-2' src={mail} alt="" /> <i className='px-3 '>nbcburewala@gmail.com</i> </Link>
       </div>
          
          <div className="text-center bg-dark text-white  ">Copyright &copy; All Rights Reserved {year} </div>
