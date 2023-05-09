@@ -1,9 +1,11 @@
 import { firestore } from 'config/Firebase';
+import { useAuthContext } from 'context/AuthContext'
 import { addDoc, collection, doc, getDocs, query, serverTimestamp, setDoc, where } from 'firebase/firestore/lite';
 import React, { useEffect, useRef, useState } from 'react'
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 
 
 const intitalState = {
@@ -27,7 +29,7 @@ const intitalState = {
   amount: "",
 
 }
-export default function OrderBooking() {
+export default function OrderBooking(props) {
   const [state, setState] = useState(intitalState)
   const [data, setData] = useState([])
   const [documents, setDocuments] = useState([])
@@ -38,10 +40,24 @@ export default function OrderBooking() {
   const [localStorageData, setLocalStorageData] = useState([])
   const [dummyToggle, setDummyToggle] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [oldItem, setOldItem] = useState({})
+  const { userRole } = useAuthContext()
+
+  const item_title_ref = useRef()
+    const order_type_ref = useRef()
+    const date_ref = useRef()
+    const quantity_ref = useRef()
+    const amount_ref = useRef()
+    const customer_name_ref = useRef()
+    const phone_ref = useRef()
+    const surving_unit_ref = useRef()
+    const sales_man_name_ref= useRef()
 
   useEffect(() => {
     gettingData()
-  }, [])
+  }, [props.counting])
 
   const gettingData = async () => {
     let array = []
@@ -50,6 +66,7 @@ export default function OrderBooking() {
       array.push(doc.data())
       setDocuments(array)
     });
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -208,6 +225,57 @@ export default function OrderBooking() {
 
 
   }
+  // handlelocalstorageupdate
+  const handleLocalStorageUpdate = async () => {
+
+    let { item_title, order_type, date,quantity,amount,customer_name,phone, surving_unit,sales_man_name } = oldItem
+    item_title = item_title.trim()
+    order_type = order_type.trim()
+
+    if (item_title === "") {
+        return window.toastify("Please Select Item Title", "error")
+    }
+    if (!order_type.length) {
+        return window.toastify("Please Select order Type", "error")
+    }
+    if (!date.length) 
+        return window.toastify("Please Select Date", "error")
+    if (!quantity.length) 
+          return window.toastify("Please Enter Quantity", "error")
+    if (!amount.length) 
+            return window.toastify("Please Enter Amount", "error")
+     if (!customer_name.length) 
+              return window.toastify("Please Enter Customer Name", "error")
+     if (!phone.length) 
+                return window.toastify("Please Enter Phone No", "error")
+      if (!surving_unit.length) 
+              return window.toastify("Please Enter Surving Unit", "error")
+    if (!sales_man_name.length) 
+         return window.toastify("Please Enter Sales Man Name", "error")
+    
+
+
+    let updatedData = {
+      item_title,
+       order_type,
+       date,
+      quantity,
+      amount,
+       customer_name,
+       phone,
+      surving_unit,
+     sales_man_name,
+      updatedBy: userRole,
+      dateUpdated: serverTimestamp()
+    }
+    setIsProcessing(true)
+     await setDoc(doc(firestore, "Menu", oldItem.firebaseId), updatedData, { merge: true });
+    gettingData()
+    window.toastify("Updated Successfully", "success")
+    setOldItem(oldItem)
+    setIsProcessing(false)
+}
+
 
   // handleLocalStorageDelete
   const handleLocalStorageDelete = (get) => {
@@ -431,6 +499,20 @@ export default function OrderBooking() {
                           <td scope="col">{items.surving_unit + " / " + items.surving_unit_details}</td>
                           <td scope="col">{items.sales_man_name}</td>
                           <td scope="col">
+                             
+                          <button className='btn btn-sm btn-link' onClick={() => handleLocalStorageUpdate(items.id)}>
+                              <EditTwoToneIcon />
+                            </button>
+                            <div className="modal fade" id="updateModalProduct" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div className="modal-dialog modal-dialog-centered">
+                                                                <div className="modal-content">
+                                                                    <div className="modal-header">
+                                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Update Food Item</h1>
+                                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                     </div>
+                                                                     </div>
+                                                                     </div>
                             <button className='btn btn-sm btn-link' onClick={() => handleLocalStorageDelete(items.id)}>
                               <DeleteTwoToneIcon />
                             </button>

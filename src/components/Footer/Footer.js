@@ -10,6 +10,8 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
   <>
+   <footer className='bg-dark'>
+
    <div className="container-fluid">
     <div className="row">
       <div className="col-12 col-md-3 bg-dark text-white ">
@@ -25,7 +27,6 @@ export default function Footer() {
             <Link to='' className=' text-decoration-none'><li className='text-white text-decoration-none'>Restuarant&Cafe</li></Link>
             <Link to='' className=' text-decoration-none'><li className='text-white '>Contact</li></Link>
        
-            <li></li>
           </ul>
              
       </div>
@@ -36,19 +37,19 @@ export default function Footer() {
             <Link to='' className=' text-decoration-none'><li className='text-white '>Masjid</li></Link>
             <Link to='' className=' text-decoration-none'><li className='text-white '>Parking</li></Link>
        
-             <li></li>
             </ul>             
       </div>
       <div className="col-12 col-md-3 bg-dark text-white">
             <h3>Get In Touch</h3>
-             <img src={location}alt="" width={30}/> <br />
+             <img src={location}alt="" width={30}/> Main multan road burewala <br />
             <Link className='text-decoration-none text-white' to=''> <img className='py-4' src={dial} alt="" /> <i className='px-3 '>0309-3344452</i> </Link> <br />
             <Link className='text-decoration-none text-white' to=''> <img className='py-2' src={mail} alt="" /> <i className='px-3 '>nbcburewala@gmail.com</i> </Link>
       </div>
          
-         <div className="text-center bg-dark text-white  ">Copyright &copy; All Rights Reserved {year} </div>
+         <div className="text-center bg-dark text-white py-5 ">Copyright &copy; All Rights Reserved {year} </div>
     </div>
    </div>
+   </footer>
   </>
     )
 }
