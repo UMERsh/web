@@ -103,9 +103,9 @@ export default function ProductItems(props) {
             <div className="row">
                 {isLoading
                     ? <div className='d-flex justify-content-center my-3'>
-                        <div class="spinner-grow text-primary" role="status"></div>
-                        <div class="spinner-grow text-secondary mx-3" role="status"></div>
-                        <div class="spinner-grow text-success" role="status"></div>
+                        <div className="spinner-grow text-primary" role="status"></div>
+                        <div className="spinner-grow text-secondary mx-3" role="status"></div>
+                        <div className="spinner-grow text-success" role="status"></div>
                     </div>
                     : <div className="col ">
                         {!documents.length
@@ -114,7 +114,7 @@ export default function ProductItems(props) {
                             </div>
                             : <div className='table-responsive'>
 
-                                <table class="table">
+                                <table className="table">
                                     <thead>
                                         <tr className='bg-primary text-white'>
                                             <th scope="col">#</th>
@@ -133,36 +133,36 @@ export default function ProductItems(props) {
                                                 <td>{data.item_type}</td>
                                                 <td className='text-center'>
                                                     <button type="button" className="btn btn-sm btn-link" data-bs-toggle="modal" data-bs-target="#updateModal" onClick={() => { setOldItem(data) }}><EditTwoToneIcon /></button>
-                                                    <div class="modal fade" id="updateModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Products</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <div className="modal fade" id="updateModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div className="modal-dialog modal-dialog-centered">
+                                                            <div className="modal-content">
+                                                                <div className="modal-header">
+                                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Update Products</h1>
+                                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
-                                                                <div class="modal-body text-start">
-                                                                    <div class="mb-3">
+                                                                <div className="modal-body text-start">
+                                                                    <div className="mb-3">
                                                                         <label htmlFor="item-type " className=' mb-1 fw-bold'>Item Type</label>
-                                                                        <select class="form-select" id='item-type' name='item_type' ref={item_type_ref} defaultValue={oldItem.item_type} onChange={handleChange} aria-label="Default select example">
+                                                                        <select className="form-select" id='item-type' name='item_type' ref={item_type_ref} defaultValue={oldItem.item_type} onChange={handleChange} aria-label="Default select example">
                                                                             <option value="" ></option>
                                                                             <option value="food">food</option>
                                                                             <option value="product">product</option>
                                                                         </select>
                                                                     </div>
-                                                                    <div class="mb-3">
-                                                                        <label htmlFor="item-name" class="form-label">Item Name</label>
-                                                                        <input type="text" class="form-control" id="item-name" name='item_name' ref={item_name_ref} defaultValue={oldItem.item_name} onChange={handleChange} placeholder="e.g: French Fries" />
+                                                                    <div className="mb-3">
+                                                                        <label htmlFor="item-name" className="form-label">Item Name</label>
+                                                                        <input type="text" className="form-control" id="item-name" name='item_name' ref={item_name_ref} defaultValue={oldItem.item_name} onChange={handleChange} placeholder="e.g: French Fries" />
                                                                     </div>
-                                                                    <div class="mb-3">
-                                                                        <label htmlFor="item-price" class="form-label">Price</label>
-                                                                        <input type="text" class="form-control" id="item-price" name='item_price' ref={item_price_ref} defaultValue={oldItem.item_price} onChange={handleChange} placeholder="e.g: 100" />
+                                                                    <div className="mb-3">
+                                                                        <label htmlFor="item-price" className="form-label">Price</label>
+                                                                        <input type="text" className="form-control" id="item-price" name='item_price' ref={item_price_ref} defaultValue={oldItem.item_price} onChange={handleChange} placeholder="e.g: 100" />
                                                                     </div>
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-primary px-5" disabled={isProcessing} onClick={handleUpdate}>
+                                                                <div className="modal-footer">
+                                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" className="btn btn-primary px-5" disabled={isProcessing} onClick={handleUpdate}>
                                                                         {isProcessing
-                                                                            ? <div class="spinner-grow spinner-grow-sm text-light" role="status"></div>
+                                                                            ? <div className="spinner-grow spinner-grow-sm text-light" role="status"></div>
                                                                             : "Done"
                                                                         }
                                                                     </button>
@@ -174,7 +174,7 @@ export default function ProductItems(props) {
                                                     {/* <button className='btn btn-link btn-sm me-2' ><EditTwoToneIcon /></button> */}
                                                     <button className='btn btn-link btn-sm' disabled={isProcessingDelete} onClick={() => handleDelete(data.firebaseId)}>
                                                         {isProcessingDelete
-                                                            ? <div class="spinner-border spinner-border-sm text-dark" role="status"></div>
+                                                            ? <div className="spinner-border spinner-border-sm text-dark" role="status"></div>
                                                             : <DeleteTwoToneIcon />
                                                         }
 

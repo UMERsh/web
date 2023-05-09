@@ -4,6 +4,7 @@ import Login from './Login'
 import Register from './Register'
 import Navbar from 'components/Header/Navbar'
 import Footer from 'components/Footer/Footer'
+import ForgotPassword from './Forgot-Password'
 
 export default function index() {
   return (
@@ -13,6 +14,7 @@ export default function index() {
         <Routes>
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
+          <Route path='forgot-password' element={<ForgotPassword />} />
         </Routes>
       </main>
       <Footer />

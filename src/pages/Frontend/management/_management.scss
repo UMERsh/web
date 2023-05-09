@@ -1,0 +1,24 @@
+.table-show-hide {
+    max-height: 550px;
+    overflow-y: hidden;
+}
+
+.table-show-hide::-webkit-scrollbar {
+    // width: 10px;
+    height: 2px ;
+}
+
+/* Track */
+.table-show-hide::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.table-show-hide::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.table-show-hide::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

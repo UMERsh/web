@@ -82,8 +82,8 @@ export default function Register() {
       <div className="container py-5">
         <div className="row ">
           <div className="col-12 offset-0 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-            <div className="card px-4 px-md-5 py-5 shadow-lg rounded-4">
-              <h2 className='text-center py-4'>REGISTER</h2>
+            <div className="card px-4 px-md-5 py-5 border-0 shadow-lg rounded-4">
+              <h2 className='text-center text-info py-4'>REGISTER</h2>
               <form className='pb-4' onSubmit={handleSubmit}>
                 <div className=" mb-3 ">
                   <input type="email" className="form-control " id="email" name='email' onChange={handleChange} placeholder="Enter Email Here..." />
@@ -99,7 +99,7 @@ export default function Register() {
                     <label htmlFor="user-role " className='fw-bold'>Register as:</label>
                   </div>
                   <div className="col-6 col-md-9">
-                    <select class="form-select" id='user-role' name='user_role' onChange={handleChange} aria-label="Default select example">
+                    <select className="form-select" id='user-role' name='user_role' onChange={handleChange} aria-label="Default select example">
                       <option value="manager">Manager</option>
                       <option value="client">Client</option>
                       <option value="staff">Staff</option>
@@ -107,7 +107,7 @@ export default function Register() {
                   </div>
                 </div>
                 <div className="text-center mt-5">
-                  <button className="btn btn-primary  w-50 rounded-0 text-white signin ">REGISTER</button>
+                  <button className='btn btn-info px-5 py-2 rounded-pill text-white buttons' >REGISTER</button>
                 </div>
                 <div className='text-center mt-5 mx-2'>
                   <span>Already have account?</span>

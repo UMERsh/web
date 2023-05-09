@@ -73,15 +73,13 @@ export default function Login() {
             <div className="container py-5">
                 <div className="row ">
                     <div className="col-12 offset-0 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-                        <div className="card px-4 px-md-5 py-5 shadow-lg rounded-4">
-                            <h2 className='text-center py-4'>LOGIN</h2>
+                        <div className="card px-4 px-md-5 py-5 border-0 shadow-lg rounded-4">
+                            <h2 className='text-center text-info py-4'>LOGIN</h2>
                             <form className='pb-4' onSubmit={handleSubmit}>
                                 <div className=" mb-3 ">
-                                    {/* <label htmlFor="floatingInput" className='text-secondary'>Email address</label> */}
                                     <input type="email" className="form-control " id="email" name='email' onChange={handleChange} placeholder="Enter Email Here..." />
                                 </div>
                                 <div className=" mb-4">
-                                    {/* <label htmlFor="floatingPassword" className='text-secondary'>Password</label> */}
                                     <input type="password" className="form-control " id="password" name='password' onChange={handleChange} placeholder="Enter Password Here..." />
                                 </div>
                                 <div className="row ">
@@ -89,7 +87,7 @@ export default function Login() {
                                         <label htmlFor="user-role " className='fw-bold'>Login as:</label>
                                     </div>
                                     <div className="col-6 col-md-9">
-                                        <select class="form-select " id='user-role' name='user_role' onChange={handleChange} aria-label="Default select example">
+                                        <select className="form-select " id='user-role' name='user_role' onChange={handleChange} aria-label="Default select example">
                                             <option value="manager" >Manager</option>
                                             <option value="client">Client</option>
                                             <option value="staff">Staff</option>
@@ -101,9 +99,9 @@ export default function Login() {
                                     <Link to="/auth/forgot-password" className='text-primary'>Forgot password?</Link>
                                 </div>
                                 <div className="text-center">
-                                    <button className="btn btn-primary  w-50 rounded-0 text-white " disabled={isLoading}>
+                                    <button className='btn btn-info px-5 py-2 rounded-pill text-white buttons' disabled={isLoading}>
                                         {isLoading
-                                            ? <div class="spinner-grow spinner-grow-sm text-light" role="status"></div>
+                                            ? <div className="spinner-grow spinner-grow-sm text-light" role="status"></div>
                                             : "LOGIN"
                                         }
                                     </button>

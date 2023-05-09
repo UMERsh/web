@@ -1,6 +1,6 @@
 import React from 'react'
 // logo
-import logo from '../../Assets/images/logo.jpeg'
+import logo from '../../Assets/images/logo.png'
 import location from '../../Assets/images/loc.png'
 import dial from '../../Assets/images/telephone-plus.svg'
 import mail from '../../Assets/images/envelope.svg'
@@ -13,7 +13,7 @@ export default function Footer() {
    <div className="container-fluid">
     <div className="row">
       <div className="col-12 col-md-3 bg-dark text-white ">
-         <img className='py-2' src={logo} alt="" width='50px' /> <b>NBCBurewala</b>
+         <img className='py-2 rounded-circle' src={logo} alt="" width='50px' /> <b>NBCBurewala</b>
           <p >Neeli Bar Club Burewala since its inception <br /> has grown to a membership strength of <br /> about 600.</p>   
              
       </div>

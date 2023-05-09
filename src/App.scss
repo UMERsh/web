@@ -1,4 +1,4 @@
-$primary:#184e77;
+$primary:#1a2c47ff;
 $info:#00afb9;
 @import './scss/bootstrap';
 #root{
@@ -7,7 +7,7 @@ $info:#00afb9;
     min-height: 100vh;
 }
 main{
-    background-color: #d9ed92;
+    // background-color: #e9ecef;
     flex: 1 0 auto;
 }
 ::-webkit-scrollbar{

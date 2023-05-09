@@ -10,60 +10,57 @@ export default function Home() {
   return (
     <>
       {/* Carousel */}
-      <div className="container-fluid ">
-        <div className="row">
-          <div className="col">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src={image3} class="d-block w-100 " alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img src={image5} class="d-block w-100" alt="..." />
-                </div>
-
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
+      <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+          <div className="carousel-item active ">
+            <img src={image3} className="d-block w-100 " height="600vh" alt="picture" />
+            <div className="carousel-caption d-none d-md-block">
+              <h1 className='fw-bold'>BUREWALA GYMKHANA</h1>
             </div>
           </div>
+          <div className="carousel-item">
+            <img src={image5} className="d-block w-100" height="600vh" alt="picture" />
+          </div>
+
         </div>
+        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </button>
       </div>
       {/* Cards */}
       <div className="container">
-        <div className="row">
+        <div className="row row-cols-1 row-cols-sm-3 g-3 my-5">
           <div className="col">
-            <div class="card" >
-              <img src={image} class="card-img-top" alt="..." height='300px' />
-              <div class="card-body">
-                <h5 class="card-title">Sports</h5>
-                <p class="card-text ">The Club offers to its members almost all type of major indoor and outdoor sports facilities.</p>
+            <div className="card shadow" >
+              <img src={image} className="card-img-top" alt="..." height='300px' />
+              <div className="card-body">
+                <h5 className="card-title">Sports</h5>
+                <p className="card-text ">The Club offers to its members almost all type of major indoor and outdoor sports facilities.</p>
               </div>
 
             </div>
           </div>
           <div className="col">
-            <div class="card" >
-              <img src={image6} class="card-img-top" alt="..." height='300px' />
-              <div class="card-body">
-                <h5 class="card-title">Restaurant and Cafe</h5>
-                <p class="card-text">With several facilities catering to all tastes, all food is exquisitely prepared and reasonably priced.</p>
+            <div className="card shadow" >
+              <img src={image6} className="card-img-top" alt="..." height='300px' />
+              <div className="card-body">
+                <h5 className="card-title">Restaurant and Cafe</h5>
+                <p className="card-text">With several facilities catering to all tastes, all food is exquisitely prepared and reasonably priced.</p>
               </div>
 
             </div>
           </div>
           <div className="col">
-            <div class="card" >
-              <img src={image7} class="card-img-top" alt="..." height='300px' />
-              <div class="card-body">
-                <h5 class="card-title">Masjid</h5>
-                <p class="card-text">The Club accommodates the Masjid for perform Namaz for all prayers for the members.</p>
+            <div className="card shadow" >
+              <img src={image7} className="card-img-top" alt="..." height='300px' />
+              <div className="card-body">
+                <h5 className="card-title">Masjid</h5>
+                <p className="card-text">The Club accommodates the Masjid for perform Namaz for all prayers for the members.</p>
               </div>
 
             </div>
