@@ -4,6 +4,7 @@ import { doc, serverTimestamp, setDoc } from 'firebase/firestore/lite'
 import React, { useState } from 'react'
 import FoodItems from './FoodItems'
 import ProductItems from './ProductItems'
+import FoodItemOptions from 'components/FoodItemOptions'
 
 const intitalState = {
     item_type: "",
@@ -40,8 +41,12 @@ export default function AddFoodItem() {
             return window.toastify("Please Enter Item Price Correctly", "error")
         }
 
+
+
+
         let itemData = {
             item_type, item_name, item_price,
+            // item_name_urdu: "",
             dateCreated: serverTimestamp(),
             createdBy: userRole,
             code: Math.random().toString().slice(2, 7)
@@ -81,14 +86,7 @@ export default function AddFoodItem() {
                                         <label htmlFor="item-type " className=' mb-1 fw-bold'>Item Type</label>
                                         <select className="form-select" id='item-type' name='item_type' value={state.item_type} onChange={handleChange} aria-label="Default select example">
                                             <option value="" ></option>
-                                            <option value="dinner">Dinner</option>
-                                            <option value="mutton">Mutton</option>
-                                            <option value="fish">Fish</option>
-                                            <option value="chinese">Chinese</option>
-                                            <option value="fried-rice">Fried Rice</option>
-                                            <option value="noodles">Noodles</option>
-                                            <option value="ice-cream">Ice Cream</option>
-                                            <option value="milk-shake">Milk Shake</option>
+                                            <FoodItemOptions />
                                         </select>
                                     </div>
                                     <div className="mb-3">
@@ -115,7 +113,7 @@ export default function AddFoodItem() {
                 </div>
             </div>
             <FoodItems counting={count} />
-            <ProductItems counting={count} />
+            <ProductItems />
         </>
     )
 }

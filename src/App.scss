@@ -1,22 +1,68 @@
-$primary:#1a2c47ff;
-$info:#00afb9;
+$primary: #1a2c47ff;
+$info: #00afb9;
 @import './scss/bootstrap';
-#root{
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fredericka+the+Great&family=Mogra&family=Monoton&display=swap');
+
+#root {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
-main{
+
+main {
     // background-color: #e9ecef;
     flex: 1 0 auto;
 }
-::-webkit-scrollbar{
+
+.carousel-inner {
+    .carousel-item.active {
+        position: relative;
+
+        .carousel-caption {
+            top: 35%;
+            position: absolute;
+            // background-color: #00afb9 !important;
+            // font-family: 'Mogra', cursive;
+            // font-family: 'Black Ops One', cursive;
+
+            h1 {
+                font-size: 70px;
+                font-family: 'Fredericka the Great', cursive;
+                // text-shadow: 0 0 20px $info;
+                filter: drop-shadow(16px 16px 20px $info);
+
+                span {
+                    font-size: 100px;
+
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:768px) {
+    .carousel-inner {
+        .carousel-item.active {
+            .carousel-caption {
+                h1 {
+                    font-size: 40px;
+
+                    span {
+                        font-size: 60px;
+
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+::-webkit-scrollbar {
     background-color: white;
-    width: 15px;   
+    width: 15px;
 }
-::-webkit-scrollbar-thumb{
-    background-color:#bcbcbc;
-}
-footer{
-    padding: 6vw;
+
+::-webkit-scrollbar-thumb {
+    background-color: #bcbcbc;
 }

@@ -14,8 +14,8 @@ export default function Home() {
         <div className="carousel-inner">
           <div className="carousel-item active ">
             <img src={image3} className="d-block w-100 " height="600vh" alt="picture" />
-            <div className="carousel-caption d-none d-md-block">
-              <h1 className='fw-bold'>BUREWALA GYMKHANA</h1>
+            <div className="carousel-caption">
+              <h1 className='fw-bold '><span>NBC </span>BUREWALA </h1>
             </div>
           </div>
           <div className="carousel-item">

@@ -1,9 +1,55 @@
 import React from 'react'
 
 export default function OrderBookingInformation() {
+
+
+
+  var arr = [
+    { type: "orange", title: "First" },
+    { type: "orange", title: "Second" },
+    { type: "banana", title: "Third" },
+    { type: "banana", title: "Fourth" },
+    { type: "apple", title: "Third" },
+    { type: "apple", title: "Fourth" },
+    { type: "banana", title: "Third" },
+    { type: "banana", title: "Fourth" },
+  ];
+
+  // Create an empty object to store the different types
+  var types = {};
+
+  // Iterate through the array and group the objects by type
+  arr.forEach(function (obj) {
+    var type = obj.type;
+    if (!types[type]) {
+      types[type] = [];
+    }
+    types[type].push(obj);
+  });
+
+  // Create a new array containing the grouped objects
+  var groupedArray = Object.values(types);
+
+  console.log(types.apple);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
-  <>
-    <div className="container my-5">
+    <>
+      <div className="container my-5">
         <div className="row ">
           <div className="col">
             <div className="card rounded-4 shadow pb-5 px-3 px-md-4">
@@ -17,7 +63,7 @@ export default function OrderBookingInformation() {
                       <div className="col">
                         <div className="mb-3">
                           <label for="date" className="form-label">Date *</label>
-                          <input type="date" className="form-control" id="date"  />
+                          <input type="date" className="form-control" id="date" />
                         </div>
                       </div>
                       <div className="col">
@@ -30,16 +76,16 @@ export default function OrderBookingInformation() {
                         <div className="mb-3">
                           <label for="shift" className="form-label">Shift *</label>
                           <select className="form-select" id='item-title' aria-label="Default select example">
-                      <option selected>Morning</option>
-                      <option value="1">Noon</option>
-                      <option value="2">Evening</option>
-                    </select>
+                            <option selected>Morning</option>
+                            <option value="1">Noon</option>
+                            <option value="2">Evening</option>
+                          </select>
                         </div>
                       </div>
                     </div>
                     {/* party name  */}
                     <div className="row">
-                    <div className="col">
+                      <div className="col">
                         <div className="mb-3">
                           <label for="party-name" className="form-label">Party Name *</label>
                           <input type="text" className="form-control" id="party-name" />
@@ -48,7 +94,7 @@ export default function OrderBookingInformation() {
                     </div>
                     {/* customer info  */}
                     <div className="row ">
-                    <div className="col">
+                      <div className="col">
                         <div className="mb-3">
                           <label for="customer-name" className="form-label">Customer Name *</label>
                           <input type="text" className="form-control" id="customer-name" />
@@ -79,24 +125,24 @@ export default function OrderBookingInformation() {
                     </div>
                     {/* preparation  */}
                     <div className="row">
-                    <div className="col">
-                            <label for="surving-unit" className="form-label">Preparation Date&Time *</label>
-                            <div className='d-flex '>
-                              <input type="date" className="form-control me-4" id="preparation_date" />
-                            <input type="time" className="form-control" />
-                    </div>
+                      <div className="col">
+                        <label for="surving-unit" className="form-label">Preparation Date&Time *</label>
+                        <div className='d-flex '>
+                          <input type="date" className="form-control me-4" id="preparation_date" />
+                          <input type="time" className="form-control" />
+                        </div>
                       </div>
-                     </div>
+                    </div>
                     {/* delivery */}
                     <div className="row my-3">
-                    <div className="col">
-                            <label for="surving-unit" className="form-label">Delivery Date&Time *</label>
-                            <div className='d-flex '>
-                              <input type="date" className="form-control me-4" id="delivery_date" />
-                            <input type="time" className="form-control" />
-                    </div>
+                      <div className="col">
+                        <label for="surving-unit" className="form-label">Delivery Date&Time *</label>
+                        <div className='d-flex '>
+                          <input type="date" className="form-control me-4" id="delivery_date" />
+                          <input type="time" className="form-control" />
+                        </div>
                       </div>
-                     </div>
+                    </div>
                     {/* delivery man */}
                     <div className="my-3">
                       <label for="delivery_man" className="form-label">Delivery Man*</label>
@@ -107,7 +153,7 @@ export default function OrderBookingInformation() {
                 {/*  */}
 
                 <div className="row mt-4 gx-2">
-                 
+
                   <div className="col-4 col-md-1  ">
                     <label for="order-code" className="form-label">Code </label>
                     <input type="text" className="form-control" id="order-code" />
@@ -140,6 +186,6 @@ export default function OrderBookingInformation() {
           </div>
         </div>
       </div >
-  </>
+    </>
   )
 }

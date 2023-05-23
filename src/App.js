@@ -5,12 +5,12 @@ import 'react-toastify/dist/ReactToastify.css'
 import Routes from './routes/Routes';
 import AuthContextProvider from 'context/AuthContext';
 import { ToastContainer } from 'react-toastify';
+
 function App() {
   return (
     <>
       <AuthContextProvider>
         <Routes />
-
         {/* react toastify */}
         <ToastContainer
           position="bottom-left"
@@ -24,8 +24,6 @@ function App() {
           pauseOnHover
           theme="light"
         />
-
-
 
       </AuthContextProvider>
     </>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import logo from 'Assets/images/logo.png'
+import logo from 'Assets/images/logo1.png'
 import { signOut } from 'firebase/auth';
 import { auth } from 'config/Firebase';
 import { useAuthContext } from 'context/AuthContext';
@@ -31,14 +31,18 @@ export default function Navbar() {
                         <li className="nav-item ">
                             <Link className="nav-link active me-3" to='/'>Home</Link>
                         </li>
-                        <li className="nav-item dropdown">
-                            <button className="btn btn-link nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Restuarant</button>
-                            <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to='/restuarant/kot-information'>KOT Information</Link></li>
-                                <li><Link className="dropdown-item" to='/restuarant/order-booking'>Order Booking</Link></li>
-                                <li><Link className="dropdown-item" to='/restuarant/order-booking-information'>Order Booking Information</Link></li>
-                            </ul>
-                        </li>                        
+                        {userRole === "manager" || userRole === "staff"
+                            ? <li className="nav-item dropdown">
+                                <button className="btn btn-link nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Restuarant</button>
+                                <ul className="dropdown-menu">
+                                    <li><Link className="dropdown-item" to='/restuarant/kot-information'>KOT Information</Link></li>
+                                    <li><Link className="dropdown-item" to='/restuarant/order-booking'>Order Booking</Link></li>
+                                    <li><Link className="dropdown-item" to='/restuarant/order-booking-information'>Order Booking Information</Link></li>
+                                </ul>
+                            </li>
+                            : ""
+                        }
+
                         <li className="nav-item dropdown">
                             <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown
@@ -56,7 +60,6 @@ export default function Navbar() {
                             </li>
                             : ""
                         }
-
 
                         {isAuthenticated
                             ? <li className="nav-item">

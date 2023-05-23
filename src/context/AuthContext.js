@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth, firestore } from 'config/Firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore/lite';
 
 const AuthContext = createContext()
@@ -23,7 +22,7 @@ export default function AuthContextProvider(props) {
                 setIsAuthenticated(false)
                 console.log('no data found')
             }
-        });
+        })
     }, [userRole])
 
     const gettingRole = async (email) => {

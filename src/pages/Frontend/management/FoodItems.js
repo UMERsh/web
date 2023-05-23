@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import FoodItemOptions from 'components/FoodItemOptions';
 
 
 export default function FoodItems(props) {
@@ -91,13 +92,7 @@ export default function FoodItems(props) {
 
 
     return (
-        <>
-            <div className="row ">
-                <div className="col">
-                    <h3>Menu</h3>
-                </div>
-
-            </div><hr />
+        <>            
             <div className="row">
                 {isLoading
                     ? <div className='d-flex justify-content-center my-3'>
@@ -107,7 +102,6 @@ export default function FoodItems(props) {
                     </div>
                     : <div className="col ">
                         <div className="card p-4 shadow-lg border-0 bg-light">
-
                             {!documents.length
                                 ? <div>
                                     <p className='text-secondary'>No items have been added yet</p>
@@ -143,15 +137,7 @@ export default function FoodItems(props) {
                                                                         <div className="mb-3">
                                                                             <label htmlFor="item-type " className=' mb-1 fw-bold'>Item Type</label>
                                                                             <select className="form-select" id='item-type' name='item_type' ref={item_type_ref} value={oldItem.item_type} onChange={handleChange} aria-label="Default select example">
-                                                                                <option value="" ></option>
-                                                                                <option value="dinner">Dinner</option>
-                                                                                <option value="mutton">Mutton</option>
-                                                                                <option value="fish">Fish</option>
-                                                                                <option value="chinese">Chinese</option>
-                                                                                <option value="fried-rice">Fried Rice</option>
-                                                                                <option value="noodles">Noodles</option>
-                                                                                <option value="ice-cream">Ice Cream</option>
-                                                                                <option value="milk-shake">Milk Shake</option>
+                                                                                <FoodItemOptions />
                                                                             </select>
                                                                         </div>
                                                                         <div className="mb-3">
@@ -199,7 +185,6 @@ export default function FoodItems(props) {
                 }
 
             </div>
-
         </>
     )
 }

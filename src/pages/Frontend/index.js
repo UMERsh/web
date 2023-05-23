@@ -1,28 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from './Home'
 import Navbar from 'components/Header/Navbar'
 import Footer from 'components/Footer/Footer'
-import KotInformation from './restuarant/Kot-Information'
-import OrderBooking from './restuarant/Order-Booking'
-import OrderBookingInformation from './restuarant/Order-Booking-Information'
 import Management from './management'
+import Restuarant from 'pages/Frontend/restuarant/index'
 import { useAuthContext } from 'context/AuthContext'
+import LoaderAnimation from 'components/LoaderAnimation'
 
-export default function index() {
+export default function Index() {
+    const { userRole } = useAuthContext()
     return (
         <>
             <Navbar />
-            <main>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='management' element={<Management />} />
-                    <Route path='restuarant/kot-information' element={<KotInformation />} />
-                    <Route path='restuarant/order-booking' element={<OrderBooking />} />
-                    <Route path='restuarant/order-booking-information' element={<OrderBookingInformation />} />
-                </Routes>
-            </main>
-            <Footer />
+            {userRole == ""
+                ? <LoaderAnimation />
+                : <>
+                    <main >
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='restuarant/*' element={userRole !== "" && userRole == 'staff' || userRole == 'manager' ? <Restuarant /> : <Home />} />
+                            <Route path='management/*' element={userRole !== "" && userRole == 'manager' ? <Management /> : <Home />} />
+                        </Routes>
+                    </main >
+                    <Footer />
+                </>
+            }
         </>
     )
 }

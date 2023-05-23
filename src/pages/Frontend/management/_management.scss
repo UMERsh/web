@@ -1,11 +1,66 @@
+$info: #00afb9;
+
 .table-show-hide {
     max-height: 550px;
     overflow-y: hidden;
 }
 
+.management-tabs {
+    .nav-item {
+        a.active {
+            border: 1px solid $info !important;
+            border-bottom: 0px !important;
+            color: $info !important;
+        }
+    }
+}
+
+.amount-sale {
+    .col-6 {
+        border: 1px solid white;
+    }
+
+    .col-6:nth-child(4) {
+        border: 1px solid white;
+        border-right: 1px solid $info;
+    }
+
+    .col-6:hover {
+        border: 1px solid $info !important;
+    }
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .management-tabs {
+        .nav-item {
+            a.active {
+                border-bottom: 1px solid $info !important;
+                border-radius: 7px;
+                padding-left: 10px;
+            }
+        }
+    }
+
+    .amount-sale {
+        .col-6:nth-child(4) {
+            border-right: 1px solid white;
+        }
+    }
+
+}
+
+.table-max-height {
+    max-height: 500px;
+}
+
+
+
+
 .table-show-hide::-webkit-scrollbar {
     // width: 10px;
-    height: 2px ;
+    height: 2px;
 }
 
 /* Track */
