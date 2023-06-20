@@ -24,7 +24,6 @@ function App() {
           pauseOnHover
           theme="light"
         />
-
       </AuthContextProvider>
     </>
   );

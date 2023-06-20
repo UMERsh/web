@@ -7,6 +7,7 @@ import Management from './management'
 import Restuarant from 'pages/Frontend/restuarant/index'
 import { useAuthContext } from 'context/AuthContext'
 import LoaderAnimation from 'components/LoaderAnimation'
+import Membership from './membership/index'
 
 export default function Index() {
     const { userRole } = useAuthContext()
@@ -21,6 +22,7 @@ export default function Index() {
                             <Route path='/' element={<Home />} />
                             <Route path='restuarant/*' element={userRole !== "" && userRole == 'staff' || userRole == 'manager' ? <Restuarant /> : <Home />} />
                             <Route path='management/*' element={userRole !== "" && userRole == 'manager' ? <Management /> : <Home />} />
+                            <Route path='membership/*' element={<Membership />} />
                         </Routes>
                     </main >
                     <Footer />

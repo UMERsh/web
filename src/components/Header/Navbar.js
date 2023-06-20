@@ -45,13 +45,12 @@ export default function Navbar() {
 
                         <li className="nav-item dropdown">
                             <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                                Membership
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Action</a></li>
-                                <li><a className="dropdown-item" href="#">Another action</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                <li><Link className="dropdown-item" to='membership/form'>Member Form</Link></li>
+                                <li><Link className="dropdown-item" to='membership/expenses'>Expenses</Link></li>
+                                <li><Link className="dropdown-item" to='membership/finalreport'>Final Report</Link></li>
                             </ul>
                         </li>
                         {userRole === "manager"
