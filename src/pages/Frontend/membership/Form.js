@@ -56,7 +56,7 @@ export default function Form() {
       dateCreated: moment().format('YYYY-MM-DD,h:mm:ss a')
     }
 
-    // console.log(formData);
+    console.log(formData);
     nextFunction(formData)
   }
 
