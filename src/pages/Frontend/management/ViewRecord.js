@@ -10,6 +10,7 @@ export default function ViewRecord() {
   const [documents, setDocuments] = useState([])
   const [filteredData, setFilteredData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [viewMore, setViewMore] = useState(true)
   const durationRef = useRef()
 
   useEffect(() => {
@@ -64,6 +65,46 @@ export default function ViewRecord() {
   // handleMemberShip
   const handleMemberShip = e => setFilteredData(documents.filter(item => item.membership_number.toLowerCase().includes(e.target.value.toLowerCase()) || item.customer_name.toLowerCase().includes(e.target.value.toLowerCase())))
 
+  // handleFakePrint
+  const handleFakePrint = (get) => {
+    // var printed = document.getElementById('unique')
+    // var printWindow = window.open('', '', 'left=0, top=0, width=800, height=500, toolbar=0, scrollbars=0, status=0');
+    // printWindow.document.write(printed.innerHTML);
+    // printWindow.document.close();
+    // printWindow.focus();
+    // printWindow.print();
+    // window.print(printed)
+
+
+    var prtContent = document.getElementById("unique");
+    var tableId = document.getElementById("table-id");
+
+
+
+    // var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+    // WinPrint.document.write(prtContent.innerHTML);
+    // WinPrint.focus();
+    // WinPrint.print();
+    // // WinPrint.close();
+    // WinPrint.document.close();
+
+    filteredData.map((data, i) => {
+      let originalContents = document.body.innerHTML;
+      document.body.innerHTML = `<table style="width:100%;background-color:red;">
+      <tr>
+        <th>${data.date}</th>
+        <th>${data.amount}</th>
+        <th>${data.id}</th>
+      </tr>
+    </table>`
+
+      window.print();
+      document.body.innerHTML = originalContents;
+    })
+
+  }
+
+
 
   return (
     <>
@@ -108,8 +149,8 @@ export default function ViewRecord() {
           <div className="spinner-grow text-secondary mx-3" role="status"></div>
           <div className="spinner-grow text-success" role="status"></div>
         </div>
-        : <div className="table-responsive table-max-height mt-5">
-          <table class="table table-light table-striped-columns">
+        : <div className={`table-responsive mt-4 ${viewMore ? "table-show-hide" : ""}`}>
+          <table class="table table-light table-striped-columns" id='table-id'>
             <thead>
               <tr>
                 <th scope="col">Customer Name</th>
@@ -118,6 +159,7 @@ export default function ViewRecord() {
                 <th scope="col">Order Type</th>
                 <th scope="col">Item Title</th>
                 <th scope="col">Salesman Name</th>
+                <th scope="col">Serving Area</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Amount</th>
               </tr>
@@ -137,6 +179,7 @@ export default function ViewRecord() {
                     <td scope="col">{data.order_type}</td>
                     <td scope="col">{data.item_title}</td>
                     <td scope="col">{data.sales_man_name}</td>
+                    <td scope="col">{data.serving_area}</td>
                     <td scope="col">{data.quantity}</td>
                     <th scope="col"><span className='fw-light'>Rs. </span>{data.amount}</th>
                   </tr>
@@ -144,12 +187,14 @@ export default function ViewRecord() {
               </tbody>
             }
           </table>
-
         </div>
 
       }
+      <div className='text-end mt-4  pe-5'>
+        <button className='btn btn-link' onClick={() => setViewMore(!viewMore)}>{viewMore ? "View More" : "View Less"}</button>
+      </div>
 
-      <div className="row my-4 g-0 amount-sale">
+      <div className="row my-5 g-0 amount-sale" id='unique'>
         <div className="col-6 col-md-4 col-lg-2 py-3  text-center ">
           <h5 className='fw-bold '>Today's Amount</h5>
           <h5 className="text-info fw-bold">Rs. {durationRef.current !== undefined && durationRef.current.value === "today" ? filteredData.reduce((a, v) => a = a + v.amount, 0) : 0}</h5>

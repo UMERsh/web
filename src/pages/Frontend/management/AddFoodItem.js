@@ -9,6 +9,7 @@ import FoodItemOptions from 'components/FoodItemOptions'
 const intitalState = {
     item_type: "",
     item_name: "",
+    // item_name_urdu: "",
     item_price: ""
 }
 
@@ -27,7 +28,8 @@ export default function AddFoodItem() {
 
     // handleSubmit
     const handleSubmit = async () => {
-        let { item_type, item_name, item_price } = state
+
+        var { item_type, item_name, item_price,} = state
         item_name = item_name.trim()
         item_price = item_price.trim()
 
@@ -40,29 +42,29 @@ export default function AddFoodItem() {
         if (!item_price.length) {
             return window.toastify("Please Enter Item Price Correctly", "error")
         }
+        
+        const appiUrl = `https://api.mymemory.translated.net/get?q=${item_name}&langpair=en-GB|ur-PK`
+        fetch(appiUrl).then((res) => res.json()).then(async (data) => {
+            let item_name_urdu = data.responseData.translatedText
+            let itemData = {
+                item_type, item_name, item_price, item_name_urdu,
+                dateCreated: serverTimestamp(),
+                createdBy: userRole,
+                code: Math.random().toString().slice(2, 7)
+            }
+            setLoading(true)
+            try {
+                await setDoc(doc(firestore, "Menu", window.getRandomId()), itemData)
+                window.toastify("Item added successfully", "success")
+                setCount(!count)
+            } catch (e) {
+                window.toastify("Something went wrong", "error")
+            }
+            setLoading(false)
+            setState(intitalState)
+        })
 
-
-
-
-        let itemData = {
-            item_type, item_name, item_price,
-            // item_name_urdu: "",
-            dateCreated: serverTimestamp(),
-            createdBy: userRole,
-            code: Math.random().toString().slice(2, 7)
-        }
-        setLoading(true)
-        try {
-            await setDoc(doc(firestore, "Menu", window.getRandomId()), itemData)
-            window.toastify("Item added successfully", "success")
-            setCount(!count)
-        } catch (e) {
-            window.toastify("Something went wrong", "error")
-        }
-        setLoading(false)
-        setState(intitalState)
     }
-    // console.log();
 
     return (
         <>

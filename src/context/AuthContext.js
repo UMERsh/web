@@ -20,7 +20,6 @@ export default function AuthContextProvider(props) {
             } else {
                 setUserRole("")
                 setIsAuthenticated(false)
-                console.log('no data found')
             }
         })
     }, [userRole])

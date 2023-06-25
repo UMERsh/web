@@ -1,8 +1,8 @@
+import React, { useState } from 'react'
 import { auth, firestore } from 'config/Firebase'
 import { useAuthContext } from 'context/AuthContext'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore/lite'
-import React, { useEffect, useState } from 'react'
+import { doc, setDoc } from 'firebase/firestore/lite'
 import { Link, useNavigate } from 'react-router-dom'
 
 const initialState = { email: "", password: "", confirm_password: "", user_role: "" }
@@ -35,7 +35,7 @@ export default function Register() {
         return alert("password dosn't match")
       }
       if (user_role === "") {
-        user_role = "manager"
+        user_role = "visiter"
       }
 
       const userData = {
@@ -68,9 +68,8 @@ export default function Register() {
 
     try {
       await setDoc(doc(firestore, "users", userData.email), userData, { merge: true });
-      console.log("Document written in firestore");
     } catch (e) {
-      console.error("Error adding document: ", e);
+      window.toastify(e.message, "error")
     }
   }
 
@@ -100,9 +99,9 @@ export default function Register() {
                   </div>
                   <div className="col-6 col-md-9">
                     <select className="form-select" id='user-role' name='user_role' onChange={handleChange} aria-label="Default select example">
-                      <option value="manager">manager</option>
-                      <option value="client">client</option>
+                      <option value="visiter">visiter</option>
                       <option value="staff">staff</option>
+                      <option value="manager">manager</option>
                     </select>
                   </div>
                 </div>

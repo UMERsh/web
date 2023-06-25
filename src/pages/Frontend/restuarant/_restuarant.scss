@@ -1,20 +1,13 @@
 .printable-table {
-    min-height: 700px;
+    height: 648px;
     overflow: hidden;
 }
 
 .edit-and-print {
-    position: relative;
+    max-height: 567px;
+    overflow: hidden;
 
-    .btn-sm:nth-child(1) {
-        position: absolute;
-        top: 10%;
-    }
-
-    .btn-sm:nth-child(2) {
-        position: absolute;
-        bottom: 10%;
-    }
+    
 }
 
 @media only screen and (max-width: 768px) {

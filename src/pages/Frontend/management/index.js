@@ -10,11 +10,11 @@ export default function index() {
             <div className="container">
                 <h1 className="text-center mt-5 fw-bold">MANAGEMENT</h1>
 
-                <nav class="navbar navbar-expand-md mb-5 bg-body-tertiary">
-                    <button class="navbar-toggler border-info " type="button" data-bs-toggle="collapse" data-bs-target="#managementSupportedContent" aria-controls="managementSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                <nav className="navbar navbar-expand-md mb-5 bg-body-tertiary">
+                    <button className="navbar-toggler border-info " type="button" data-bs-toggle="collapse" data-bs-target="#managementSupportedContent" aria-controls="managementSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse mt-4 mt-md-0" id="managementSupportedContent">
+                    <div className="collapse navbar-collapse mt-4 mt-md-0" id="managementSupportedContent">
                         <ul className=" navbar-nav nav-tabs border-bottom border-info w-100 management-tabs">
                             <li className="nav-item pe-3">
                                 <NavLink className="nav-link text-primary border-0 " to="/management" end>Add Items</NavLink>

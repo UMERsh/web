@@ -63,26 +63,30 @@ export default function FoodItems(props) {
             return window.toastify("Please Enter Item Price Correctly", "error")
         }
 
-
-        let updatedData = {
-            item_type,
-            item_name,
-            item_price,
-            updatedBy: userRole,
-            dateUpdated: serverTimestamp()
-        }
+        const appiUrl = `https://api.mymemory.translated.net/get?q=${item_name}&langpair=en-GB|ur-PK`
         setIsProcessing(true)
-        await setDoc(doc(firestore, "Menu", oldItem.firebaseId), updatedData, { merge: true });
-        gettingData()
-        window.toastify("Updated Successfully", "success")
-        setOldItem(oldItem)
-        setIsProcessing(false)
+        fetch(appiUrl).then((res) => res.json()).then(async (data) => {
+            let item_name_urdu = data.responseData.translatedText
+
+            let updatedData = {
+                item_type,
+                item_name,
+                item_price,
+                item_name_urdu,
+                updatedBy: userRole,
+                dateUpdated: serverTimestamp()
+            }
+            await setDoc(doc(firestore, "Menu", oldItem.firebaseId), updatedData, { merge: true });
+            gettingData()
+            window.toastify("Updated Successfully", "success")
+            setOldItem(oldItem)
+            setIsProcessing(false)
+        })
     }
 
 
     //delete
     const handleDelete = async (get) => {
-        console.log(get);
         setIsProcessingDelete(true)
         await deleteDoc(doc(firestore, "Menu", get));
         gettingData()
@@ -92,7 +96,7 @@ export default function FoodItems(props) {
 
 
     return (
-        <>            
+        <>
             <div className="row">
                 {isLoading
                     ? <div className='d-flex justify-content-center my-3'>
@@ -142,16 +146,16 @@ export default function FoodItems(props) {
                                                                         </div>
                                                                         <div className="mb-3">
                                                                             <label htmlFor="item-name" className="form-label">Item Name</label>
-                                                                            <input type="text" className="form-control" id="item-name" name='item_name' ref={item_name_ref} defaultValue={oldItem.item_name} value={oldItem.item_name !== undefined ? oldItem.item_name : ""} onChange={handleChange} placeholder="e.g: French Fries" />
+                                                                            <input type="text" className="form-control" id="item-name" name='item_name' ref={item_name_ref} value={oldItem.item_name !== undefined ? oldItem.item_name : ""} onChange={handleChange} placeholder="e.g: French Fries" />
                                                                         </div>
                                                                         <div className="mb-3">
                                                                             <label htmlFor="item-price" className="form-label">Price</label>
-                                                                            <input type="text" className="form-control" id="item-price" name='item_price' ref={item_price_ref} defaultValue={oldItem.item_price} value={oldItem.item_price !== undefined ? oldItem.item_price : ""} onChange={handleChange} placeholder="e.g: 100" />
+                                                                            <input type="text" className="form-control" id="item-price" name='item_price' ref={item_price_ref} value={oldItem.item_price !== undefined ? oldItem.item_price : ""} onChange={handleChange} placeholder="e.g: 100" />
                                                                         </div>
                                                                     </div>
                                                                     <div className="modal-footer">
                                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        <button type="button" className="btn btn-primary px-5" disabled={isProcessing} onClick={handleUpdate}>
+                                                                        <button type="button" className="btn btn-primary px-5" disabled={isProcessing} onClick={handleUpdate} data-bs-dismiss="modal">
                                                                             {isProcessing
                                                                                 ? <div className="spinner-grow spinner-grow-sm text-light" role="status"></div>
                                                                                 : "Done"

@@ -84,7 +84,6 @@ export default function ProductItems(props) {
 
     //delete
     const handleDelete = async (get) => {
-        console.log(get);
         setIsProcessingDelete(true)
         await deleteDoc(doc(firestore, "Items", get));
         gettingData()

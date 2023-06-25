@@ -5,6 +5,7 @@ import Register from './Register'
 import Navbar from 'components/Header/Navbar'
 import Footer from 'components/Footer/Footer'
 import ForgotPassword from './Forgot-Password'
+import Nopage from 'pages/Nopage'
 
 export default function index() {
   return (
@@ -15,6 +16,7 @@ export default function index() {
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
           <Route path='forgot-password' element={<ForgotPassword />} />
+          <Route path='*' element={<Nopage />} />
         </Routes>
       </main>
       <Footer />

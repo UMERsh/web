@@ -14,3 +14,11 @@ export default function FoodItemOptions() {
         </>
     )
 }
+
+
+
+
+{/* <option value="chinese">Chinese</option>
+            <option value="pakistani">Pakistani</option>
+            <option value="bar-b-q">Bar B Q</option>
+            <option value="tandoor">Tandoor</option> */}

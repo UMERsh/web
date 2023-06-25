@@ -13,10 +13,10 @@ export default function Navbar() {
     const handleLogout = () => {
         signOut(auth).then(() => {
             setIsAuthenticated(false)
-            console.log("Sign-out successful");
+            window.toastify("Log out successful","success")
             navigate('/')
-        }).catch((error) => {
-            console.log(error);
+        }).catch((error) => {            
+            window.toastify(error.message,"error")
         });
     }
     return (
@@ -31,24 +31,20 @@ export default function Navbar() {
                         <li className="nav-item ">
                             <Link className="nav-link active me-3" to='/'>Home</Link>
                         </li>
+
                         {userRole === "manager" || userRole === "staff"
-                            ? <li className="nav-item dropdown">
-                                <button className="btn btn-link nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Restuarant</button>
-                                <ul className="dropdown-menu">
-                                    <li><Link className="dropdown-item" to='/restuarant/kot-information'>KOT Information</Link></li>
-                                    <li><Link className="dropdown-item" to='/restuarant/order-booking'>Order Booking</Link></li>
-                                    <li><Link className="dropdown-item" to='/restuarant/order-booking-information'>Order Booking Information</Link></li>
-                                </ul>
+                            ? <li className="nav-item ">
+                                <Link className="nav-link me-3" to='/restuarant/order-booking'>Restuarant</Link>
                             </li>
                             : ""
                         }
 
                         <li className="nav-item dropdown">
-                            <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                            <a className="nav-link me-3 dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Membership
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Action</a></li>
+                                <li><Link className="dropdown-item" to="/membership/form">Membership Form</Link></li>
                                 <li><a className="dropdown-item" href="#">Another action</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="#">Something else here</a></li>
@@ -62,16 +58,15 @@ export default function Navbar() {
                         }
 
                         {isAuthenticated
-                            ? <li className="nav-item">
+                            ? <li className="nav-item mt-3 mt-lg-0">
                                 <button className='btn btn-info px-5 py-2 rounded-pill text-white buttons' onClick={handleLogout}>Logout</button>
                             </li>
-                            : <li className="nav-item">
+                            : <li className="nav-item mt-3 mt-lg-0">
                                 <Link className='btn btn-info px-5 py-2 rounded-pill text-white buttons' to='/auth/login'>Login</Link>
                             </li>
                         }
 
                     </ul>
-
                 </div>
             </div>
         </nav>
