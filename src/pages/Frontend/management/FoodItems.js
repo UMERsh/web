@@ -90,7 +90,7 @@ export default function FoodItems(props) {
         setIsProcessingDelete(true)
         await deleteDoc(doc(firestore, "Menu", get));
         gettingData()
-        window.toastify("Todo has been deleted successfully", "success")
+        window.toastify("Item has been deleted successfully", "success")
         setIsProcessingDelete(false)
     }
 

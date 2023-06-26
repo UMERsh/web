@@ -45,7 +45,7 @@ export default function Navbar() {
                             <ul className="dropdown-menu">
                                 <li><Link className="dropdown-item" to='membership/form'>Member Form</Link></li>
                                 <li><Link className="dropdown-item" to='membership/expenses'>Expenses</Link></li>
-                                <li><Link className="dropdown-item" to='membership/finalreport'>Final Report</Link></li>
+                                <li><Link className="dropdown-item" to='membership/total-members'>Total Members</Link></li>
                             </ul>
                         </li>
                         {userRole === "manager"
