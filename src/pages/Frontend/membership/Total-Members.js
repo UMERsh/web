@@ -67,6 +67,9 @@ export default function TotalMembers() {
                   <div><b>Membership No:</b> {items.membership_no}</div>
                 </div>
                 <div className="col ">
+                  <div><b>Membership Fee:</b> {items.member_fee}</div>
+                </div>
+                <div className="col ">
                   <div><b>Date:</b> {items.dateCreated}</div>
                 </div>
                 <div className="col">
