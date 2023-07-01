@@ -16,9 +16,9 @@ export default function UtilityBills() {
                       <label htmlFor="bill-type" className="form-label">Bill Type <span className="text-danger">*</span></label>
                       <select className="form-select bg-light" id='bill-type' name='bill-type'  aria-label="Default select example">
                         <option value="" >Please Select Bill type</option>
-                        <option value="dine_in" >MEPCO</option>
-                        <option value="take_away" >PTCL</option>
-                        <option value="home_delivery" >Gas</option>
+                        <option value="mepco" >MEPCO</option>
+                        <option value="ptcl" >PTCL</option>
+                        <option value="gas" >Gas</option>
                       </select>
                     </div>
               
