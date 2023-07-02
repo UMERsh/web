@@ -1,0 +1,14 @@
+// arrow-animation on membership page
+.arrow-animation {
+    animation: 1s ease-in 1s infinite alternate slidein;
+}
+
+@keyframes slidein {
+    0% {
+        transform: translateX(-30px);
+    }
+    
+    100% {        
+        transform: translateX(0px);
+    }
+}

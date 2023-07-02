@@ -4,6 +4,7 @@ import Form from './Form'
 import Expenses from './Expenses'
 import TotalMembers from './Total-Members'
 import MemberDetail from './Member-Detail'
+import './_membership.scss'
 
 export default function index() {
     return (

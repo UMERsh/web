@@ -3,6 +3,7 @@ import { firestore } from 'config/Firebase'
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore/lite'
 import { Link } from 'react-router-dom'
 import MemberDetail from './Member-Detail'
+import RefreshData from './Refresh-Data'
 
 export default function TotalMembers() {
   const [documents, setDocuments] = useState([])
@@ -46,8 +47,8 @@ export default function TotalMembers() {
   return (
     <>
       <div className="container py-5">
+        <RefreshData />
         <h1 className='fw-bold  pb-3 text-info'>Total Members___</h1>
-
         {isLoading
           ? <div className='d-flex justify-content-center my-5'>
             <div className="spinner-grow text-primary" role="status"></div>
