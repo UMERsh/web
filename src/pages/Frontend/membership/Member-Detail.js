@@ -22,7 +22,6 @@ export default function MemberDetail() {
             setDocument(doc.data())
         });
 
-        // setIsLoading(false)
     }
 
 
