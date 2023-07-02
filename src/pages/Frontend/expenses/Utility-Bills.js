@@ -1,24 +1,24 @@
 import React from 'react'
 
-export default function Expenses() {
+export default function UtilityBills() {
   return (
     <>
     <div className="container my-5 ">
         <div className="row ">
           <div className="col">
             <div className="card rounded-4 shadow pb-5 px-3 px-md-4">
-              <h1 className='pt-3 pb-5 text-info'>Expenses</h1>
+              <h1 className='pt-3 pb-5 text-info'>Utility Bills</h1>
               {/* Expense Type */}
          <div className="container">
           <div className="row">
             <div className="col-6">
             <div className="mb-3  ">
-                      <label htmlFor="expense-type" className="form-label">Expense Type <span className="text-danger">*</span></label>
-                      <select className="form-select bg-light" id='expense-type' name='expense-type'  aria-label="Default select example">
-                        <option value="" >Please Select Expense type</option>
-                        <option value="dine_in" >MEPCO</option>
-                        <option value="take_away" >PTCL</option>
-                        <option value="home_delivery" >Gas</option>
+                      <label htmlFor="bill-type" className="form-label">Bill Type <span className="text-danger">*</span></label>
+                      <select className="form-select bg-light" id='bill-type' name='bill-type'  aria-label="Default select example">
+                        <option value="" >Please Select Bill type</option>
+                        <option value="mepco" >MEPCO</option>
+                        <option value="ptcl" >PTCL</option>
+                        <option value="gas" >Gas</option>
                       </select>
                     </div>
               
@@ -45,6 +45,11 @@ export default function Expenses() {
         </div>
       </div>
 
+      <div className="row mt-4">
+                  <div className="col-8 col-md-3 offset-2 offset-md-9">
+                    <button className='btn btn-info text-white w-100'>Submit</button>
+                  </div>
+                </div>
      </div>
              
                     
