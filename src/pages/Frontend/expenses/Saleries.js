@@ -78,7 +78,7 @@ export default function Saleries() {
                   </div>
                   {/* Person Salary */}
                   <div className="col mt-3 mt-md-0">
-                    <label for="salary" className="form-label"> Salary*</label>
+                    <label htmlFor="salary" className="form-label"> Salary*</label>
                     <input type="number" className="form-control" name='salery' onChange={handleChange} id="salary" required />
                   </div>
                 </div>
@@ -86,7 +86,7 @@ export default function Saleries() {
                 {/* Salary Month*/}
                 <div className="row">
                   <div className="col">
-                    <label for="sal_month" className="form-label"> Month for Salary*</label>
+                    <label htmlFor="sal_month" className="form-label"> Month for Salary*</label>
                     <input type="date" className="form-control" name='salery_month' onChange={handleChange} id="sal_month" required />
                   </div>
                 </div>

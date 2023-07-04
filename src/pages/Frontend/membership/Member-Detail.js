@@ -100,7 +100,7 @@ export default function MemberDetail() {
                         <div><b>Address: </b>{document.address}</div>
                     </div>
                     <div className="col">
-                        <div><b>Member's Fee:</b> {document.member_fee}</div>
+                        <div><b>Member's Monthly Fee:</b> {document.member_fee}</div>
                     </div>
                 </div>
 
@@ -112,8 +112,8 @@ export default function MemberDetail() {
 
                 <div className="text-danger my-3"><b>Note:</b> If the member has paid the amount then update the total amount of the member here</div>
                 <form onSubmit={handleUpdateAmount}>
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="floatingInput" value={updateAmount} placeholder='E.g. 500' onChange={e => setUpdateAmount(e.target.value)} required />
+                    <div className="form-floating mb-3">
+                        <input type="number" className="form-control" id="floatingInput" value={updateAmount} placeholder='E.g. 500' onChange={e => setUpdateAmount(e.target.value)} required />
                         <label htmlFor="floatingInput" className='text-secondary'>Enter the amount to be deducted in Total E.g. 500</label>
                     </div>
                     <button className='btn btn-info text-white' disabled={isUpdateLoading}>

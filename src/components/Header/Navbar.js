@@ -38,7 +38,7 @@ export default function Navbar() {
                             : ""
                         }
                         {userRole === "manager" || userRole === "staff"
-                            ? <li li className="nav-item dropdown">
+                            ? <li className="nav-item dropdown">
                                 <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Membership
                                 </a>

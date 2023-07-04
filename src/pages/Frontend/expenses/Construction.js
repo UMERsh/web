@@ -14,7 +14,7 @@ export default function Construction() {
   const [state, setState] = useState(initialState)
   const [isLoading, setIsLoading] = useState(false)
   const { userData } = useAuthContext()
-  const [totalAmount, setTotalAmount] = useState()
+  const [totalAmount, setTotalAmount] = useState(0)
 
   // handleChange
   const handleChange = e => {
@@ -67,7 +67,7 @@ export default function Construction() {
                   </div>
                   {/* Material Quantity */}
                   <div className="col mt-3 mt-md-0">
-                    <label for="material_quantity" className="form-label"> Quantity of Material*</label>
+                    <label htmlFor="material_quantity" className="form-label"> Quantity of Material*</label>
                     <input type="text" className="form-control" name='material_quantity' id="material_quantity" placeholder='E.g. 2' onChange={handleChange} required />
                   </div>
                 </div>
@@ -75,12 +75,12 @@ export default function Construction() {
                 {/* Price of MAterial*/}
                 <div className="row row-cols-1 row-cols-md-2 mt-3">
                   <div className="col">
-                    <label for="mat_amount" className="form-label"> Amount per quantity*</label>
+                    <label htmlFor="mat_amount" className="form-label"> Amount per quantity*</label>
                     <input type="number" className="form-control" name='material_amount' id="mat_amount" placeholder='E.g. 200' onChange={handleChange} required />
                   </div>
                   <div className="col mt-3 mt-md-0">
-                    <label for="total_amount" className="form-label"> Total Amount*</label>
-                    <input type="number" className="form-control" id="total_amount" value={totalAmount} />
+                    <label htmlFor="total_amount" className="form-label"> Total Amount*</label>
+                    <input type="number" className="form-control" id="total_amount" readOnly value={totalAmount} />
                   </div>
                 </div>
 

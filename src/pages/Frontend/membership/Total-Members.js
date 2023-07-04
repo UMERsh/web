@@ -74,26 +74,26 @@ export default function TotalMembers() {
                   <div><b>Date:</b> {items.dateCreated}</div>
                 </div>
                 <div className="col">
-                  <Link class="btn btn-sm btn-link text-info" to={`/membership/member-details/${items.membership_no}`}>View Details</Link>
+                  <Link className="btn btn-sm btn-link text-info" to={`/membership/member-details/${items.membership_no}`}>View Details</Link>
 
                   {/* remove button */}
-                  <button type="button" class="btn btn-sm btn-link text-danger" data-bs-toggle="modal" data-bs-target="#removeMember" onClick={() => setDelMemberNo(items.membership_no)}>Remove</button>
-                  <div class="modal fade" id="removeMember" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
+                  <button type="button" className="btn btn-sm btn-link text-danger" data-bs-toggle="modal" data-bs-target="#removeMember" onClick={() => setDelMemberNo(items.membership_no)}>Remove</button>
+                  <div className="modal fade" id="removeMember" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
                       {isProcessingDelete === true
-                        ? <div class="modal-content py-5 ">
-                          <div class="spinner-border text-info mx-auto p-4 p-md-5" role="status"></div>
+                        ? <div className="modal-content py-5 ">
+                          <div className="spinner-border text-info mx-auto p-4 p-md-5" role="status"></div>
                         </div>
-                        : <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        : <div className="modal-content">
+                          <div className="modal-header">
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
-                          <div class="modal-body text-start">
+                          <div className="modal-body text-start">
                             <h6>Warning! If you will remove then all data of member will be removed. Are you sure?</h6>
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-sm btn-danger" onClick={handleRemove}>Remove</button>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-sm btn-danger" onClick={handleRemove}>Remove</button>
                           </div>
                         </div>
                       }

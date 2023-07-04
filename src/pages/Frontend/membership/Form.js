@@ -330,7 +330,7 @@ export default function Form() {
                                             </div>
                                             <div className="col ">
                                                 <div className="mb-3">
-                                                    <label htmlFor="member_fee" className="form-label">Member's Fee <span className="text-danger">*</span></label>
+                                                    <label htmlFor="member_fee" className="form-label">Member's Monthly Fee <span className="text-danger">*</span></label>
                                                     <input type="number" className="form-control" ref={member_fee_ref} name='member_fee' value={state.member_fee} onChange={handleChange} id="member_fee" />
                                                 </div>
                                             </div>
@@ -360,9 +360,9 @@ export default function Form() {
                                         <div className="mb-3">
                                             <label htmlFor="martial_status" className="form-label">Marital Status <span className="text-danger">*</span></label> <br />
                                             <input type="radio" name="martial_status" value="married" onChange={handleChange} id="married" />
-                                            <label htmlFor="married">Married</label> <br />
+                                            <label htmlFor="married"> Married</label> <br />
                                             <input type="radio" name="martial_status" value="unmarried" onChange={handleChange} id="unmarried" />
-                                            <label htmlFor="unmarried">Unmarried</label>
+                                            <label htmlFor="unmarried"> Unmarried</label>
 
                                         </div>
                                     </div>

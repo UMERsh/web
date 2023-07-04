@@ -63,9 +63,7 @@ export default function ViewRestuarantRecord() {
   }
 
   // handleMemberShip
-  const handleMemberShip = e => setFilteredData(documents.filter(item => item.membership_number.toLowerCase().includes(e.target.value.toLowerCase()) || item.customer_name.toLowerCase().includes(e.target.value.toLowerCase())))
-
-
+  const handleMemberShip = e => setFilteredData(documents.filter(item => item.customer_name.toLowerCase().includes(e.target.value.toLowerCase())))
 
   return (
     <>
@@ -97,7 +95,7 @@ export default function ViewRestuarantRecord() {
         <div className="col-10 col-sm-4 col-lg-3 mx-auto mx-md-0 ms-md-auto mt-4 mt-sm-0">
           <div class="input-group">
             <span class="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
-            <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search ...' onChange={handleMemberShip} />
+            <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search with member name...' onChange={handleMemberShip} />
           </div>
         </div>
       </div>

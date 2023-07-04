@@ -11,9 +11,10 @@ import ReactToPrint from 'react-to-print';
 import { ComponentToPrint } from './New';
 import { StaffComponentPrint } from './StaffComponentPrint';
 import { Select } from 'antd';
+import moment from 'moment';
+import DeleteModal from './DeleteModal';
 
 const intitalState = {
-  date: "",
   shift: "",
   sales_man_name: "",
   surving_unit: "",
@@ -45,6 +46,8 @@ export default function OrderBooking(props) {
   const [changeTime, setChangeTime] = useState(false)
   const [printData, setPrintData] = useState([])
   const [printDataForStaff, setPrintDataForStaff] = useState([])
+  const [showAddedProducts, setShowAddedProducts] = useState(false)
+  const [delModalValue, setDelModalValue] = useState([])
 
   var componentRef = useRef(null)
   var staffComponentPrint = useRef(null)
@@ -75,7 +78,7 @@ export default function OrderBooking(props) {
     gettingData()
     gettingHomeDeliveryPrintableData()
     gettingDineInPrintableData()
-    state.sales_man_name=auth.currentUser.displayName
+    state.sales_man_name = auth.currentUser.displayName
   }, [])
 
   // this funtion is used to get firebase data and this data is used in menu items
@@ -152,8 +155,7 @@ export default function OrderBooking(props) {
 
     let previousLocalStorageItems = JSON.parse(localStorage.getItem("orders")) || []
 
-    let { date, shift, sales_man_name, surving_unit, surving_unit_details, serving_area, membership_number, customer_name, order_type, order_code, item_title, item_name_urdu, quantity, amount } = state
-    date = date.trim()
+    let { shift, sales_man_name, surving_unit, surving_unit_details, serving_area, membership_number, customer_name, order_type, order_code, item_title, item_name_urdu, quantity, amount } = state
     shift = shift.trim()
     // sales_man_name = sales_man_name.trim()
     surving_unit = surving_unit.trim()
@@ -174,7 +176,7 @@ export default function OrderBooking(props) {
 
 
     const formData = {
-      date,
+      date: moment().format('YYYY-MM-DD'),
       shift,
       sales_man_name,
       surving_unit,
@@ -218,6 +220,7 @@ export default function OrderBooking(props) {
     setQuantity(1)
     setAmount(0)
     window.toastify("Item added Successfully", "success")
+    setShowAddedProducts(false)
   }
 
 
@@ -329,20 +332,21 @@ export default function OrderBooking(props) {
     if (ordersCollection.length !== 0) {
       return window.toastify('Some Data already exists. Please press "Go for Print" button', "error")
     } else {
-      data.forEach((editId, i) => {
-        let name = editId.customer_name
-        let memberShip_number = editId.membership_number;
-        let filtered = printableLocal.filter((dataa, i) => {
-          return (dataa.customer_name !== name && dataa.membership_number !== memberShip_number);
-        })
-        localStorage.setItem("printable", JSON.stringify(filtered))
-      })
-      localStorage.setItem("orders", JSON.stringify(data))
-      setDummyToggle(!dummyToggle)
-      let dataForUpdate = JSON.parse(localStorage.getItem("orders")) || []
-      const lastData = dataForUpdate[dataForUpdate.length - 1];
+      // data.forEach((editId, i) => {
+      //   let name = editId.customer_name
+      //   let memberShip_number = editId.membership_number;
+      //   let filtered = printableLocal.filter((dataa, i) => {
+      //     return (dataa.customer_name !== name && dataa.membership_number !== memberShip_number);
+      //   })
+      //   localStorage.setItem("printable", JSON.stringify(filtered))
+      // })
 
-      state.date = lastData.date;
+      setShowAddedProducts(true)
+      // localStorage.setItem("orders", JSON.stringify(data))
+      // setDummyToggle(!dummyToggle)
+      // let dataForUpdate = JSON.parse(localStorage.getItem("orders")) || []
+      const lastData = data[data.length - 1];
+
       state.serving_area = lastData.serving_area;
       state.surving_unit = lastData.surving_unit;
       state.surving_unit_details = lastData.surving_unit_details;
@@ -351,10 +355,10 @@ export default function OrderBooking(props) {
     }
   }
 
-  // handlePrint
-  const handlePrint = (get) => {
-    setChangeTime(!changeTime)
-    setPrintData(get)
+  // handleSaveData
+  const handleSaveData = (get) => {
+    // setChangeTime(!changeTime)
+    // setPrintData(get)
     let printableLocal = JSON.parse(localStorage.getItem("printable"))
 
     get.forEach(async (items, i) => {
@@ -377,11 +381,22 @@ export default function OrderBooking(props) {
   }
 
 
+  const handleDeleteFromPrintable = (get) => {
+    let printableLocal = JSON.parse(localStorage.getItem("printable"))
+
+    let filteredItems = printableLocal.filter((oldpro) => {
+      return oldpro.id !== get
+    })
+    setDummyToggle(!dummyToggle)
+    localStorage.setItem("printable", JSON.stringify(filteredItems))
+    window.toastify("Removed Successfully", "success")
+  }
+
   return (
     <>
-      <div className={`${localStorageData.length == 0 ? "container my-5" : "container-fluid my-5 px-4"}`}>
+      <div className={`${localStorageData.length == 0 && showAddedProducts === false ? "container my-5" : "container-fluid my-5 px-4"}`}>
         <div className="row g-2">
-          <div className={`${localStorageData.length == 0 ? "col-12" : "col-12 col-md-8"} `}>
+          <div className={`${localStorageData.length == 0 && showAddedProducts === false ? "col-12" : "col-12 col-md-8"} `}>
             <div className="card rounded-4 shadow-lg bg-light border-0 pb-5 px-3 px-md-4">
               <h1 className='pt-3 fw-bold pb-5 text-info'>Order Booking</h1>
               <form onSubmit={handleSubmit}>
@@ -389,12 +404,7 @@ export default function OrderBooking(props) {
                   <div className="col">
                     {/* date and shift input fields */}
                     <div className="row g-2">
-                      <div className="col">
-                        <div className="mb-3">
-                          <label htmlFor="date" className="form-label">Date <span className="text-danger">*</span></label>
-                          <input type="date" className="form-control bg-light" id="date" required name='date' value={state.date} onChange={handleChange} placeholder="name@example.com" />
-                        </div>
-                      </div>
+
                       <div className="col">
                         <div className="mb-3">
                           <label htmlFor="shift" className="form-label">Shift <span className="text-danger">*</span></label>
@@ -405,7 +415,7 @@ export default function OrderBooking(props) {
                     {/* serving area */}
                     <div className="mb-3">
                       <label htmlFor="serving-area" className="form-label">Serving Area <span className="text-danger">*</span></label>
-                      <select className="form-select bg-light" id='serving-area' name='serving_area' onChange={handleChange} aria-label="Default select example" required>
+                      <select className="form-select bg-light" id='serving-area' name='serving_area' onChange={handleChange} aria-label="Default select example">
                         <option value="" >Please Select Serving Area</option>
                         <option value="dine_in" >Dine in</option>
                         <option value="take_away" >Take Away</option>
@@ -435,7 +445,7 @@ export default function OrderBooking(props) {
                   <div className="col">
                     <div className="mb-4">
                       <label htmlFor="sales-man" className="form-label">Sales man <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control bg-light" id="sales-man" name='sales_man_name' value={state.sales_man_name} placeholder="Enter Name" />
+                      <input type="text" className="form-control bg-light" id="sales-man" name='sales_man_name' value={state.sales_man_name} readOnly placeholder="Enter Name" />
                     </div>
                     {/* serving unit */}
                     <div className="row mb-4">
@@ -514,7 +524,7 @@ export default function OrderBooking(props) {
 
           {/* print screen */}
 
-          {localStorageData.length !== 0
+          {localStorageData.length !== 0 || showAddedProducts
             ?
             <div className="col-12 col-md-4">
               <div className="card rounded-4 shadow py-3 px-3 px-md-4 bg-light border-0 printable-table">
@@ -595,7 +605,8 @@ export default function OrderBooking(props) {
                       <th scope="col" className='pe-5 ' >Serving Unit</th>
                       <th scope="col" className='pe-5 ' >Sales man</th>
                       <th scope="col" className='px-3 ' >Date</th>
-                      <th scope="col" className='px-3 '>Action</th>
+                      <th scope="col" className='text-center ' >Print</th>
+                      <th scope="col" className='text-center'>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -645,19 +656,73 @@ export default function OrderBooking(props) {
                         )}
                         </td>
                         <td scope="col" >
-                          <button className='btn btn-link btn-sm me-2' onClick={() => handleLocalStorageUpdate(data)}><EditTwoToneIcon /></button>
-                          <ReactToPrint
-                            trigger={() => <div className='btn btn-info btn-sm text-white' onMouseOver={() => setPrintData(data)}>Print</div>}
-                            // onBeforePrint={() => handlePrint(data)}
-                            // removeAfterPrint={true}
-                            onAfterPrint={() => handlePrint(data)}
-                            content={() => componentRef}
-                          />
-
-                          <div className='d-none'>
-                            <ComponentToPrint ref={(el) => (componentRef = el)} dataForPrint={printData} time={time} />
+                          <div className="row row-cols-1 text-center g-1">
+                            <div className="col">
+                              <ReactToPrint
+                                trigger={() => <div className='btn btn-info btn-sm text-white' onMouseOver={() => setPrintData(data)}>Print</div>}
+                                // onAfterPrint={() => handlePrint(data)}
+                                content={() => componentRef}
+                              />
+                              <div className='d-none'>
+                                <ComponentToPrint ref={(el) => (componentRef = el)} dataForPrint={printData} time={time} />
+                              </div>
+                            </div>
+                            <div className="col">
+                              <button className='btn btn-info btn-sm text-white' onClick={() => handleSaveData(data)}>Save</button>
+                            </div>
                           </div>
                         </td>
+
+                        <td scope="col" >
+                          <button className='btn btn-link btn-sm me-2' onClick={() => handleLocalStorageUpdate(data)}><EditTwoToneIcon /></button>
+                          <button type="button" className="btn btn-link btn-sm me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setDelModalValue(data)}><DeleteTwoToneIcon /></button>
+
+                          <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+                              <div className="modal-content">
+                                <div className="modal-header ">
+                                  <h1 className="modal-title fs-3 ms-auto fw-bold text-info" id="exampleModalLabel">Delete Items</h1>
+                                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+                                  <table className="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">Membership Number</th>
+                                        <th scope="col">Order Type</th>
+                                        <th scope="col">Items</th>
+                                        <th scope="col">Serving Unit</th>
+                                        <th scope="col">Sales Man</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {delModalValue.map((items, i) => {
+                                        return <tr key={i}>
+                                          <th>{i + 1}</th>
+                                          <td>{items.customer_name}</td>
+                                          <td className='text-center'>{items.membership_number}</td>
+                                          <td>{items.order_type}</td>
+                                          <td>{items.item_title}</td>
+                                          <td>{items.surving_unit_details}</td>
+                                          <td>{items.sales_man_name}</td>
+                                          <td>{items.date}</td>
+                                          <td>
+                                            <button type="button" className="btn btn-link btn-sm" onClick={() => handleDeleteFromPrintable(items.id)}><DeleteTwoToneIcon /></button>
+                                          </td>
+                                        </tr>
+                                      })}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+
                       </tr>
                     })}
                   </tbody>
@@ -682,7 +747,8 @@ export default function OrderBooking(props) {
                       <th scope="col" className='px-3 '>Items</th>
                       <th scope="col" className='pe-5 ' >Serving Unit</th>
                       <th scope="col" className='px-3 ' >Date</th>
-                      <th scope="col" className='px-3 '>Action</th>
+                      <th scope="col" className='text-center' >Print</th>
+                      <th scope="col" className='text-center` '>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -726,19 +792,76 @@ export default function OrderBooking(props) {
                         )}
                         </td>
                         <td scope="col" >
-                          <button className='btn btn-link btn-sm me-2' onClick={() => handleLocalStorageUpdate(data)}><EditTwoToneIcon /></button>
-                          <ReactToPrint
-                            trigger={() => <div className='btn btn-info btn-sm text-white' onMouseOver={() => setPrintData(data)}>Print</div>}
-                            // onBeforePrint={() => handlePrint(data)}
-                            // removeAfterPrint={true}
-                            onAfterPrint={() => handlePrint(data)}
-                            content={() => componentRef}
-                          />
-
-                          <div className='d-none'>
-                            <ComponentToPrint ref={(el) => (componentRef = el)} dataForPrint={printData} time={time} />
+                          <div className="row row-cols-1 text-center g-1">
+                            <div className="col">
+                              <ReactToPrint
+                                trigger={() => <div className='btn btn-info btn-sm text-white' onMouseOver={() => setPrintData(data)}>Print</div>}
+                                content={() => componentRef}
+                              />
+                              <div className='d-none'>
+                                <ComponentToPrint ref={(el) => (componentRef = el)} dataForPrint={printData} time={time} />
+                              </div>
+                            </div>
+                            <div className="col">
+                              <button className='btn btn-info btn-sm text-white' onClick={() => handleSaveData(data)}>Save</button>
+                            </div>
                           </div>
                         </td>
+
+                        <td scope="col" >
+                          <button className='btn btn-link btn-sm ' onClick={() => handleLocalStorageUpdate(data)}><EditTwoToneIcon /></button>
+                          <button type="button" className="btn btn-link btn-sm me-2" data-bs-toggle="modal" data-bs-target="#party-function" onClick={() => setDelModalValue(data)}><DeleteTwoToneIcon /></button>
+
+                          <div className="modal fade" id="party-function" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+                              <div className="modal-content">
+                                <div className="modal-header ">
+                                  <h1 className="modal-title fs-3 ms-auto fw-bold text-info" id="exampleModalLabel">Delete Items</h1>
+                                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+                                  <table className="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">Membership Number</th>
+                                        <th scope="col">Order Type</th>
+                                        <th scope="col">Items</th>
+                                        <th scope="col">Item Price</th>
+                                        <th scope="col">Serving Unit</th>
+                                        <th scope="col">Sales Man</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {delModalValue.map((items, i) => {
+                                        return <tr key={i}>
+                                          <th>{i + 1}</th>
+                                          <td>{items.customer_name}</td>
+                                          <td className='text-center'>{items.membership_number}</td>
+                                          <td>{items.order_type}</td>
+                                          <td>{items.item_title}</td>
+                                          <td>{items.amount}</td>
+                                          <td>{items.surving_unit_details}</td>
+                                          <td>{items.sales_man_name}</td>
+                                          <td>{items.date}</td>
+                                          <td>
+                                            <button type="button" className="btn btn-link btn-sm" onClick={() => handleDeleteFromPrintable(items.id)}><DeleteTwoToneIcon /></button>
+                                          </td>
+                                        </tr>
+                                      })}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </td>
+
                       </tr>
                     })}
                   </tbody>
