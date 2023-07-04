@@ -1,14 +1,20 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import AddFoodItem from './AddFoodItem'
-import ViewRecord from './ViewRecord'
+import ViewUtilityBillsRecord from './ViewUtilityBillsRecord'
+import ViewRestuarantRecord from './ViewRestuarantRecord'
+import ViewSaleryRecord from './ViewSaleryRecord'
+import ViewConstructionRecord from './ViewConstructionRecord'
 
 
 export default function index() {
     return (
         <Routes>
             <Route path='/' element={<AddFoodItem />} />
-            <Route path='/records' element={<ViewRecord />} />
+            <Route path='/records' element={<ViewRestuarantRecord />} />
+            <Route path='/utility-bills' element={<ViewUtilityBillsRecord />} />
+            <Route path='/salaries' element={<ViewSaleryRecord />} />
+            <Route path='/construction' element={<ViewConstructionRecord />} />
         </Routes>
     )
 }

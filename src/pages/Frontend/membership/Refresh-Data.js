@@ -8,7 +8,6 @@ export default function RefreshData() {
     const [isLoading, setIsLoading] = useState(false)
     
     const gettingData = async () => {
-        console.log("usman");
         setIsLoading(true)
         const querySnapshot = await getDocs(collection(firestore, "Members"));
         querySnapshot.forEach((doc) => {

@@ -8,8 +8,8 @@ import Restuarant from 'pages/Frontend/restuarant/index'
 import LoaderAnimation from 'components/LoaderAnimation'
 import Membership from 'pages/Frontend/membership'
 import Nopage from 'pages/Nopage'
-import { useAuthContext } from 'context/AuthContext'
 import Expenses from '../../pages/Frontend/expenses'
+import { useAuthContext } from 'context/AuthContext'
 
 export default function Index() {
     const { userRole } = useAuthContext()
@@ -24,8 +24,8 @@ export default function Index() {
                             <Route path='/' element={<Home />} />
                             <Route path='restuarant/*' element={userRole !== "" && userRole == 'staff' || userRole == 'manager' ? <Restuarant /> : <Home />} />
                             <Route path='management/*' element={userRole !== "" && userRole == 'manager' ? <Management /> : <Home />} />
-                            <Route path='membership/*' element={<Membership />} />
-                            <Route path='expenses/*' element={<Expenses />} />
+                            <Route path='membership/*' element={userRole !== "" && userRole == 'staff' || userRole == 'manager' ? <Membership /> : <Home />} />
+                            <Route path='expenses/*' element={userRole !== "" && userRole == 'manager' ? <Expenses /> : <Home />} />
                             <Route path='*' element={<Nopage />} />
                         </Routes>
                     </main >

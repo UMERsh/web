@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { firestore } from 'config/Firebase';
+import { auth, firestore } from 'config/Firebase';
 import { collection, doc, getDocs, query, serverTimestamp, setDoc, where } from 'firebase/firestore/lite';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
@@ -75,6 +75,7 @@ export default function OrderBooking(props) {
     gettingData()
     gettingHomeDeliveryPrintableData()
     gettingDineInPrintableData()
+    state.sales_man_name=auth.currentUser.displayName
   }, [])
 
   // this funtion is used to get firebase data and this data is used in menu items
@@ -154,7 +155,7 @@ export default function OrderBooking(props) {
     let { date, shift, sales_man_name, surving_unit, surving_unit_details, serving_area, membership_number, customer_name, order_type, order_code, item_title, item_name_urdu, quantity, amount } = state
     date = date.trim()
     shift = shift.trim()
-    sales_man_name = sales_man_name.trim()
+    // sales_man_name = sales_man_name.trim()
     surving_unit = surving_unit.trim()
     surving_unit_details = surving_unit_details.trim()
     membership_number = membership_number.trim()
@@ -404,7 +405,7 @@ export default function OrderBooking(props) {
                     {/* serving area */}
                     <div className="mb-3">
                       <label htmlFor="serving-area" className="form-label">Serving Area <span className="text-danger">*</span></label>
-                      <select className="form-select bg-light" id='serving-area' name='serving_area' onChange={handleChange} aria-label="Default select example">
+                      <select className="form-select bg-light" id='serving-area' name='serving_area' onChange={handleChange} aria-label="Default select example" required>
                         <option value="" >Please Select Serving Area</option>
                         <option value="dine_in" >Dine in</option>
                         <option value="take_away" >Take Away</option>
@@ -434,7 +435,7 @@ export default function OrderBooking(props) {
                   <div className="col">
                     <div className="mb-4">
                       <label htmlFor="sales-man" className="form-label">Sales man <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control bg-light" id="sales-man" name='sales_man_name' value={state.sales_man_name} required onChange={handleChange} placeholder="Enter Name" />
+                      <input type="text" className="form-control bg-light" id="sales-man" name='sales_man_name' value={state.sales_man_name} placeholder="Enter Name" />
                     </div>
                     {/* serving unit */}
                     <div className="row mb-4">

@@ -1,11 +1,12 @@
 import React from 'react'
 // logo
 import logo from '../../Assets/images/logo1.png'
-import location from '../../Assets/images/loc.png'
-import dial from '../../Assets/images/telephone-plus.svg'
-import mail from '../../Assets/images/envelope.svg'
-// Link
+
 import { Link } from 'react-router-dom';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
+import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -20,15 +21,15 @@ export default function Footer() {
             </div>
 
             <div className="col mt-4 mt-md-0">
-              <h3>Quick Links</h3>
+              <h3 className='mb-4'>Quick Links</h3>
               <ul>
-                <Link to='' className='text-decoration-none'><li className='text-white '>Home</li></Link>
-                <Link to='' className=' text-decoration-none'><li className='text-white '>Restuarant & Cafe</li></Link>
-                <Link to='' className=' text-decoration-none'><li className='text-white '>Contact</li></Link>
+                <Link to='/' className='text-decoration-none'><li className='text-white '>Home</li></Link>
+                <Link to='/restuarant/order-booking' className=' text-decoration-none'><li className='text-white '>Restuarant </li></Link>
+                {/* <Link to='' className=' text-decoration-none'><li className='text-white '>Contact</li></Link> */}
               </ul>
             </div>
             <div className="col mt-4 mt-lg-0">
-              <h3>Facilities </h3>
+              <h3 className='mb-4'>Facilities </h3>
               <ul>
                 <Link to='' className='text-decoration-none'><li className='text-white '>Sports</li></Link>
                 <Link to='' className=' text-decoration-none'><li className='text-white '>Masjid</li></Link>
@@ -37,10 +38,10 @@ export default function Footer() {
               </ul>
             </div>
             <div className="col mt-4 mt-lg-0">
-              <h3>Get In Touch</h3>
-              <img src={location} alt="" width={30} /> Main multan road burewala <br />
-              <Link className='text-decoration-none text-white' to=''> <img className='py-4' src={dial} alt="" /> <i className='px-3 '>0309-3344452</i> </Link> <br />
-              <Link className='text-decoration-none text-white' to=''> <img className='py-2' src={mail} alt="" /> <i className='px-3 '>nbcburewala @gmail.com</i> </Link>
+              <h3 className='mb-4'>Get In Touch</h3>
+              <div><LocationOnOutlinedIcon /> Main multan road burewala </div>
+              <div className='my-3'><LocalPhoneOutlinedIcon /> 0309-3344452</div>
+              <div><MailOutlineOutlinedIcon /> nbcburewala @gmail.com</div>
             </div>
 
           </div><hr />

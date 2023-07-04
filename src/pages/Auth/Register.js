@@ -1,17 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { auth, firestore } from 'config/Firebase'
 import { useAuthContext } from 'context/AuthContext'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore/lite'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { collection, doc, getDocs, setDoc } from 'firebase/firestore/lite'
 import { Link, useNavigate } from 'react-router-dom'
 
-const initialState = { email: "", password: "", confirm_password: "", user_role: "" }
+const initialState = { email: "", password: "", confirm_password: "", user_role: "", user_name: "" }
 
 export default function Register() {
   const [state, setState] = useState(initialState)
+  const [documents, setDocuments] = useState([])
   const { setIsAuthenticated } = useAuthContext()
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    gettingData()
+  }, [])
+
+  const gettingData = async () => {
+    let array = []
+    const querySnapshot = await getDocs(collection(firestore, "users"));
+    querySnapshot.forEach((doc) => {
+      array.push(doc.data())
+      setDocuments(array)
+    });
+  }
+
+
 
   //  handleChange
   const handleChange = e => {
@@ -22,23 +38,27 @@ export default function Register() {
   //  handleSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-    let { email, password, confirm_password, user_role } = state
+    let { email, password, confirm_password, user_role, user_name } = state
+    user_name = user_name.trim();
     email = email.trim();
     password = password.trim();
     confirm_password = confirm_password.trim();
 
     var validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (email.match(validRegex)) {
-
+    let userExists = documents.some((data) => data.user_name == user_name)
+    if (userExists === true) {
+      return window.toastify("User Name Exists Already. Please Choose Unique Name", "error")
+    } else if (email.match(validRegex)) {
       if (password !== confirm_password) {
-        return alert("password dosn't match")
+        return window.toastify("password dosn't match", "error")
       }
       if (user_role === "") {
         user_role = "visiter"
       }
 
       const userData = {
+        user_name,
         email,
         password,
         confirm_password,
@@ -49,6 +69,9 @@ export default function Register() {
       createUserWithEmailAndPassword(auth, email, confirm_password)
         .then((userCredential) => {
           const user = userCredential.user;
+          updateProfile(auth.currentUser, {
+            displayName: user_name
+          })
           setIsAuthenticated(true)
           navigate('/')
           setDataInFirestore(userData);
@@ -84,6 +107,9 @@ export default function Register() {
             <div className="card px-4 px-md-5 py-5 border-0 shadow-lg rounded-4">
               <h2 className='text-center text-info py-4'>REGISTER</h2>
               <form className='pb-4' onSubmit={handleSubmit}>
+                <div className=" mb-3 ">
+                  <input type="text" className="form-control " id="name" name='user_name' onChange={handleChange} placeholder="Enter Unique Username Here..." required />
+                </div>
                 <div className=" mb-3 ">
                   <input type="email" className="form-control " id="email" name='email' onChange={handleChange} placeholder="Enter Email Here..." />
                 </div>

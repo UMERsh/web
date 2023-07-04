@@ -9,7 +9,6 @@ export default function index() {
             <div className="alert alert-info mx-2" role="alert">Note! Only management can see this page.</div>
             <div className="container">
                 <h1 className="text-center mt-5 fw-bold">MANAGEMENT</h1>
-
                 <nav className="navbar navbar-expand-md mb-5 bg-body-tertiary">
                     <button className="navbar-toggler border-info " type="button" data-bs-toggle="collapse" data-bs-target="#managementSupportedContent" aria-controls="managementSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -17,25 +16,25 @@ export default function index() {
                     <div className="collapse navbar-collapse mt-4 mt-md-0" id="managementSupportedContent">
                         <ul className=" navbar-nav nav-tabs border-bottom border-info w-100 management-tabs">
                             <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to="/management" end>Add Items</NavLink>
+                                <NavLink className="nav-link text-primary border-0 " to="/management" end>Add Food Items</NavLink>
                             </li>
                             <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to='/management/records'>View Record</NavLink>
+                                <NavLink className="nav-link text-primary border-0 " to='/management/records'>Restuarant Record</NavLink>
                             </li>
                             <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to='/management/re'>Link</NavLink>
+                                <NavLink className="nav-link text-primary border-0 " to='/management/utility-bills'>Utility Bills Record</NavLink>
                             </li>
                             <li className="nav-item pe-3">
-                                <a className="nav-link text-primary border-0 " href='#'>Disabled</a>
+                                <NavLink className="nav-link text-primary border-0 " to='/management/salaries'>Salary Record</NavLink>
+                            </li>
+                            <li className="nav-item pe-3">
+                                <NavLink className="nav-link text-primary border-0 " to='/management/construction'>Construction Record</NavLink>
                             </li>
                         </ul>
                     </div>
                 </nav>
                 <Routes />
             </div>
-
-
-
         </>
     )
 }

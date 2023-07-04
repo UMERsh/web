@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { auth, firestore } from 'config/Firebase'
 import { useAuthContext } from 'context/AuthContext'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { collection, getDocs, query, where } from 'firebase/firestore/lite'
+import { collection, getDocs } from 'firebase/firestore/lite'
 import { Link, useNavigate } from 'react-router-dom'
 
 const initialState = { email: "", password: "", user_role: "" }

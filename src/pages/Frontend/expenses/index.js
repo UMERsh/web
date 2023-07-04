@@ -7,6 +7,7 @@ import Construction from "./Construction";
 export default function index(){
     return(
         <>
+            <div className="alert alert-info mx-2" role="alert">Note! Only management can see this page.</div>
             <Routes>
              <Route path="utility-bills" element={<UtilityBills />} />
              <Route path="saleries" element={<Saleries />} />

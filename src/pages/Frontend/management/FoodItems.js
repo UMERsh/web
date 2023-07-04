@@ -97,7 +97,7 @@ export default function FoodItems(props) {
 
     return (
         <>
-            <div className="row">
+            <div className="row pb-4">
                 {isLoading
                     ? <div className='d-flex justify-content-center my-3'>
                         <div className="spinner-grow text-primary" role="status"></div>

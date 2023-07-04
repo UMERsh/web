@@ -6,7 +6,7 @@ import moment from 'moment/moment'
 import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 
-export default function ViewRecord() {
+export default function ViewRestuarantRecord() {
   const [documents, setDocuments] = useState([])
   const [filteredData, setFilteredData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -64,45 +64,6 @@ export default function ViewRecord() {
 
   // handleMemberShip
   const handleMemberShip = e => setFilteredData(documents.filter(item => item.membership_number.toLowerCase().includes(e.target.value.toLowerCase()) || item.customer_name.toLowerCase().includes(e.target.value.toLowerCase())))
-
-  // handleFakePrint
-  const handleFakePrint = (get) => {
-    // var printed = document.getElementById('unique')
-    // var printWindow = window.open('', '', 'left=0, top=0, width=800, height=500, toolbar=0, scrollbars=0, status=0');
-    // printWindow.document.write(printed.innerHTML);
-    // printWindow.document.close();
-    // printWindow.focus();
-    // printWindow.print();
-    // window.print(printed)
-
-
-    var prtContent = document.getElementById("unique");
-    var tableId = document.getElementById("table-id");
-
-
-
-    // var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-    // WinPrint.document.write(prtContent.innerHTML);
-    // WinPrint.focus();
-    // WinPrint.print();
-    // // WinPrint.close();
-    // WinPrint.document.close();
-
-    filteredData.map((data, i) => {
-      let originalContents = document.body.innerHTML;
-      document.body.innerHTML = `<table style="width:100%;background-color:red;">
-      <tr>
-        <th>${data.date}</th>
-        <th>${data.amount}</th>
-        <th>${data.id}</th>
-      </tr>
-    </table>`
-
-      window.print();
-      document.body.innerHTML = originalContents;
-    })
-
-  }
 
 
 

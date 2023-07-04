@@ -3,7 +3,6 @@ import { useAuthContext } from 'context/AuthContext'
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore/lite'
 import React, { useState } from 'react'
 import FoodItems from './FoodItems'
-import ProductItems from './ProductItems'
 import FoodItemOptions from 'components/FoodItemOptions'
 
 const intitalState = {
@@ -115,7 +114,6 @@ export default function AddFoodItem() {
                 </div>
             </div>
             <FoodItems counting={count} />
-            <ProductItems />
         </>
     )
 }

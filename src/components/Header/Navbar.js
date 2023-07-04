@@ -37,35 +37,39 @@ export default function Navbar() {
                             </li>
                             : ""
                         }
+                        {userRole === "manager" || userRole === "staff"
+                            ? <li li className="nav-item dropdown">
+                                <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Membership
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li><Link className="dropdown-item" to='membership/form'>Member Form</Link></li>
+                                    <li><Link className="dropdown-item" to='membership/total-members'>Total Members</Link></li>
+                                </ul>
+                            </li>
+                            : ""
+                        }
 
-                        <li className="nav-item dropdown">
-                            <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Membership
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to='membership/form'>Member Form</Link></li>
-                                <li><Link className="dropdown-item" to='membership/expenses'>Expenses</Link></li>
-                                <li><Link className="dropdown-item" to='membership/total-members'>Total Members</Link></li>
-                            </ul>
-                        </li>
-                   
+                        {userRole === "manager"
+                            ? <li className="nav-item dropdown">
+                                <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Expenses
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li><Link className="dropdown-item" to='expenses/utility-bills'>Utility Bills</Link></li>
+                                    <li><Link className="dropdown-item" to='expenses/saleries'>Salaries</Link></li>
+                                    <li><Link className="dropdown-item" to='expenses/construction'>Construction</Link></li>
+                                </ul>
+                            </li>
+                            : ""
+                        }
+
                         {userRole === "manager"
                             ? <li className="nav-item">
                                 <Link className="nav-link me-3" to='/management'>Management</Link>
                             </li>
                             : ""
                         }
-                        <li className="nav-item dropdown">
-                            <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Expenses
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to='expenses/utility-bills'>Utility Bills</Link></li>
-                                <li><Link className="dropdown-item" to='expenses/saleries'>Saleries</Link></li>
-                                <li><Link className="dropdown-item" to='expenses/construction'>Construction</Link></li>
-                            </ul>
-                        </li>
-
                         {isAuthenticated
                             ? <li className="nav-item">
                                 <button className='btn btn-info px-5 py-2 rounded-pill text-white buttons' onClick={handleLogout}>Logout</button>
@@ -79,6 +83,6 @@ export default function Navbar() {
 
                 </div>
             </div>
-        </nav>
+        </nav >
     )
 }
