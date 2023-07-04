@@ -106,7 +106,7 @@ export default function MemberDetail() {
 
                 <div className="row text-end my-4">
                     <div className="col">
-                        <h4>Total Payable Fee: <span className='text-info'>{document.totalFee}</span></h4>
+                        <h4>Total Payable Fee: <span className='text-info'>{document.totalFee}</span></h4> 
                     </div>
                 </div>
 

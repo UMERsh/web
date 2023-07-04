@@ -529,6 +529,7 @@ export default function OrderBooking(props) {
                         <th scope="col" className='px-3' >Customer Name</th>
                         <th scope="col" className='px-3' >Membership Number</th>
                         <th scope="col" className='px-3' >Serving Area</th>
+                        <th scope="col" className='px-3' >Salesman</th>
                         <th scope="col" className='px-3' >Quantity</th>
                         <th scope="col" className='px-3' >Date</th>
                         <th scope="col" className='px-3' >Price</th>
@@ -547,6 +548,7 @@ export default function OrderBooking(props) {
                           <td scope="col">{items.customer_name}</td>
                           <td scope="col">{items.membership_number}</td>
                           <td scope="col">{items.serving_area}</td>
+                          <td scope="col">{items.sales_man_name}</td>
                           <td scope="col" className='text-center'>{items.quantity}</td>
                           <td scope="col">{items.date}</td>
                           <td scope="col">{"Rs. " + items.amount}</td>

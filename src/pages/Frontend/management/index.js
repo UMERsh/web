@@ -30,6 +30,9 @@ export default function index() {
                             <li className="nav-item pe-3">
                                 <NavLink className="nav-link text-primary border-0 " to='/management/construction'>Construction Record</NavLink>
                             </li>
+                            <li className="nav-item pe-3">
+                                <NavLink className="nav-link text-primary border-0 " to='/management/inventory'>Inventory</NavLink>
+                            </li>
                         </ul>
                     </div>
                 </nav>
