@@ -5,6 +5,7 @@ import ViewUtilityBillsRecord from './ViewUtilityBillsRecord'
 import ViewRestuarantRecord from './ViewRestuarantRecord'
 import ViewSaleryRecord from './ViewSaleryRecord'
 import ViewConstructionRecord from './ViewConstructionRecord'
+import ViewInventoryRecord from './ViewInventoryRecord'
 
 
 export default function index() {
@@ -15,6 +16,7 @@ export default function index() {
             <Route path='/utility-bills' element={<ViewUtilityBillsRecord />} />
             <Route path='/salaries' element={<ViewSaleryRecord />} />
             <Route path='/construction' element={<ViewConstructionRecord />} />
+            <Route path='/inventory' element={<ViewInventoryRecord />} />
         </Routes>
     )
 }

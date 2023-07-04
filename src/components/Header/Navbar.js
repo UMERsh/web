@@ -37,6 +37,20 @@ export default function Navbar() {
                             </li>
                             : ""
                         }
+                        {userRole === "manager" || userRole == "staff"
+                            ? <li className="nav-item dropdown">
+                                <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Inventory
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li><Link className="dropdown-item" to='inventory/goods-receive'>Goods Receiving Note(GRN)</Link></li>
+                                    <li><Link className="dropdown-item" to='inventory/goods-return'>Goods Return Note(GRN)</Link></li>
+                                    <li><Link className="dropdown-item" to='inventory/cash-payment'>Cash Payment</Link></li>
+                                   
+                                </ul>
+                            </li>
+                            : ""
+                        }
                         {userRole === "manager" || userRole === "staff"
                             ? <li className="nav-item dropdown">
                                 <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
