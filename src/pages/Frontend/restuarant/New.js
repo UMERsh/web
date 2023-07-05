@@ -7,6 +7,16 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
 
     const { time } = props
     var data = props.dataForPrint
+    var salesTax = 0
+    var totalBill = 0
+
+    if (data[0] !== undefined && data[0].serving_area === "dine_in") {
+        const tax = 6
+        let totalamnt = data.reduce((a, v) => a = a + v.amount, 0)
+        salesTax = (tax / 100) * totalamnt;
+        totalBill = totalamnt + salesTax;
+
+    }
 
     return (
         <>
@@ -49,17 +59,37 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                                 <td>{items.quantity}</td>
                                 <td>{items.amount}</td>
                             </tr>
-                        })}
-                        <tr>
-                            <td colSpan="3"><b>Total Price: </b></td>
-                            <td >{data.reduce((a, v) => a = a + v.amount, 0)}</td>
-                        </tr>
+                        })}                        
                     </tbody>
                 </table>
+
+                <div className="row text-center mt-4">
+                    <div className="col">
+                        <b>Sales Tax: </b>
+                    </div>
+                    <div className="col">
+                        {salesTax.toFixed(2)}
+                    </div>
+                </div>
+
+                <div className="row text-center">
+                    <div className="col">
+                        <b>Total Price: </b>
+                    </div>
+                    <div className="col">
+                        {data.reduce((a, v) => a = a + v.amount, 0)}
+                    </div>
+                </div>
+
+                <div className="row text-center mt-3 pt-2 border-top">
+                    <div className="col">
+                        <b>Total: </b>
+                    </div>
+                    <div className="col">
+                        {data.reduce((a, v) => a = a + v.amount, 0) + salesTax}
+                    </div>
+                </div>
             </div>
         </>
-
-
-
     );
 });

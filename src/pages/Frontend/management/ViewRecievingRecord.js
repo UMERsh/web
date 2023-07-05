@@ -84,6 +84,7 @@ export default function ViewRecievingRecord() {
                 <th scope="col">Quantity</th>
                 <th scope="col">Unit Rate</th>
                 <th scope="col">Gross Amount</th>
+                <th scope="col">Supplier</th>
                 <th scope="col">Date Created</th>
                 <th scope="col">Created By</th>
               </tr>
@@ -101,6 +102,7 @@ export default function ViewRecievingRecord() {
                     <td scope="col">{data.approved_qty + " " + data.unit}</td>
                     <td scope="col">{data.unit_rate}</td>
                     <td scope="col">{data.gross_amount}</td>
+                    <td scope="col">{data.supplier}</td>
                     <td scope="col">{data.dateCreated}</td>
                     <td scope="col">{data.createdBy.email}</td>
                   </tr>

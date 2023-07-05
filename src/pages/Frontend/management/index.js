@@ -9,7 +9,7 @@ export default function index() {
             <div className="alert alert-info mx-2" role="alert">Note! Only management can see this page.</div>
             <div className="container">
                 <h1 className="text-center mt-5 fw-bold">MANAGEMENT</h1>
-                <nav className="navbar navbar-expand-md mb-5 bg-body-tertiary">
+                <nav className="navbar navbar-expand-lg mb-5 bg-body-tertiary">
                     <button className="navbar-toggler border-info " type="button" data-bs-toggle="collapse" data-bs-target="#managementSupportedContent" aria-controls="managementSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate,NavLink } from 'react-router-dom'
+import { Link, useNavigate, NavLink } from 'react-router-dom'
 import logo from 'Assets/images/logo1.png'
 import { signOut } from 'firebase/auth';
 import { auth } from 'config/Firebase';
@@ -37,22 +37,15 @@ export default function Navbar() {
                             </li>
                             : ""
                         }
-                        {userRole === "manager" 
+                        {userRole === "manager"
                             ? <li className="nav-item dropdown">
                                 <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Inventory
                                 </a>
                                 <ul className="dropdown-menu">
-<<<<<<< HEAD
                                     <li><NavLink className="dropdown-item" to='inventory/goods-receive'>Goods Receiving Note(GRN)</NavLink></li>
                                     <li><NavLink className="dropdown-item" to='inventory/goods-return'>Goods Return Note(GRN)</NavLink></li>
                                     <li><NavLink className="dropdown-item" to='inventory/cash-payment'>Cash Payment</NavLink></li>
-=======
-                                    <li><Link className="dropdown-item" to='inventory/goods-receive'>Goods Receiving Note(GRN)</Link></li>
-                                    <li><Link className="dropdown-item" to='inventory/goods-return'>Goods Return Note(GRN)</Link></li>
-                                    <li><Link className="dropdown-item bg-success" to='inventory/cash-payment'>Cash Payment</Link></li>
-                                    <li><Link className="dropdown-item bg-danger" to='inventory/cash-receive'>Cash Receive</Link></li>
-                                   
                                 </ul>
                             </li>
                             : ""
@@ -65,8 +58,7 @@ export default function Navbar() {
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to='payroll/employe-info'>Employe Information</Link></li>
                                     <li><Link className="dropdown-item" to='payroll/advance-salery'>Advance Salery</Link></li>
->>>>>>> c7612651b40caed4e5eb60652a762f5b1f9751d2
-                                   
+
                                 </ul>
                             </li>
                             : ""

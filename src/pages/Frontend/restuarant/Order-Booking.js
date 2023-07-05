@@ -47,6 +47,8 @@ export default function OrderBooking(props) {
   const [printDataForStaff, setPrintDataForStaff] = useState([])
   const [showAddedProducts, setShowAddedProducts] = useState(false)
   const [delModalValue, setDelModalValue] = useState([])
+  const [isSaveLoading, setIsSaveLoading] = useState(false)
+
 
   var componentRef = useRef(null)
   var staffComponentPrint = useRef(null)
@@ -356,10 +358,8 @@ export default function OrderBooking(props) {
 
   // handleSaveData
   const handleSaveData = (get) => {
-    // setChangeTime(!changeTime)
-    // setPrintData(get)
     let printableLocal = JSON.parse(localStorage.getItem("printable"))
-
+    setIsSaveLoading(true)
     get.forEach(async (items, i) => {
       try {
         await setDoc(doc(firestore, "Order-booking", window.getRandomId()), items)
@@ -371,10 +371,12 @@ export default function OrderBooking(props) {
             })
             localStorage.setItem("printable", JSON.stringify(filtered))
             setDummyToggle(!dummyToggle)
+            setIsSaveLoading(false)
           })
 
       } catch (e) {
         window.toastify("Something went wrong", "error")
+        setIsSaveLoading(false)
       }
     })
   }
@@ -600,7 +602,7 @@ export default function OrderBooking(props) {
                     <tr>
                       <th scope="col" className='px-3 text-center' >#</th>
                       <th scope="col" className='px-3 ' >Customer</th>
-                      <th scope="col" className='px-0 ' style={{ width: 180 }}>Membership Number</th>
+                      <th scope="col" className='px-0 ' style={{ width: 130 }}>Membership No.</th>
                       <th scope="col" className='px-3 '>Order Type</th>
                       <th scope="col" className='px-3 '>Items</th>
                       <th scope="col" className='pe-5 ' >Serving Unit</th>
@@ -669,7 +671,12 @@ export default function OrderBooking(props) {
                               </div>
                             </div>
                             <div className="col">
-                              <button className='btn btn-info btn-sm text-white' onClick={() => handleSaveData(data)}>Save</button>
+                              <button className='btn btn-info btn-sm text-white' onClick={() => handleSaveData(data)} disabled={isSaveLoading}>
+                                {isSaveLoading
+                                  ? <div className='spinner-border spinner-border-sm'></div>
+                                  : "Save"}
+
+                              </button>
                             </div>
                           </div>
                         </td>
@@ -743,7 +750,7 @@ export default function OrderBooking(props) {
                     <tr>
                       <th scope="col" className='px-3 text-center' >#</th>
                       <th scope="col" className='px-3 ' >Customer</th>
-                      <th scope="col" className='px-0 ' style={{ width: 180 }}>Membership Number</th>
+                      <th scope="col" className='px-0 ' style={{ width: 130 }}>Membership No.</th>
                       <th scope="col" className='px-3 '>Order Type</th>
                       <th scope="col" className='px-3 '>Items</th>
                       <th scope="col" className='pe-5 ' >Serving Unit</th>
@@ -804,7 +811,11 @@ export default function OrderBooking(props) {
                               </div>
                             </div>
                             <div className="col">
-                              <button className='btn btn-info btn-sm text-white' onClick={() => handleSaveData(data)}>Save</button>
+                              <button className='btn btn-info btn-sm text-white' onClick={() => handleSaveData(data)} disabled={isSaveLoading}>
+                                {isSaveLoading
+                                  ? <div className='spinner-border spinner-border-sm'></div>
+                                  : "Save"}
+                              </button>
                             </div>
                           </div>
                         </td>
