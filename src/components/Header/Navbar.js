@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate,NavLink } from 'react-router-dom'
 import logo from 'Assets/images/logo1.png'
 import { signOut } from 'firebase/auth';
 import { auth } from 'config/Firebase';
@@ -29,23 +29,23 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item ">
-                            <Link className="nav-link active me-3" to='/'>Home</Link>
+                            <NavLink className="nav-link me-3" to='/'>Home</NavLink>
                         </li>
                         {userRole === "manager" || userRole === "staff"
                             ? <li className="nav-item dropdown">
-                                <Link className="nav-link me-3" to='/restuarant/order-booking'>Restuarant</Link>
+                                <NavLink className="nav-link me-3" to='/restuarant/order-booking'>Restuarant</NavLink>
                             </li>
                             : ""
                         }
-                        {userRole === "manager" || userRole == "staff"
+                        {userRole === "manager" 
                             ? <li className="nav-item dropdown">
                                 <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Inventory
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link className="dropdown-item" to='inventory/goods-receive'>Goods Receiving Note(GRN)</Link></li>
-                                    <li><Link className="dropdown-item" to='inventory/goods-return'>Goods Return Note(GRN)</Link></li>
-                                    <li><Link className="dropdown-item" to='inventory/cash-payment'>Cash Payment</Link></li>
+                                    <li><NavLink className="dropdown-item" to='inventory/goods-receive'>Goods Receiving Note(GRN)</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to='inventory/goods-return'>Goods Return Note(GRN)</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to='inventory/cash-payment'>Cash Payment</NavLink></li>
                                    
                                 </ul>
                             </li>
@@ -57,8 +57,8 @@ export default function Navbar() {
                                     Membership
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link className="dropdown-item" to='membership/form'>Member Form</Link></li>
-                                    <li><Link className="dropdown-item" to='membership/total-members'>Total Members</Link></li>
+                                    <li><NavLink className="dropdown-item" to='membership/form'>Member Form</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to='membership/total-members'>Total Members</NavLink></li>
                                 </ul>
                             </li>
                             : ""
@@ -70,17 +70,17 @@ export default function Navbar() {
                                     Expenses
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link className="dropdown-item" to='expenses/utility-bills'>Utility Bills</Link></li>
-                                    <li><Link className="dropdown-item" to='expenses/saleries'>Salaries</Link></li>
-                                    <li><Link className="dropdown-item" to='expenses/construction'>Construction</Link></li>
+                                    <li><NavLink className="dropdown-item" to='expenses/utility-bills'>Utility Bills</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to='expenses/saleries'>Salaries</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to='expenses/construction'>Construction</NavLink></li>
                                 </ul>
                             </li>
                             : ""
                         }
 
                         {userRole === "manager"
-                            ? <li className="nav-item">
-                                <Link className="nav-link me-3" to='/management'>Management</Link>
+                            ? <li className="nav-item mb-3 mb-lg-0">
+                                <NavLink className="nav-link me-3" to='/management'>Management</NavLink>
                             </li>
                             : ""
                         }

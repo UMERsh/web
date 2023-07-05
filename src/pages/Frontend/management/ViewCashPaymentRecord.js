@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { firestore } from 'config/Firebase'
 import { collection, getDocs } from 'firebase/firestore/lite'
-import moment from 'moment/moment'
+import moment from 'moment'
 import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 
-export default function ViewConstructionRecord() {
-  const [documents, setDocuments] = useState([])
-  const [filteredData, setFilteredData] = useState([])
+export default function ViewCashPaymentRecord() {
+  const [goodsRecieving, setGoodsRecieving] = useState([])
+  const [goodsRecievingfltrData, setGoodsRecievingfltrData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [viewMore, setViewMore] = useState(true)
   const durationRef = useRef()
@@ -18,11 +18,11 @@ export default function ViewConstructionRecord() {
 
   const gettingData = async () => {
     let array = []
-    const querySnapshot = await getDocs(collection(firestore, "Construction"));
+    const querySnapshot = await getDocs(collection(firestore, "Cash-Payment"));
     querySnapshot.forEach((doc) => {
       array.push(doc.data())
-      setDocuments(array)
-      setFilteredData(array)
+      setGoodsRecieving(array)
+      setGoodsRecievingfltrData(array)
     });
     setIsLoading(false)
   }
@@ -30,25 +30,23 @@ export default function ViewConstructionRecord() {
   //handleChangeDuration
   const handleChangeDuration = e => {
     var currentFullDate = moment().format('YYYY-MM-DD,h:mm:ss a')
-    e.target.value === "" ? setFilteredData(documents) : setFilteredData(documents.filter(doc => doc.dateCreated >= moment().subtract(e.target.value, "month").format('YYYY-MM-DD,h:mm:ss a') && doc.dateCreated <= currentFullDate))
+    e.target.value === "" ? setGoodsRecievingfltrData(goodsRecieving) : setGoodsRecievingfltrData(goodsRecieving.filter(doc => doc.dateCreated >= moment().subtract(e.target.value, "month").format('YYYY-MM-DD,h:mm:ss a') && doc.dateCreated <= currentFullDate))
   }
 
 
 
   // handleMemberShip
-  const handleMemberShip = e => setFilteredData(documents.filter(item => item.material_type.toLowerCase().includes(e.target.value.toLowerCase())))
-
-
+  const handleMemberShip = e => setGoodsRecievingfltrData(goodsRecieving.filter(item => item.item_type.toLowerCase().includes(e.target.value.toLowerCase()) || item.dateCreated.includes(e.target.value) || item.account_name.toLowerCase().includes(e.target.value.toLowerCase())))
 
   return (
     <>
-      <h3 className='fw-bold mb-4 text-info'>Construction Record</h3>
+      <h3 className='fw-bold mb-4 text-info'>Cash Payment Record</h3>
       <div className="row mb-3">
         <div className="col text-secondary">
           <h6 >Filters <FilterListTwoToneIcon /></h6>
         </div>
         <div className="col text-end text-secondary pe-3 pe-sm-5">
-          <h6 >Total Results: {filteredData.length}</h6>
+          <h6 >Total Results: {goodsRecievingfltrData.length}</h6>
         </div>
       </div>
       <div className="row g-2">
@@ -62,10 +60,10 @@ export default function ViewConstructionRecord() {
           </select>
         </div>
 
-        <div className="col-10 col-sm-4 col-lg-3 mx-auto mx-md-0 ms-md-auto mt-4 mt-sm-0">
+        <div className="col-10 col-sm-4 mx-auto mx-md-0 ms-md-auto mt-4 mt-sm-0">
           <div className="input-group">
             <span className="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
-            <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search with material type...' onChange={handleMemberShip} />
+            <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search item type, account or date...' onChange={handleMemberShip} />
           </div>
         </div>
       </div>
@@ -82,27 +80,27 @@ export default function ViewConstructionRecord() {
           <table className="table table-light table-striped-columns" id='table-id'>
             <thead>
               <tr>
-                <th scope="col">Material Type</th>
-                <th scope="col">Material Quantity</th>
-                <th scope="col">Material Amount</th>
-                <th scope="col">Total Amount</th>
+                <th scope="col">Item Type</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Account Name</th>
+                <th scope="col">Date</th>
                 <th scope="col">Date Created</th>
                 <th scope="col">Created By</th>
               </tr>
             </thead>
-            {!filteredData.length
+            {!goodsRecievingfltrData.length
               ? <tbody >
                 <tr >
                   <th scope='col' className='border-0 text-center text-info' colSpan="8">No data found</th>
                 </tr>
               </tbody>
               : <tbody className="table-group-divider">
-                {filteredData.map((data, i) => {
+                {goodsRecievingfltrData.map((data, i) => {
                   return <tr key={i}>
-                    <td scope="col">{data.material_type}</td>
-                    <td scope="col">{data.material_quantity}</td>
-                    <td scope="col">{data.material_amount}</td>
-                    <td scope="col">{data.total_amount}</td>
+                    <td scope="col">{data.item_type}</td>
+                    <td scope="col">{data.amount}</td>
+                    <td scope="col">{data.account_name}</td>
+                    <td scope="col">{data.date}</td>
                     <td scope="col">{data.dateCreated}</td>
                     <td scope="col">{data.createdBy.email}</td>
                   </tr>

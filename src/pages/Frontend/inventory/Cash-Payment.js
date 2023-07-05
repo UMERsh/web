@@ -1,39 +1,27 @@
-import React, {useState,useEffect} from 'react'
+import React, { useState } from 'react'
 import { firestore } from 'config/Firebase'
-import { collection, doc, getDocs, setDoc } from 'firebase/firestore/lite'
+import { doc, setDoc } from 'firebase/firestore/lite'
 import { useAuthContext } from 'context/AuthContext'
 import moment from 'moment'
 
 const initialState = {
-    date: "",
-    account_name: "",
-    amount: "",
-    item_type: "",
-    description: ""
+  date: "",
+  account_name: "",
+  amount: "",
+  item_type: "",
+  description: ""
 }
 export default function CashPayment() {
-  const [documents, setDocuments] = useState([])
   const [state, setState] = useState(initialState)
   const [isLoading, setIsLoading] = useState(false)
   const { userData } = useAuthContext()
 
-  useEffect(()=>{
-    gettingData()
-  },[])
-  const gettingData = async () => {
-    let array = []
-    const querySnapshot = await getDocs(collection(firestore, "users"));
-    querySnapshot.forEach((doc) => {
-      array.push(doc.data())
-      setDocuments(array)
-    });
-  }
   //handlechange
   const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }));
-///handlesubmit
-const handleSubmit = async (e)=>{
+  ///handlesubmit
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     let data = {
       ...state,
       dateCreated: moment().format('YYYY-MM-DD,h:mm:ss a'),
@@ -53,74 +41,49 @@ const handleSubmit = async (e)=>{
       window.toastify(error.message, "error")
       setIsLoading(false)
     }
-    }
+    setState(initialState)
+  }
   return (
     <>
-    <div className="container my-5 ">
+      <div className="container my-5 ">
         <div className="row ">
           <div className="col">
-            <div className="card rounded-4 shadow pb-5 px-3 px-md-4">
-              <h1 className='pt-3 pb-5 text-info'>Cash Payment</h1>
+            <div className="card rounded-4 shadow-lg border-0 pb-5 px-3 px-md-4">
+              <h1 className='pt-3 pb-5 fw-bold text-info'>Cash Payment</h1>
               <form onSubmit={handleSubmit} >
+                {/* Date */}
+                <div className="row row-cols-1 row-cols-md-2 mb-3">
+                  <div className="col">
+                    <label htmlFor="date" className="form-label">Date <span className="text-danger">*</span></label>
+                    <input type="date" className="form-control" id="date" name='date' value={state.date} onChange={handleChange} required />
+                  </div>
+                  {/* Account Name */}
+                  <div className="col mt-3 mt-md-0">
+                    <label htmlFor="account_name" className="form-label"> Account Name <span className="text-danger">*</span></label>
+                    <input type="text" className="form-control" id="account_name" name='account_name' value={state.account_name} onChange={handleChange} required />
+                  </div>
+                </div>
 
-              {/* Date */}
-         <div className="container">
-          <div className="row">
-            <div className="col-6">
-            <div className="mb-3  ">
-                      <label htmlFor="date" className="form-label">Date <span className="text-danger">*</span></label>
-                      <input type="date" className="form-control" id="date" name='date' onChange={handleChange} required/>
-                    </div>
-              
-            </div>
-             {/* Account Name */}
-            <div className="col-6">
-            <div className="mb-3  ">
-            <label for="salary" className="form-label"> Account Name</label>
-                          <input type="text" className="form-control" id="account_name" name='account_name'  onChange={handleChange} required/>
-                    </div>
-              
-            </div>
-            
-          </div>
-          
-           
-         </div>
-           {/* amount*/}
-       <div className="container">
-        <div className="row">
-            <div className="col-6">
-            <div className="mb-3  ">
-                      <label htmlFor="person_name" className="form-label">Amount<span className="text-danger">*</span></label>
-                      <input type="number" className="form-control" id="amount" name='amount' onChange={handleChange} required  />
-                    </div>
-              
-            </div>
-            {/* item type */}
-            <div className="col-6">
-            <div className="mb-3  ">
-                      <label htmlFor="person_name" className="form-label">Item Type<span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="item_type" name='item_type' onChange={handleChange} required  />
-                    </div>
-              
-            </div>
-        </div>
-       </div>
-       <div className="container">
-        <div className="row">
-            <div className="col">
-             {/* Description*/}
-            <div className="mb-3  ">
-                      <label htmlFor="person_name" className="form-label">Description<span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="description" name='description'   onChange={handleChange} required/>
-                    </div>
-                    
-              
-            </div>
-           
-        </div>
-       </div>
-       <div className="row mt-4">
+                {/* amount*/}
+                <div className="row row-cols-1 row-cols-md-2 mb-3">
+                  <div className="col">
+                    <label htmlFor="amount" className="form-label">Amount<span className="text-danger">*</span></label>
+                    <input type="number" className="form-control" id="amount" name='amount'value={state.amount} onChange={handleChange} required />
+                  </div>
+                  {/* item type */}
+                  <div className="col mt-3 mt-md-0">
+                    <label htmlFor="item_type" className="form-label">Item Type <span className="text-danger">*</span></label>
+                    <input type="text" className="form-control" id="item_type" name='item_type'value={state.item_type} onChange={handleChange} required />                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col">
+                    {/* Description*/}
+                    <label htmlFor="description" className="form-label">Description <span className="text-danger">*</span></label>
+                    <textarea className="form-control" rows={3} id="description" name='description'value={state.description} onChange={handleChange} required ></textarea>
+                  </div>
+                </div>
+                <div className="row mt-4">
                   <div className="col-8 col-md-3 offset-2 offset-md-9">
                     <button className='btn btn-info text-white w-100' disabled={isLoading}>
                       {isLoading
@@ -134,12 +97,12 @@ const handleSubmit = async (e)=>{
                   </div>
                 </div>
               </form>
-     </div>
-             
-                    
             </div>
+
+
           </div>
         </div>
+      </div>
     </>
   )
 

@@ -36,7 +36,7 @@ export default function ViewRestuarantRecord() {
 
   // handleOrderType
   const handleOrderType = e => {
-    var currentFullDate = moment().format('YYYY-MM-D')
+    var currentFullDate = moment().format('YYYY-MM-DD')
     const gettingValue = e.target.value;
     if (gettingValue === "") {
       setFilteredData(documents)
@@ -78,7 +78,7 @@ export default function ViewRestuarantRecord() {
       </div>
       <div className="row g-2">
         <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-          <select class="form-select" ref={durationRef} onChange={handleChangeDuration} aria-label="Default select example">
+          <select className="form-select" ref={durationRef} onChange={handleChangeDuration} aria-label="Default select example">
             <option value="">Duration..</option>
             <option value="today">Today</option>
             <option value="week">Last Week</option>
@@ -93,8 +93,8 @@ export default function ViewRestuarantRecord() {
           </select>
         </div>
         <div className="col-10 col-sm-4 col-lg-3 mx-auto mx-md-0 ms-md-auto mt-4 mt-sm-0">
-          <div class="input-group">
-            <span class="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
+          <div className="input-group">
+            <span className="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
             <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search with member name...' onChange={handleMemberShip} />
           </div>
         </div>
@@ -109,7 +109,7 @@ export default function ViewRestuarantRecord() {
           <div className="spinner-grow text-success" role="status"></div>
         </div>
         : <div className={`table-responsive mt-4 ${viewMore ? "table-show-hide" : ""}`}>
-          <table class="table table-light table-striped-columns" id='table-id'>
+          <table className="table table-light table-striped-columns" id='table-id'>
             <thead>
               <tr>
                 <th scope="col">Customer Name</th>
@@ -129,7 +129,7 @@ export default function ViewRestuarantRecord() {
                   <th scope='col' className='border-0 text-center text-info' colSpan="8">No data found</th>
                 </tr>
               </tbody>
-              : <tbody class="table-group-divider">
+              : <tbody className="table-group-divider">
                 {filteredData.map((data, i) => {
                   return <tr key={i}>
                     <td scope="col">{data.customer_name}</td>

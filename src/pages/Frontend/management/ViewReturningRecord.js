@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { firestore } from 'config/Firebase'
 import { collection, getDocs } from 'firebase/firestore/lite'
-import moment from 'moment/moment'
+import moment from 'moment'
 import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 
-export default function ViewUtilityBillsRecord() {
-  const [documents, setDocuments] = useState([])
-  const [filteredData, setFilteredData] = useState([])
+export default function ViewReturningRecord() {
+  const [goodsRecieving, setGoodsRecieving] = useState([])
+  const [goodsRecievingfltrData, setGoodsRecievingfltrData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [viewMore, setViewMore] = useState(true)
   const durationRef = useRef()
@@ -18,63 +18,35 @@ export default function ViewUtilityBillsRecord() {
 
   const gettingData = async () => {
     let array = []
-    const querySnapshot = await getDocs(collection(firestore, "Utility-Bills"));
+    const querySnapshot = await getDocs(collection(firestore, "Goods-Return"));
     querySnapshot.forEach((doc) => {
       array.push(doc.data())
-      setDocuments(array)
-      setFilteredData(array)
+      setGoodsRecieving(array)
+      setGoodsRecievingfltrData(array)
     });
     setIsLoading(false)
   }
 
   //handleChangeDuration
   const handleChangeDuration = e => {
-    var currentFullDate = moment().format('YYYY-MM-D')
-    e.target.value === "" ? setFilteredData(documents) : setFilteredData(documents.filter(doc => doc.bill_month >= moment().subtract(e.target.value, "month").format('YYYY-MM-DD') && doc.bill_month <= currentFullDate))
+    var currentFullDate = moment().format('YYYY-MM-DD,h:mm:ss a')
+    e.target.value === "" ? setGoodsRecievingfltrData(goodsRecieving) : setGoodsRecievingfltrData(goodsRecieving.filter(doc => doc.dateCreated >= moment().subtract(e.target.value, "month").format('YYYY-MM-DD,h:mm:ss a') && doc.dateCreated <= currentFullDate))
   }
 
-  // handleOrderType
-  const handleOrderType = e => {
-    var currentFullDate = moment().format('YYYY-MM-D')
-    const gettingValue = e.target.value;
-    if (gettingValue === "") {
-      setFilteredData(documents)
-    } else {
-      switch (durationRef.current.value) {
-        case '1':
-          setFilteredData(documents.filter(doc => doc.bill_month >= moment().subtract(1, 'month').format('YYYY-MM-DD') && doc.bill_month <= currentFullDate && doc.bill_type === gettingValue))
-          break;
-        case '2':
-          setFilteredData(documents.filter(doc => doc.bill_month >= moment().subtract(2, 'month').format('YYYY-MM-DD') && doc.bill_month <= currentFullDate && doc.bill_type === gettingValue))
-          break;
-        case '3':
-          setFilteredData(documents.filter(doc => doc.bill_month >= moment().subtract(3, 'month').format('YYYY-MM-DD') && doc.bill_month <= currentFullDate && doc.bill_type === gettingValue))
-          break;
-        case "4":
-          setFilteredData(documents.filter(doc => doc.bill_month >= moment().subtract(4, 'month').format('YYYY-MM-DD') && doc.bill_month <= currentFullDate && doc.bill_type === gettingValue))
-          break;
-        default:
-          setFilteredData(documents.filter(doc => doc.bill_type === gettingValue))
-          break;
-      }
-    }
 
-  }
 
   // handleMemberShip
-  const handleMemberShip = e => setFilteredData(documents.filter(item => item.bill_month.includes(e.target.value.toLowerCase())))
-
-
+  const handleMemberShip = e => setGoodsRecievingfltrData(goodsRecieving.filter(item => item.item_name.toLowerCase().includes(e.target.value.toLowerCase()) || item.dateCreated.includes(e.target.value)))
 
   return (
     <>
-      <h3 className='fw-bold mb-4 text-info'>Utility Bills Record</h3>
+      <h3 className='fw-bold mb-4 text-info'>Goods Return Note Record</h3>
       <div className="row mb-3">
         <div className="col text-secondary">
           <h6 >Filters <FilterListTwoToneIcon /></h6>
         </div>
         <div className="col text-end text-secondary pe-3 pe-sm-5">
-          <h6 >Total Results: {filteredData.length}</h6>
+          <h6 >Total Results: {goodsRecievingfltrData.length}</h6>
         </div>
       </div>
       <div className="row g-2">
@@ -87,18 +59,11 @@ export default function ViewUtilityBillsRecord() {
             <option value={4}>Last 4 Months</option>
           </select>
         </div>
-        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-          <select className="form-select" id='order-type' onChange={handleOrderType} aria-label="Default select example">
-            <option value="" >Bill Type...</option>
-            <option value="mepco" >MEPCO</option>
-            <option value="ptcl" >PTCL</option>
-            <option value="gas" >Gas</option>
-          </select>
-        </div>
+
         <div className="col-10 col-sm-4 col-lg-3 mx-auto mx-md-0 ms-md-auto mt-4 mt-sm-0">
           <div className="input-group">
             <span className="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
-            <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search with bill month...' onChange={handleMemberShip} />
+            <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search item name or date...' onChange={handleMemberShip} />
           </div>
         </div>
       </div>
@@ -115,25 +80,27 @@ export default function ViewUtilityBillsRecord() {
           <table className="table table-light table-striped-columns" id='table-id'>
             <thead>
               <tr>
-                <th scope="col">Bill Month</th>
-                <th scope="col">Bill Type</th>
-                <th scope="col">Bill Price</th>
+                <th scope="col">Item Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit Rate</th>
+                <th scope="col">Gross Amount</th>
                 <th scope="col">Date Created</th>
                 <th scope="col">Created By</th>
               </tr>
             </thead>
-            {!filteredData.length
+            {!goodsRecievingfltrData.length
               ? <tbody >
                 <tr >
                   <th scope='col' className='border-0 text-center text-info' colSpan="8">No data found</th>
                 </tr>
               </tbody>
               : <tbody className="table-group-divider">
-                {filteredData.map((data, i) => {
+                {goodsRecievingfltrData.map((data, i) => {
                   return <tr key={i}>
-                    <td scope="col">{data.bill_month}</td>
-                    <td scope="col">{data.bill_type}</td>
-                    <td scope="col">{data.bill_price}</td>
+                    <td scope="col">{data.item_name}</td>
+                    <td scope="col">{data.approved_qty + " " + data.unit}</td>
+                    <td scope="col">{data.unit_rate}</td>
+                    <td scope="col">{data.gross_amount}</td>
                     <td scope="col">{data.dateCreated}</td>
                     <td scope="col">{data.createdBy.email}</td>
                   </tr>

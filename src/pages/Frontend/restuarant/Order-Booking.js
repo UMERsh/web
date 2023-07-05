@@ -12,7 +12,6 @@ import { ComponentToPrint } from './New';
 import { StaffComponentPrint } from './StaffComponentPrint';
 import { Select } from 'antd';
 import moment from 'moment';
-import DeleteModal from './DeleteModal';
 
 const intitalState = {
   shift: "",
