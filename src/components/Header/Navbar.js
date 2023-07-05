@@ -45,7 +45,21 @@ export default function Navbar() {
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to='inventory/goods-receive'>Goods Receiving Note(GRN)</Link></li>
                                     <li><Link className="dropdown-item" to='inventory/goods-return'>Goods Return Note(GRN)</Link></li>
-                                    <li><Link className="dropdown-item" to='inventory/cash-payment'>Cash Payment</Link></li>
+                                    <li><Link className="dropdown-item bg-success" to='inventory/cash-payment'>Cash Payment</Link></li>
+                                    <li><Link className="dropdown-item bg-danger" to='inventory/cash-receive'>Cash Receive</Link></li>
+                                   
+                                </ul>
+                            </li>
+                            : ""
+                        }
+                        {userRole === "manager" || userRole == "staff"
+                            ? <li className="nav-item dropdown">
+                                <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    PayRoll
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li><Link className="dropdown-item" to='payroll/employe-info'>Employe Information</Link></li>
+                                    <li><Link className="dropdown-item" to='payroll/advance-salery'>Advance Salery</Link></li>
                                    
                                 </ul>
                             </li>

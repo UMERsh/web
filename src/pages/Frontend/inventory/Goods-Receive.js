@@ -5,12 +5,13 @@ import { useAuthContext } from 'context/AuthContext'
 import moment from 'moment'
 
 const initialState = {
+   supplier: "",
     item_name: "",
     unit: "",
    approved_qty: "",
    unit_rate: "",
    gross_amount: "",
-   store_name: ""
+   store: ""
 
 }
 
@@ -69,21 +70,22 @@ export default function GoodsReceive() {
               <h1 className='pt-3 pb-5 text-info'>Goods Receiving Note(GRN)</h1>
               <form onSubmit={handleSubmit} >
 
-              {/* Item Name */}
+              {/* Supplier */}
          <div className="container">
           <div className="row">
             <div className="col-6">
             <div className="mb-3  ">
-                      <label htmlFor="person_name" className="form-label">Item Name <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="item_name" name='item_name' onChange={handleChange} required/>
+                      <label htmlFor="supplier" className="form-label">Supplier <span className="text-danger">*</span></label>
+                      <input type="text" className="form-control" id="supplier" name='supplier' onChange={handleChange} required/>
                     </div>
               
             </div>
-             {/* Unit */}
+            
+             {/* Item Name */}
             <div className="col-6">
             <div className="mb-3  ">
-            <label for="salary" className="form-label"> Unit</label>
-                          <input type="text" className="form-control" id="unit" name='unit' onChange={handleChange} required/>
+            <label for="item name" className="form-label"> Item Name</label>
+                          <input type="text" className="form-control" id="item_name" name='item_name' onChange={handleChange} required/>
                     </div>
               
             </div>
@@ -92,21 +94,21 @@ export default function GoodsReceive() {
           
            
          </div>
-           {/* Approved Qty*/}
+           {/* Unit*/}
        <div className="container">
         <div className="row">
             <div className="col-6">
             <div className="mb-3  ">
-                      <label htmlFor="person_name" className="form-label">Approved Qty<span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="approved_qty" name='approved_qty' onChange={handleChange} required  />
+                      <label htmlFor="person_name" className="form-label">Unit<span className="text-danger">*</span></label>
+                      <input type="text" className="form-control" id="unit" name='unit' onChange={handleChange} required  />
                     </div>
               
             </div>
-            {/* //Unit Rate */}
+            {/* //Approved Qty */}
             <div className="col-6">
             <div className="mb-3  ">
-                      <label htmlFor="person_name" className="form-label">Unit Rate<span className="text-danger">*</span></label>
-                      <input type="number" className="form-control" id="unit_rate" name='unit_rate' onChange={handleChange} required  />
+                      <label htmlFor="person_name" className="form-label">Approved Qty<span className="text-danger">*</span></label>
+                      <input type="number" className="form-control" id="approved_qty" name='approved_qty' onChange={handleChange} required  />
                     </div>
               
             </div>
@@ -115,22 +117,33 @@ export default function GoodsReceive() {
        <div className="container">
         <div className="row">
             <div className="col-6">
-             {/* Gross Amount */}
+             {/* Unit Rate */}
             <div className="mb-3  ">
-                      <label htmlFor="person_name" className="form-label">Gross Amount<span className="text-danger">*</span></label>
-                      <input type="number" className="form-control" id="gross_amount" name='gross_amount'  value={totalAmount} onChange={handleChange} required/>
+                      <label htmlFor="person_name" className="form-label">Unit Rate<span className="text-danger">*</span></label>
+                      <input type="number" className="form-control" id="unit_rate" name='unit_rate'  onChange={handleChange} required/>
                     </div>
                     
               
             </div>
             <div className="col-6">
-             {/* Store */}
+             {/* Gross Amount */}
             <div className="mb-3  ">
-                      <label htmlFor="person_name" className="form-label">Store Name<span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" id="store_name" name='store_name'   onChange={handleChange} required/>
+                      <label htmlFor="person_name" className="form-label">Gross Amount<span className="text-danger">*</span></label>
+                      <input type="number" className="form-control" id="gross_amount" name='gross_amount' value={totalAmount}  onChange={handleChange} required/>
                     </div>
                     
               
+            </div>
+            <div className="container">
+              <div className="row">
+                <div className="col">
+                   {/* Store */}
+            <div className="mb-3  ">
+                      <label htmlFor="person_name" className="form-label">Store<span className="text-danger">*</span></label>
+                      <input type="text" className="form-control" id="store" name='store'   onChange={handleChange} required/>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
        </div>
