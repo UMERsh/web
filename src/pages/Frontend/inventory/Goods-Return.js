@@ -4,12 +4,22 @@ import { collection, doc, getDocs, setDoc } from 'firebase/firestore/lite'
 import { useAuthContext } from 'context/AuthContext'
 import moment from 'moment'
 const initialState = {
+<<<<<<< HEAD
   item_name: "",
   unit: "",
   approved_qty: "",
   unit_rate: "",
   gross_amount: "",
   store_name:""
+=======
+   supplier: "",
+    item_name: "",
+    unit: "",
+   approved_qty: "",
+   unit_rate: "",
+   gross_amount: "",
+   store: ""
+>>>>>>> c7612651b40caed4e5eb60652a762f5b1f9751d2
 
 }
 export default function GoodsReturn() {
@@ -54,7 +64,11 @@ export default function GoodsReturn() {
   }
   return (
     <>
+<<<<<<< HEAD
       <div className="container my-5 ">
+=======
+   <div className="container my-5 ">
+>>>>>>> c7612651b40caed4e5eb60652a762f5b1f9751d2
         <div className="row ">
           <div className="col">
             <div className="card rounded-4 shadow-lg border-0 pb-5 px-3 px-md-4">
@@ -97,7 +111,88 @@ export default function GoodsReturn() {
                   </div>
                 </div>
 
+<<<<<<< HEAD
                 <div className="row mt-4">
+=======
+              {/* Supplier */}
+         <div className="container">
+          <div className="row">
+            <div className="col-6">
+            <div className="mb-3  ">
+                      <label htmlFor="supplier" className="form-label">Supplier <span className="text-danger">*</span></label>
+                      <input type="text" className="form-control" id="supplier" name='supplier' onChange={handleChange} required/>
+                    </div>
+              
+            </div>
+            
+             {/* Item Name */}
+            <div className="col-6">
+            <div className="mb-3  ">
+            <label for="item name" className="form-label"> Item Name(Returned)</label>
+                          <input type="text" className="form-control" id="item_name" name='item_name' onChange={handleChange} required/>
+                    </div>
+              
+            </div>
+            
+          </div>
+          
+           
+         </div>
+           {/* Unit*/}
+       <div className="container">
+        <div className="row">
+            <div className="col-6">
+            <div className="mb-3  ">
+                      <label htmlFor="person_name" className="form-label">Unit<span className="text-danger">*</span></label>
+                      <input type="text" className="form-control" id="unit" name='unit' onChange={handleChange} required  />
+                    </div>
+              
+            </div>
+            {/* //Approved Qty */}
+            <div className="col-6">
+            <div className="mb-3  ">
+                      <label htmlFor="person_name" className="form-label">Approved Qty<span className="text-danger">*</span></label>
+                      <input type="number" className="form-control" id="approved_qty" name='approved_qty' onChange={handleChange} required  />
+                    </div>
+              
+            </div>
+        </div>
+       </div>
+       <div className="container">
+        <div className="row">
+            <div className="col-6">
+             {/* Unit Rate */}
+            <div className="mb-3  ">
+                      <label htmlFor="person_name" className="form-label">Unit Rate<span className="text-danger">*</span></label>
+                      <input type="number" className="form-control" id="unit_rate" name='unit_rate'  onChange={handleChange} required/>
+                    </div>
+                    
+              
+            </div>
+            <div className="col-6">
+             {/* Gross Amount */}
+            <div className="mb-3  ">
+                      <label htmlFor="person_name" className="form-label">Gross Amount<span className="text-danger">*</span></label>
+                      <input type="number" className="form-control" id="gross_amount" name='gross_amount' value={totalAmount}  onChange={handleChange} required/>
+                    </div>
+                    
+              
+            </div>
+            <div className="container">
+              <div className="row">
+                <div className="col">
+                   {/* Store */}
+            <div className="mb-3  ">
+                      <label htmlFor="person_name" className="form-label">Store<span className="text-danger">*</span></label>
+                      <input type="text" className="form-control" id="store" name='store'   onChange={handleChange} required/>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+       </div>
+       <div className="row mt-4">
+>>>>>>> c7612651b40caed4e5eb60652a762f5b1f9751d2
                   <div className="col-8 col-md-3 offset-2 offset-md-9">
                     <button className='btn btn-info text-white w-100' disabled={isLoading}>
                       {isLoading
