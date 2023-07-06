@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import FoodItemOptions from 'components/FoodItemOptions'
 import { firestore } from 'config/Firebase'
-import { collection, getDocs } from 'firebase/firestore/lite'
+import { collection, doc, getDocs } from 'firebase/firestore/lite'
 import moment from 'moment/moment'
 import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
@@ -9,6 +9,7 @@ import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 export default function ViewRestuarantRecord() {
   const [documents, setDocuments] = useState([])
   const [filteredData, setFilteredData] = useState([])
+  const [totalTax, setTotalTax] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [viewMore, setViewMore] = useState(true)
   const durationRef = useRef()
@@ -25,6 +26,11 @@ export default function ViewRestuarantRecord() {
       setDocuments(array)
       setFilteredData(array)
     });
+
+    const querySnapshot1 = await getDocs(collection(firestore, "TotalTax"));
+    querySnapshot1.forEach((doc) => {
+      setTotalTax(doc.data().salesTax)
+    })
     setIsLoading(false)
   }
 
@@ -62,8 +68,36 @@ export default function ViewRestuarantRecord() {
 
   }
 
+  // handleOrderType
+  const handleMemberShip = e => {
+    var currentFullDate = moment().format('YYYY-MM-DD')
+    let filterd;
+    switch (durationRef.current.value) {
+      case "today":
+        filterd = documents.filter(doc => doc.date == currentFullDate)
+        setFilteredData(filterd.filter(doc => doc.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || doc.serving_area.includes(e.target.value.toLowerCase())))
+        break;
+      case "week":
+        filterd = documents.filter(doc => doc.date >= moment().subtract(1, 'week').format('YYYY-MM-DD') && doc.date <= currentFullDate)
+        setFilteredData(filterd.filter(doc => doc.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || doc.serving_area.includes(e.target.value.toLowerCase())))
+        break;
+      case "month":
+        filterd = documents.filter(doc => doc.date >= moment().subtract(1, 'month').format('YYYY-MM-DD') && doc.date <= currentFullDate)
+        setFilteredData(filterd.filter(doc => doc.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || doc.serving_area.includes(e.target.value.toLowerCase())))
+        break;
+      case "year":
+        filterd = documents.filter(doc => doc.date >= moment().subtract(1, 'year').format('YYYY-MM-DD') && doc.date <= currentFullDate)
+        setFilteredData(filterd.filter(doc => doc.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || doc.serving_area.includes(e.target.value.toLowerCase())))
+        break;
+      default:
+        setFilteredData(documents.filter(item => item.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || item.serving_area.includes(e.target.value.toLowerCase())))
+        break;
+    }
+
+  }
+
   // handleMemberShip
-  const handleMemberShip = e => setFilteredData(documents.filter(item => item.customer_name.toLowerCase().includes(e.target.value.toLowerCase())))
+  // const handleMemberShip = e => setFilteredData(documents.filter(item => item.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || item.serving_area.includes(e.target.value.toLowerCase())))
 
   return (
     <>
@@ -92,10 +126,10 @@ export default function ViewRestuarantRecord() {
             <FoodItemOptions />
           </select>
         </div>
-        <div className="col-10 col-sm-4 col-lg-3 mx-auto mx-md-0 ms-md-auto mt-4 mt-sm-0">
+        <div className="col-10 col-sm-4  mx-auto mx-md-0 ms-md-auto mt-4 mt-sm-0">
           <div className="input-group">
             <span className="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
-            <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search with member name...' onChange={handleMemberShip} />
+            <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search member name or serving area...' onChange={handleMemberShip} />
           </div>
         </div>
       </div>
@@ -170,13 +204,17 @@ export default function ViewRestuarantRecord() {
           <h5 className='fw-bold '>Yearly Amount</h5>
           <h5 className="text-info fw-bold">Rs. {durationRef.current !== undefined && durationRef.current.value === "year" ? filteredData.reduce((a, v) => a = a + v.amount, 0) : 0}</h5>
         </div>
-        <div className="col-6 col-md-4 col-lg-2 py-3  text-center ">
+        <div className="col-6 col-md-4 col-lg-2 py-3 text-center ">
           <h5 className='fw-bold '>Item's Total Amount</h5>
           <h5 className="text-info fw-bold">Rs. {durationRef.current !== undefined && durationRef.current.value === "" ? filteredData.reduce((a, v) => a = a + v.amount, 0) : 0}</h5>
         </div>
+        <div className="col-6 col-md-4 col-lg-2 py-3  text-center ">
+          <h5 className='fw-bold '>Total Sales Tax</h5>
+          <h5 className="text-info fw-bold">Rs. {totalTax}</h5>
+        </div>
         <div className="col-6 col-md-4 col-lg-2 py-3  text-center bg-primary text-light shadow ">
-          <h5 className='fw-bold '>Total Amount</h5>
-          <h5 className="text-info fw-bold">Rs. {documents.reduce((a, v) => a = a + v.amount, 0)}</h5>
+          <h5 className='fw-bold '>Total Amount with Sales Tax</h5>
+          <h5 className="text-info fw-bold">Rs. {documents.reduce((a, v) => a = a + v.amount, 0) + totalTax}</h5>
         </div>
       </div>
     </>

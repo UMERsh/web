@@ -20,7 +20,7 @@ $info: #00afb9;
         border: 1px solid white;
     }
 
-    .col-6:nth-child(4) {
+    .col-6:nth-child(5),.col-6:nth-child(4) {
         border: 1px solid white;
         border-right: 1px solid $info;
     }
@@ -44,7 +44,7 @@ $info: #00afb9;
     }
 
     .amount-sale {
-        .col-6:nth-child(4) {
+        .col-6:nth-child(4),.col-6:nth-child(5) {
             border-right: 1px solid white;
         }
     }
