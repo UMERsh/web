@@ -88,9 +88,11 @@ export default function Login() {
                                     </div>
                                     <div className="col-6 col-md-9">
                                         <select className="form-select " id='user-role' name='user_role' onChange={handleChange} aria-label="Default select example">
-                                            <option value="manager" >manager</option>
-                                            <option value="staff">staff</option>
-                                            <option value="visiter">visiter</option>
+                                            <option value="manager">Manager</option>
+                                            <option value="visiter">Visiter</option>
+                                            <option value="staff">Staff</option>
+                                            <option value="restuarant_staff">Restuarant Staff</option>
+                                            <option value="restuarant_manager">Restuarant Manager</option>
                                         </select>
                                     </div>
                                 </div>

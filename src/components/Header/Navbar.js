@@ -31,7 +31,7 @@ export default function Navbar() {
                         <li className="nav-item ">
                             <NavLink className="nav-link me-3" to='/'>Home</NavLink>
                         </li>
-                        {userRole === "manager" || userRole === "staff"
+                        {userRole === "restuarant_manager" || userRole === "restuarant_staff"
                             ? <li className="nav-item dropdown">
                                 <NavLink className="nav-link me-3" to='/restuarant/order-booking'>Restuarant</NavLink>
                             </li>
@@ -92,7 +92,7 @@ export default function Navbar() {
                             : ""
                         }
 
-                        {userRole === "manager"
+                        {userRole === "manager" || userRole === "restuarant_manager"
                             ? <li className="nav-item mb-3 mb-lg-0">
                                 <NavLink className="nav-link me-3" to='/management'>Management</NavLink>
                             </li>

@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import './_management.scss'
 import Routes from 'pages/Frontend/management/Routes'
 import { NavLink } from 'react-router-dom'
+import { useAuthContext } from 'context/AuthContext'
 
-export default function index() {
+export default function Index() {
+    const { userRole } = useAuthContext()
+
     return (
         <>
             <div className="alert alert-info mx-2" role="alert">Note! Only management can see this page.</div>
@@ -15,32 +18,46 @@ export default function index() {
                     </button>
                     <div className="collapse navbar-collapse mt-4 mt-md-0" id="managementSupportedContent">
                         <ul className=" navbar-nav nav-tabs border-bottom border-info w-100 management-tabs">
-                            <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to="/management" end>Add Food Items</NavLink>
-                            </li>
-                            <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to='/management/records'>Restuarant Record</NavLink>
-                            </li>
-                            <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to='/management/utility-bills'>Utility Bills Record</NavLink>
-                            </li>
-                            <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to='/management/salaries'>Salary Record</NavLink>
-                            </li>
-                            <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to='/management/construction'>Construction Record</NavLink>
-                            </li>
-                            <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to='/management/inventory'>Inventory</NavLink>
-                            </li>
-                            <li className="nav-item pe-3">
-                                <NavLink className="nav-link text-primary border-0 " to='/management/payroll'>PayRoll</NavLink>
-                            </li>
+                            {userRole !== "" && userRole == 'restuarant_manager'
+                                && <li className="nav-item pe-3">
+                                    <NavLink className="nav-link text-primary border-0 " to="/management" end>Add Food Items</NavLink>
+                                </li>
+                            }
+                            {userRole !== "" && userRole == 'restuarant_manager'
+                                && <li className="nav-item pe-3">
+                                    <NavLink className="nav-link text-primary border-0 " to='/management/records'>Restuarant Record</NavLink>
+                                </li>
+                            }
+                            {userRole !== "" && userRole == 'manager'
+                                && <li className="nav-item pe-3">
+                                    <NavLink className="nav-link text-primary border-0 " to='/management/utility-bills'>Utility Bills Record</NavLink>
+                                </li>
+                            }
+                            {userRole !== "" && userRole == 'manager'
+                                && <li className="nav-item pe-3">
+                                    <NavLink className="nav-link text-primary border-0 " to='/management/salaries'>Salary Record</NavLink>
+                                </li>
+                            }
+                            {userRole !== "" && userRole == 'manager'
+                                && <li className="nav-item pe-3">
+                                    <NavLink className="nav-link text-primary border-0 " to='/management/construction'>Construction Record</NavLink>
+                                </li>
+                            }
+                            {userRole !== "" && userRole == 'manager'
+                                && <li className="nav-item pe-3">
+                                    <NavLink className="nav-link text-primary border-0 " to='/management/inventory'>Inventory</NavLink>
+                                </li>
+                            }
+                            {userRole !== "" && userRole == 'manager'
+                                && <li className="nav-item pe-3">
+                                    <NavLink className="nav-link text-primary border-0 " to='/management/payroll'>PayRoll</NavLink>
+                                </li>
+                            }
                         </ul>
                     </div>
-                </nav>
+                </nav >
                 <Routes />
-            </div>
+            </div >
         </>
     )
 }

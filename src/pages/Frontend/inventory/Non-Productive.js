@@ -1,42 +1,43 @@
 import React, { useState, useEffect } from 'react'
 import { firestore } from 'config/Firebase'
-import { collection, doc, getDocs, setDoc } from 'firebase/firestore/lite'
+import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore/lite'
 import { useAuthContext } from 'context/AuthContext'
 import moment from 'moment'
 import ProductiveItemsOptions from 'components/ProductiveItemsOptions'
 
 const initialState = {
-    supplier: "",
-    item_type: "",
-    unit: "",
-    approved_qty: 0,
-    unit_rate: 0,
-    store: ""
-  
-  }
+  supplier: "",
+  item_type: "",
+  unit: "",
+  approved_qty: 0,
+  unit_rate: 0,
+  store: ""
+
+}
 export default function NonProductive() {
-    const [state, setState] = useState(initialState)
-    const [data, setData] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
-    const [totalAmount, setTotalAmount] = useState(0)
-    const { userData } = useAuthContext()
-    const gettingData = async () => {
-        let array = []
-        const querySnapshot = await getDocs(collection(firestore, "ProductiveItems"));
-        querySnapshot.forEach((doc) => {
-          array.push(doc.data())
-          setDocuments(array)
-        });
-      }
-      useEffect(() => {
-        gettingData()
-        state.approved_qty = Number(state.approved_qty)
-        state.unit_rate = Number(state.unit_rate)
-    
-        setTotalAmount(state.approved_qty * state.unit_rate)
-      }, [state.approved_qty, state.unit_rate])
-    
-       // handleItemType
+  const [state, setState] = useState(initialState)
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [totalAmount, setTotalAmount] = useState(0)
+  const { userData } = useAuthContext()
+
+  // const gettingData = async () => {
+  //   let array = []
+  //   const querySnapshot = await getDocs(collection(firestore, "ProductiveItems"));
+  //   querySnapshot.forEach((doc) => {
+  //     array.push(doc.data())
+  //     setDocuments(array)
+  //   });
+  // }
+  useEffect(() => {
+    // gettingData()
+    state.approved_qty = Number(state.approved_qty)
+    state.unit_rate = Number(state.unit_rate)
+
+    setTotalAmount(state.approved_qty * state.unit_rate)
+  }, [state.approved_qty, state.unit_rate])
+
+  // handleItemType
   const handleItemType = async (e) => {
     let ItemType = e.target.value
     state.item_type = ItemType;
@@ -50,37 +51,37 @@ export default function NonProductive() {
     });
 
   }
-      const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }));
-      //handleSubmit
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        let data = {
-          ...state,
-          gross_amount: totalAmount,
-          dateCreated: moment().format('YYYY-MM-DD,h:mm:ss a'),
-          createdBy: {
-            email: userData.email,
-            uid: userData.uid,
-          }
-        }
-    
-        setIsLoading(true)
-        try {
-          await setDoc(doc(firestore, "Non-Productive", moment().format('YYYY-MM-DD,h:mm:ss a')), data)
-            .then(() => {
-              setIsLoading(false)
-              window.toastify("Record Added Successfully", "success")
-            })
-        } catch (error) {
-          window.toastify(error.message, "error")
-          setIsLoading(false)
-        }
-    
-        setState(initialState)
+  const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }));
+  //handleSubmit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let data = {
+      ...state,
+      gross_amount: totalAmount,
+      dateCreated: moment().format('YYYY-MM-DD,h:mm:ss a'),
+      createdBy: {
+        email: userData.email,
+        uid: userData.uid,
       }
+    }
+
+    setIsLoading(true)
+    try {
+      await setDoc(doc(firestore, "Non-Productive", moment().format('YYYY-MM-DD,h:mm:ss a')), data)
+        .then(() => {
+          setIsLoading(false)
+          window.toastify("Record Added Successfully", "success")
+        })
+    } catch (error) {
+      window.toastify(error.message, "error")
+      setIsLoading(false)
+    }
+
+    setState(initialState)
+  }
   return (
-<>
-<div className="container my-5 ">
+    <>
+      <div className="container my-5 ">
         <div className="row ">
           <div className="col">
             <div className="card rounded-4 shadow-lg border-0 pb-5 px-3 px-md-4">
@@ -102,7 +103,7 @@ export default function NonProductive() {
                     </select>
                   </div>
                 </div>
-                      
+
                 {/* Unit*/}
                 <div className="row row-cols-1 row-cols-md-2 mb-3">
                   <div className="col">
@@ -154,6 +155,6 @@ export default function NonProductive() {
           </div >
         </div >
       </div >
-</>
-    )
+    </>
+  )
 }

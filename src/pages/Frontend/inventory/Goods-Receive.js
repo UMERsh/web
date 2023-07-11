@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { firestore } from 'config/Firebase'
-import { collection, doc, getDocs, setDoc } from 'firebase/firestore/lite'
+import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore/lite'
 import { useAuthContext } from 'context/AuthContext'
 import moment from 'moment'
 import ProductiveItemsOptions from 'components/ProductiveItemsOptions'
@@ -22,16 +22,16 @@ export default function GoodsReceive() {
   const [totalAmount, setTotalAmount] = useState(0)
   const { userData } = useAuthContext()
 
-  const gettingData = async () => {
-    let array = []
-    const querySnapshot = await getDocs(collection(firestore, "ProductiveItems"));
-    querySnapshot.forEach((doc) => {
-      array.push(doc.data())
-      setDocuments(array)
-    });
-  }
+  // const gettingData = async () => {
+  //   let array = []
+  //   const querySnapshot = await getDocs(collection(firestore, "ProductiveItems"));
+  //   querySnapshot.forEach((doc) => {
+  //     array.push(doc.data())
+  //     setDocuments(array)
+  //   });
+  // }
   useEffect(() => {
-    gettingData()
+    // gettingData()
     state.approved_qty = Number(state.approved_qty)
     state.unit_rate = Number(state.unit_rate)
 
