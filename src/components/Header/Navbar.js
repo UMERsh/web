@@ -39,7 +39,7 @@ export default function Navbar() {
                         }
                         {userRole === "manager"
                             ? <li className="nav-item dropdown">
-                                <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  aria-expanded="false">
                                     Inventory
                                 </a>
                                 <ul className="dropdown-menu">
@@ -51,7 +51,7 @@ export default function Navbar() {
                             </li>
                             : ""
                         }
-                        {userRole === "manager" || userRole == "staff"
+                        {userRole === "manager" 
                             ? <li className="nav-item dropdown">
                                 <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     PayRoll

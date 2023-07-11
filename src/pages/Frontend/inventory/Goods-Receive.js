@@ -7,9 +7,9 @@ import moment from 'moment'
 const initialState = {
   supplier: "",
   item_name: "",
-  unit: 0,
+  unit: "",
   approved_qty: 0,
-  unit_rate: "",
+  unit_rate: 0,
   store: ""
 
 }
@@ -45,7 +45,7 @@ export default function GoodsReceive() {
 
     setIsLoading(true)
     try {
-      await setDoc(doc(firestore, "Goods-Receive", moment().format('YYYY-MM-DD,h:mm:ss')), data)
+      await setDoc(doc(firestore, "Goods-Receive", moment().format('YYYY-MM-DD,h:mm:ss a')), data)
         .then(() => {
           setIsLoading(false)
           window.toastify("Record Added Successfully", "success")

@@ -23,7 +23,7 @@ export default function Footer() {
             <div className="col mt-4 mt-md-0">
               <h3 className='mb-4'>Quick Links</h3>
               <ul>
-                <Link to='/' className='text-decoration-none'><li className='text-white '>Home</li></Link>
+                <Link to='/' className='text-decoration-none' ><li className='text-white '>Home </li></Link>
                 <Link to='/restuarant/order-booking' className=' text-decoration-none'><li className='text-white '>Restuarant </li></Link>
                 {/* <Link to='' className=' text-decoration-none'><li className='text-white '>Contact</li></Link> */}
               </ul>

@@ -85,8 +85,10 @@ export default function ViewRecievingRecord() {
                 <th scope="col">Unit Rate</th>
                 <th scope="col">Gross Amount</th>
                 <th scope="col">Supplier</th>
+                <th scope="col">Store</th>
                 <th scope="col">Date Created</th>
                 <th scope="col">Created By</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             {!goodsRecievingfltrData.length
@@ -103,8 +105,10 @@ export default function ViewRecievingRecord() {
                     <td scope="col">{data.unit_rate}</td>
                     <td scope="col">{data.gross_amount}</td>
                     <td scope="col">{data.supplier}</td>
+                    <td scope="col">{data.store}</td>
                     <td scope="col">{data.dateCreated}</td>
                     <td scope="col">{data.createdBy.email}</td>
+                    <td scope="col">{data.date?"modified":""}</td>
                   </tr>
                 })}
               </tbody>

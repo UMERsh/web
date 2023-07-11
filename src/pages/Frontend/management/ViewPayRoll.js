@@ -87,8 +87,8 @@ export default function ViewPayRoll() {
         </div>
 
         <div className="col-10 col-sm-4 mx-auto mx-md-0 ms-md-auto mt-4 mt-sm-0">
-          <div class="input-group">
-            <span class="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
+          <div className="input-group">
+            <span className="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
             <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search with employee Name or hire date...' onChange={handleMemberShip} />
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function ViewPayRoll() {
           <div className="spinner-grow text-success" role="status"></div>
         </div>
         : <div className={`table-responsive mt-4 ${viewMore ? "table-show-hide" : ""}`}>
-          <table class="table table-light table-striped-columns" id='table-id'>
+          <table className="table table-light table-striped-columns" id='table-id'>
             <thead>
               <tr>
                 <th scope="col" style={{ width: "140px" }}>Employe Name</th>
@@ -122,7 +122,7 @@ export default function ViewPayRoll() {
                   <th scope='col' className='border-0 text-center text-info' colSpan="8">No data found</th>
                 </tr>
               </tbody>
-              : <tbody class="table-group-divider">
+              : <tbody className="table-group-divider">
                 {filteredData.map((data, i) => {
                   return <tr key={i}>
                     <td scope="col">{data.employe_name}</td>
@@ -175,8 +175,8 @@ export default function ViewPayRoll() {
         </div>
 
         <div className="col-10 col-sm-4 mx-auto mx-md-0 ms-md-auto mt-4 mt-sm-0">
-          <div class="input-group">
-            <span class="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
+          <div className="input-group">
+            <span className="input-group-text bg-white text-secondary border-0 border-bottom border-secondary rounded-0 px-0"><SearchTwoToneIcon /></span>
             <input type="search" className='form-control border-0 border-bottom border-secondary shadow-none rounded-0' placeholder='Search with employee Name or hire date...' onChange={handleMemberShip1} />
           </div>
         </div>
@@ -191,7 +191,7 @@ export default function ViewPayRoll() {
           <div className="spinner-grow text-success" role="status"></div>
         </div>
         : <div className={`table-responsive mt-4 ${viewMore ? "table-show-hide" : ""}`}>
-          <table class="table table-light table-striped-columns" id='table-id'>
+          <table className="table table-light table-striped-columns" id='table-id'>
             <thead>
               <tr>
                 <th scope="col" style={{ width: "140px" }}>Employe Name</th>
@@ -209,7 +209,7 @@ export default function ViewPayRoll() {
                   <th scope='col' className='border-0 text-center text-info' colSpan="8">No data found</th>
                 </tr>
               </tbody>
-              : <tbody class="table-group-divider">
+              : <tbody className="table-group-divider">
                 {filteredData1.map((data, i) => {
                   return <tr key={i}>
                     <td scope="col">{data.employe_name}</td>

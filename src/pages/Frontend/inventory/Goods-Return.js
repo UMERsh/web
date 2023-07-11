@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { firestore } from 'config/Firebase'
-import { collection, doc, getDocs, setDoc } from 'firebase/firestore/lite'
+import { collection, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore/lite'
 import { useAuthContext } from 'context/AuthContext'
 import moment from 'moment'
 const initialState = {
   supplier: "",
   item_name: "",
-  unit: 0,
+  unit: "",
   approved_qty: 0,
-  unit_rate: "",
-  store: ""
+  unit_rate: 0,
+  store: "",
+  date: ""
 
 }
 export default function GoodsReturn() {
+  const [documents, setDocuments] = useState([])
   const [state, setState] = useState(initialState)
   const [isLoading, setIsLoading] = useState(false)
   const [totalAmount, setTotalAmount] = useState(0)
@@ -25,13 +27,36 @@ export default function GoodsReturn() {
     setTotalAmount(state.approved_qty * state.unit_rate)
   }, [state.approved_qty, state.unit_rate])
 
+
+  useEffect(() => {
+    gettingRecieveData()
+  }, [])
+
+  const gettingRecieveData = async () => {
+    let array = []
+    const querySnapshot = await getDocs(collection(firestore, "Goods-Receive"));
+    querySnapshot.forEach((doc) => {
+      array.push(doc.data())
+      setDocuments(array)
+    });
+
+  }
+
   const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }));
+
   //handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    var { supplier, item_name, unit, approved_qty, unit_rate, store, date } = state
+    supplier = supplier.trim()
+    item_name = item_name.trim()
+    unit = unit.trim()
+    // approved_qty = approved_qty.trim()
+    // unit_rate = unit_rate.trim()
+    store = store.trim()
 
     let data = {
-      ...state,
+      supplier, item_name, unit, approved_qty, unit_rate, store, date,
       gross_amount: totalAmount,
       dateCreated: moment().format('YYYY-MM-DD,h:mm:ss a'),
       createdBy: {
@@ -39,17 +64,40 @@ export default function GoodsReturn() {
         uid: userData.uid,
       }
     }
-    setIsLoading(true)
-    try {
-      await setDoc(doc(firestore, "Goods-Return", moment().format('YYYY-MM-DD,h:mm:ss')), data)
-        .then(() => {
-          setIsLoading(false)
-          window.toastify("Record Added Successfully", "success")
-        })
-    } catch (error) {
-      window.toastify(error.message, "error")
-      setIsLoading(false)
+
+    let fillteredData = documents.filter(item => {
+      return item.dateCreated.split(',')[0] == data.date && item.item_name.toLowerCase() == data.item_name.toLowerCase() && item.store.toLowerCase() == data.store.toLowerCase() && item.supplier.toLowerCase() == data.supplier.toLowerCase()
+    })
+    if (!fillteredData.length) {
+      return window.toastify("supplier, Item name, store or date does not match with existed received goods. Please re-check data", "error")
+    } else {
+      setIsLoading(true)
+      try {
+        const washingtonRef = doc(firestore, "Goods-Receive", fillteredData[0].dateCreated);
+        await updateDoc(washingtonRef, data)
+          .then(async () => {
+            await setDoc(doc(firestore, "Goods-Return", moment().format('YYYY-MM-DD,h:mm:ss a')), data)
+            setIsLoading(false)
+            window.toastify("Record Added Successfully", "success")
+          })
+
+      } catch (error) {
+        window.toastify(error.message, "error")
+        setIsLoading(false)
+
+      }
     }
+
+    // try {
+    //   await setDoc(doc(firestore, "Goods-Return", moment().format('YYYY-MM-DD,h:mm:ss')), data)
+    //     .then(() => {
+    //       setIsLoading(false)
+    //       window.toastify("Record Added Successfully", "success")
+    //     })
+    // } catch (error) {
+    //   window.toastify(error.message, "error")
+    //   setIsLoading(false)
+    // }
     setState(initialState)
   }
   return (
@@ -99,11 +147,16 @@ export default function GoodsReturn() {
                   </div>
                 </div>
 
-                <div className="row">
+                <div className="row row-cols-1 row-cols-md-2 mb-3">
                   <div className="col">
                     {/* Store */}
                     <label htmlFor="store" className="form-label">Store <span className="text-danger">*</span></label>
                     <input type="text" className="form-control" id="store" name='store' value={state.store} onChange={handleChange} required />
+                  </div>
+                  <div className="col mt-3 mt-md-0">
+                    {/* Gross Amount */}
+                    <label htmlFor="date" className="form-label">Enter Date of Received Goods<span className="text-danger">*</span></label>
+                    <input type="date" className="form-control" id="date" name='date' value={state.date} onChange={handleChange} required />
                   </div>
                 </div>
                 <div className="row mt-4">
