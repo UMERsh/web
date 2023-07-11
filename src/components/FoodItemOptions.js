@@ -3,21 +3,21 @@ import React from 'react'
 export default function FoodItemOptions() {
     return (
         <>
-            <option value="dinner">Bar B,Q</option>
-            <option value="mutton">Welcome</option>
-            <option value="fish">Rice</option>
-            <option value="chinese">China Rice</option>
-            <option value="fried-rice">Desi Zaiqa</option>
-            <option value="noodles">China Town</option>
-            <option value="ice-cream">Shahi Daster Khawan</option>
-            <option value="milk-shake">Orignal Crust</option>
-            <option value="milk-shake">Hot & Cool</option>
-            <option value="milk-shake">Burger</option>
-            <option value="milk-shake">Shawarma</option>
-            <option value="milk-shake">Saled Bar</option>
+            <option value="bar-bq">Bar B,Q</option>
+            <option value="welcome">Welcome</option>
+            <option value="rice">Rice</option>
+            <option value="china-hot">China Hot</option>
+            <option value="desi-zaiqa">Desi Zaiqa</option>
+            <option value="china-town">China Town</option>
+            <option value="shahi-daster-khawan">Shahi Daster Khawan</option>
+            <option value="orignal-crust">Orignal Crust</option>
+            <option value="mhot-cool">Hot & Cool</option>
+            <option value="burger">Burger</option>
+            <option value="shawarma">Shawarma</option>
+            <option value="saled-bar">Saled Bar</option>
             <option value="hot-wings">Hot Wings</option>
             <option value="fries">Fries</option>
-            <option value="tandor">Tandoor</option>
+            <option value="tandoor">Tandoor</option>
         </>
     )
 }

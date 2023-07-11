@@ -505,7 +505,7 @@ export default function OrderBooking(props) {
                 <div className="row mt-5 gx-2">
                   <div className="col-4 col-md-2 ">
                     <label htmlFor="order-type" className="form-label">Order Type</label>
-                    <select className="form-select shadow-none" id='order-type' name='order_type' value={state.order_type} onChange={handleOrderType} aria-label="Default select example">
+                    <select className="form-select shadow-none" id='order_type' name='order_type' value={state.order_type} onChange={handleOrderType} aria-label="Default select example">
                       <option value="" ></option>
                       <FoodItemOptions />
                     </select>
