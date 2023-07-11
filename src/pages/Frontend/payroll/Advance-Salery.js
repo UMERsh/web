@@ -19,6 +19,7 @@ export default function AdvanceSalery() {
   const { userData } = useAuthContext()
 
 
+
   const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }));
   //handleSubmit
   const handleSubmit = async (e) => {
@@ -90,7 +91,7 @@ export default function AdvanceSalery() {
                   <div className="col mt-3 mt-md-0">
                     {/* New Sal*/}
                     <label htmlFor="person_name" className="form-label">New Ex Salery of Month<span className="text-danger">*</span></label>
-                    <input type="number" className="form-control" id="ex_salery" name='ex_salery' value={state.ex_salery} onChange={handleChange} required />
+                    <input type="number" className="form-control" id="ex_salery" name='ex_salery' value={state.ex_salery}  onChange={handleChange} required />
                   </div>
                 </div>
 

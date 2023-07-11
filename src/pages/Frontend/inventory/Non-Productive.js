@@ -6,47 +6,43 @@ import moment from 'moment'
 import ProductiveItemsOptions from 'components/ProductiveItemsOptions'
 
 const initialState = {
-  supplier: "",
-  item_type: "",
-  unit: "",
-  approved_qty: 0,
-  unit_rate: 0,
-  store: ""
-
-}
-
-export default function GoodsReceive() {
-  const [state, setState] = useState(initialState)
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [totalAmount, setTotalAmount] = useState(0)
-  const { userData } = useAuthContext()
-
-  const gettingData = async () => {
-    let array = []
-    const querySnapshot = await getDocs(collection(firestore, "ProductiveItems"));
-    querySnapshot.forEach((doc) => {
-      array.push(doc.data())
-      setDocuments(array)
-    });
+    supplier: "",
+    item_type: "",
+    unit: "",
+    approved_qty: 0,
+    unit_rate: 0,
+    store: ""
+  
   }
-  useEffect(() => {
-    gettingData()
-    state.approved_qty = Number(state.approved_qty)
-    state.unit_rate = Number(state.unit_rate)
-
-    setTotalAmount(state.approved_qty * state.unit_rate)
-  }, [state.approved_qty, state.unit_rate])
-
-
-
-  // handleItemType
+export default function NonProductive() {
+    const [state, setState] = useState(initialState)
+    const [data, setData] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    const [totalAmount, setTotalAmount] = useState(0)
+    const { userData } = useAuthContext()
+    const gettingData = async () => {
+        let array = []
+        const querySnapshot = await getDocs(collection(firestore, "ProductiveItems"));
+        querySnapshot.forEach((doc) => {
+          array.push(doc.data())
+          setDocuments(array)
+        });
+      }
+      useEffect(() => {
+        gettingData()
+        state.approved_qty = Number(state.approved_qty)
+        state.unit_rate = Number(state.unit_rate)
+    
+        setTotalAmount(state.approved_qty * state.unit_rate)
+      }, [state.approved_qty, state.unit_rate])
+    
+       // handleItemType
   const handleItemType = async (e) => {
     let ItemType = e.target.value
     state.item_type = ItemType;
 
     let array = []
-    const q = query(collection(firestore, "ProductiveItems"), where("item_type", "==", ItemType));
+    const q = query(collection(firestore, "NonProductiveItems"), where("item_type", "==", ItemType));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       array.push(doc.data())
@@ -54,43 +50,41 @@ export default function GoodsReceive() {
     });
 
   }
-
-  const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }));
-  //handleSubmit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let data = {
-      ...state,
-      gross_amount: totalAmount,
-      dateCreated: moment().format('YYYY-MM-DD,h:mm:ss a'),
-      createdBy: {
-        email: userData.email,
-        uid: userData.uid,
-      }
-    }
-
-    setIsLoading(true)
-    try {
-      await setDoc(doc(firestore, "Goods-Receive", moment().format('YYYY-MM-DD,h:mm:ss a')), data)
-        .then(() => {
+      const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }));
+      //handleSubmit
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        let data = {
+          ...state,
+          gross_amount: totalAmount,
+          dateCreated: moment().format('YYYY-MM-DD,h:mm:ss a'),
+          createdBy: {
+            email: userData.email,
+            uid: userData.uid,
+          }
+        }
+    
+        setIsLoading(true)
+        try {
+          await setDoc(doc(firestore, "Non-Productive", moment().format('YYYY-MM-DD,h:mm:ss a')), data)
+            .then(() => {
+              setIsLoading(false)
+              window.toastify("Record Added Successfully", "success")
+            })
+        } catch (error) {
+          window.toastify(error.message, "error")
           setIsLoading(false)
-          window.toastify("Record Added Successfully", "success")
-        })
-    } catch (error) {
-      window.toastify(error.message, "error")
-      setIsLoading(false)
-    }
-
-    setState(initialState)
-  }
+        }
+    
+        setState(initialState)
+      }
   return (
-
-    <>
-      <div className="container my-5 ">
+<>
+<div className="container my-5 ">
         <div className="row ">
           <div className="col">
             <div className="card rounded-4 shadow-lg border-0 pb-5 px-3 px-md-4">
-              <h1 className='pt-3 pb-5 fw-bold text-info'>Goods Receiving Note (GRN)</h1>
+              <h1 className='pt-3 pb-5 fw-bold text-info'>Non Productive Items</h1>
               <form onSubmit={handleSubmit} >
                 {/* Supplier */}
                 <div className="row row-cols-1 row-cols-md-2 mb-3">
@@ -160,6 +154,6 @@ export default function GoodsReceive() {
           </div >
         </div >
       </div >
-    </>
-  )
+</>
+    )
 }

@@ -7,7 +7,6 @@ import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import FoodItemOptions from 'components/FoodItemOptions';
 
-
 export default function FoodItems(props) {
     const [documents, setDocuments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
