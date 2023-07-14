@@ -4,6 +4,7 @@ import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firesto
 import { useAuthContext } from 'context/AuthContext'
 import moment from 'moment'
 import ProductiveItemsOptions from 'components/ProductiveItemsOptions'
+import NonProductiveItemsOptions from 'components/NonProductiveItemsOptions'
 
 const initialState = {
   supplier: "",
@@ -95,11 +96,11 @@ export default function NonProductive() {
                   </div>
                   {/* Item Name */}
                   <div className="col mt-3 mt-md-0">
-                    <label htmlFor="item name" className="form-label"> Item Type</label>
+                    <label htmlFor="item type" className="form-label"> Item Type</label>
                     {/* <input type="text" className="form-control" id="item_name" name='item_name' value={state.item_name} onChange={handleChange} required /> */}
-                    <select className="form-select shadow-none" id='item_type' name='item_type' value={state.item_type} onChange={handleItemType} aria-label="Default select example">
+                    <select className="form-select shadow-none" id='item_type' name='item_type' value={state.item_type} onChange={handleChange} aria-label="Default select example">
                       <option value="" ></option>
-                      <ProductiveItemsOptions />
+                      <NonProductiveItemsOptions />
                     </select>
                   </div>
                 </div>

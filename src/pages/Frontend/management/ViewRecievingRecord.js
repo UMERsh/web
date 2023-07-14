@@ -36,7 +36,7 @@ export default function ViewRecievingRecord() {
 
 
   // handleMemberShip
-  const handleMemberShip = e => setGoodsRecievingfltrData(goodsRecieving.filter(item => item.item_name.toLowerCase().includes(e.target.value.toLowerCase()) || item.dateCreated.includes(e.target.value)))
+  const handleMemberShip = e => setGoodsRecievingfltrData(goodsRecieving.filter(item => item.item_type.toLowerCase().includes(e.target.value.toLowerCase()) || item.dateCreated.includes(e.target.value)))
 
   return (
     <>

@@ -1,0 +1,68 @@
+[debug] [2023-07-14T10:10:43.548Z] ----------------------------------------------------------------------
+[debug] [2023-07-14T10:10:43.557Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Umar Laptop\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-07-14T10:10:43.559Z] CLI Version:   11.26.0
+[debug] [2023-07-14T10:10:43.559Z] Platform:      win32
+[debug] [2023-07-14T10:10:43.560Z] Node Version:  v18.12.1
+[debug] [2023-07-14T10:10:43.562Z] Time:          Fri Jul 14 2023 15:10:43 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-07-14T10:10:43.563Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-07-14T10:10:43.598Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-07-14T10:10:43.845Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-07-14T10:10:43.846Z] > authorizing via signed-in user (umershafiq513@gmail.com)
+[debug] [2023-07-14T10:10:43.847Z] [iam] checking project nbcburewala-75283 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-07-14T10:10:43.849Z] > refreshing access token with scopes: []
+[debug] [2023-07-14T10:10:43.851Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-07-14T10:10:43.851Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-07-14T10:10:44.370Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-07-14T10:10:44.371Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-07-14T10:10:44.427Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions [none]
+[debug] [2023-07-14T10:10:44.428Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions x-goog-quota-user=projects/nbcburewala-75283
+[debug] [2023-07-14T10:10:44.428Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-07-14T10:10:44.541Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-07-14T10:10:44.541Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2023-07-14T10:10:46.202Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions 200
+[debug] [2023-07-14T10:10:46.203Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions {}
+[debug] [2023-07-14T10:10:46.204Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project nbcburewala-75283:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2023-07-14T10:10:46.208Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/nbcburewala-75283 [none]
+[debug] [2023-07-14T10:11:00.583Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/nbcburewala-75283 403
+[debug] [2023-07-14T10:11:00.585Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/nbcburewala-75283 {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2023-07-14T10:11:00.587Z] HTTP Error: 403, The caller does not have permission
+[debug] [2023-07-14T10:11:01.003Z] FirebaseError: HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\Umar Laptop\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:49:12)
+    at RetryOperation._fn (C:\Users\Umar Laptop\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:288:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project nbcburewala-75283. Please make sure the project exists and your account has permission to access it.
+[debug] [2023-07-14T10:11:30.095Z] ----------------------------------------------------------------------
+[debug] [2023-07-14T10:11:30.099Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Umar Laptop\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-07-14T10:11:30.100Z] CLI Version:   11.26.0
+[debug] [2023-07-14T10:11:30.100Z] Platform:      win32
+[debug] [2023-07-14T10:11:30.100Z] Node Version:  v18.12.1
+[debug] [2023-07-14T10:11:30.102Z] Time:          Fri Jul 14 2023 15:11:30 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-07-14T10:11:30.103Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-07-14T10:11:30.245Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-07-14T10:11:30.246Z] > authorizing via signed-in user (umershafiq513@gmail.com)
+[debug] [2023-07-14T10:11:30.246Z] [iam] checking project nbcburewala-75283 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-07-14T10:11:30.251Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions [none]
+[debug] [2023-07-14T10:11:30.252Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions x-goog-quota-user=projects/nbcburewala-75283
+[debug] [2023-07-14T10:11:30.252Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-07-14T10:11:31.989Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions 200
+[debug] [2023-07-14T10:11:31.990Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/nbcburewala-75283:testIamPermissions {}
+[debug] [2023-07-14T10:11:31.991Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project nbcburewala-75283:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2023-07-14T10:11:31.993Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/nbcburewala-75283 [none]
+[debug] [2023-07-14T10:11:32.593Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/nbcburewala-75283 403
+[debug] [2023-07-14T10:11:32.593Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/nbcburewala-75283 {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2023-07-14T10:11:32.596Z] HTTP Error: 403, The caller does not have permission
+[debug] [2023-07-14T10:11:33.148Z] FirebaseError: HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\Umar Laptop\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:49:12)
+    at RetryOperation._fn (C:\Users\Umar Laptop\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:288:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project nbcburewala-75283. Please make sure the project exists and your account has permission to access it.

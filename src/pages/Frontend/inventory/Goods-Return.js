@@ -3,6 +3,7 @@ import { firestore } from 'config/Firebase'
 import { collection, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore/lite'
 import { useAuthContext } from 'context/AuthContext'
 import moment from 'moment'
+import ProductiveItemsOptions from 'components/ProductiveItemsOptions'
 const initialState = {
   supplier: "",
   item_name: "",
@@ -34,7 +35,7 @@ export default function GoodsReturn() {
 
   const gettingRecieveData = async () => {
     let array = []
-    const querySnapshot = await getDocs(collection(firestore, "Goods-Receive"));
+    const querySnapshot = await getDocs(collection(firestore, "Goods-Return"));
     querySnapshot.forEach((doc) => {
       array.push(doc.data())
       setDocuments(array)
@@ -73,7 +74,7 @@ export default function GoodsReturn() {
     } else {
       setIsLoading(true)
       try {
-        const washingtonRef = doc(firestore, "Goods-Receive", fillteredData[0].dateCreated);
+        const washingtonRef = doc(firestore, "Goods-Return", fillteredData[0].dateCreated);
         await updateDoc(washingtonRef, data)
           .then(async () => {
             await setDoc(doc(firestore, "Goods-Return", moment().format('YYYY-MM-DD,h:mm:ss a')), data)
@@ -117,7 +118,11 @@ export default function GoodsReturn() {
                   {/* Item Name */}
                   <div className="col mt-3 mt-md-0">
                     <label htmlFor="item name" className="form-label"> Item Name</label>
-                    <input type="text" className="form-control" id="item_name" name='item_name' value={state.item_name} onChange={handleChange} required />
+                    {/* <input type="text" className="form-control" id="item_name" name='item_name' value={state.item_name} onChange={handleChange} required /> */}
+                    <select className="form-select shadow-none" id='item_name' name='item_name' value={state.item_name} onChange={handleChange} aria-label="Default select example">
+                      <option value="" ></option>
+                       <ProductiveItemsOptions />
+                   </select>
                   </div>
                 </div>
 

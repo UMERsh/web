@@ -7,7 +7,7 @@ import ProductiveItemsOptions from 'components/ProductiveItemsOptions'
 
 const initialState = {
   supplier: "",
-  item_type: "",
+  item_name: "",
   unit: "",
   approved_qty: 0,
   unit_rate: 0,
@@ -42,11 +42,11 @@ export default function GoodsReceive() {
 
   // handleItemType
   const handleItemType = async (e) => {
-    let ItemType = e.target.value
-    state.item_type = ItemType;
+    let ItemName = e.target.value
+    state.item_name = ItemName;
 
     let array = []
-    const q = query(collection(firestore, "ProductiveItems"), where("item_type", "==", ItemType));
+    const q = query(collection(firestore, "ProductiveItems"), where("item_name", "==", ItemName));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       array.push(doc.data())
@@ -98,14 +98,14 @@ export default function GoodsReceive() {
                     <label htmlFor="supplier" className="form-label">Supplier <span className="text-danger">*</span></label>
                     <input type="text" className="form-control" id="supplier" name='supplier' value={state.supplier} onChange={handleChange} required />
                   </div>
-                  {/* Item Name */}
+                  {/* Item Type */}
                   <div className="col mt-3 mt-md-0">
-                    <label htmlFor="item name" className="form-label"> Item Type</label>
+                    <label htmlFor="item-type" className="form-label"> Item Type</label>
                     {/* <input type="text" className="form-control" id="item_name" name='item_name' value={state.item_name} onChange={handleChange} required /> */}
-                    <select className="form-select shadow-none" id='item_type' name='item_type' value={state.item_type} onChange={handleItemType} aria-label="Default select example">
+                   <select className="form-select shadow-none" id='item_name' name='item_name' value={state.item_name} onChange={handleChange} aria-label="Default select example">
                       <option value="" ></option>
-                      <ProductiveItemsOptions />
-                    </select>
+                       <ProductiveItemsOptions />
+                   </select> 
                   </div>
                 </div>
                       
