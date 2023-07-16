@@ -910,10 +910,7 @@ export default function OrderBooking(props) {
                               </div>
                             </div>
                           </div>
-
-
                         </td>
-
                       </tr>
                     })}
                   </tbody>

@@ -45,7 +45,12 @@ export default function Index() {
                             }
                             {userRole !== "" && userRole == 'manager'
                                 && <li className="nav-item pe-3">
-                                    <NavLink className="nav-link text-primary border-0 " to='/management/inventory'>Inventory</NavLink>
+                                    <NavLink className="nav-link text-primary border-0 " to='/management/inventory-goods'>Inventory Goods Record</NavLink>
+                                </li>
+                            }
+                            {userRole !== "" && userRole == 'manager'
+                                && <li className="nav-item pe-3">
+                                    <NavLink className="nav-link text-primary border-0 " to='/management/inventory'>Non Productive Inventory</NavLink>
                                 </li>
                             }
                             {userRole !== "" && userRole == 'manager'

@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import FoodItemOptions from 'components/FoodItemOptions'
 import { firestore } from 'config/Firebase'
-import { collection, doc, getDocs } from 'firebase/firestore/lite'
+import { collection, getDocs } from 'firebase/firestore/lite'
 import moment from 'moment/moment'
 import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
+import ReactToPrint from 'react-to-print'
+import { PrintScreen } from './PrintScreen'
 
 export default function ViewRestuarantRecord() {
   const [documents, setDocuments] = useState([])
@@ -13,6 +15,7 @@ export default function ViewRestuarantRecord() {
   const [isLoading, setIsLoading] = useState(true)
   const [viewMore, setViewMore] = useState(true)
   const durationRef = useRef()
+  var componentRef = useRef(null)
 
   useEffect(() => {
     gettingData()
@@ -107,7 +110,15 @@ export default function ViewRestuarantRecord() {
           <h6 >Filters <FilterListTwoToneIcon /></h6>
         </div>
         <div className="col text-end text-secondary pe-3 pe-sm-5">
-          <h6 >Total Results: {filteredData.length}</h6>
+          <span className='me-3'>Total Results: {filteredData.length}</span>
+          <ReactToPrint
+            trigger={() => <div className='btn btn-info btn-sm px-4 py-2 rounded-pill text-white buttons'>Print</div>}
+            content={() => componentRef}
+          />
+          <div className='d-none'>
+            <PrintScreen ref={(el) => (componentRef = el)} dataForPrint={filteredData} />
+          </div>
+          {/* <button className='btn btn-info btn-sm px-4 py-2 rounded-pill text-white buttons'>Print</button> */}
         </div>
       </div>
       <div className="row g-2">

@@ -35,7 +35,7 @@ export default function GoodsReturn() {
 
   const gettingRecieveData = async () => {
     let array = []
-    const querySnapshot = await getDocs(collection(firestore, "Goods-Return"));
+    const querySnapshot = await getDocs(collection(firestore, "Goods-Receive"));
     querySnapshot.forEach((doc) => {
       array.push(doc.data())
       setDocuments(array)
@@ -69,17 +69,18 @@ export default function GoodsReturn() {
     let fillteredData = documents.filter(item => {
       return item.dateCreated.split(',')[0] == data.date && item.item_name.toLowerCase() == data.item_name.toLowerCase() && item.store.toLowerCase() == data.store.toLowerCase() && item.supplier.toLowerCase() == data.supplier.toLowerCase()
     })
+
     if (!fillteredData.length) {
       return window.toastify("supplier, Item name, store or date does not match with existed received goods. Please re-check data", "error")
     } else {
       setIsLoading(true)
       try {
-        const washingtonRef = doc(firestore, "Goods-Return", fillteredData[0].dateCreated);
+        const washingtonRef = doc(firestore, "Goods-Receive", fillteredData[0].dateCreated);
         await updateDoc(washingtonRef, data)
           .then(async () => {
             await setDoc(doc(firestore, "Goods-Return", moment().format('YYYY-MM-DD,h:mm:ss a')), data)
             setIsLoading(false)
-            window.toastify("Record Added Successfully", "success")
+            window.toastify("Good's Recieve Data Updated and New Record Added Successfully", "success")
           })
 
       } catch (error) {
@@ -89,16 +90,6 @@ export default function GoodsReturn() {
       }
     }
 
-    // try {
-    //   await setDoc(doc(firestore, "Goods-Return", moment().format('YYYY-MM-DD,h:mm:ss')), data)
-    //     .then(() => {
-    //       setIsLoading(false)
-    //       window.toastify("Record Added Successfully", "success")
-    //     })
-    // } catch (error) {
-    //   window.toastify(error.message, "error")
-    //   setIsLoading(false)
-    // }
     setState(initialState)
   }
   return (

@@ -1,19 +1,17 @@
 import React from 'react'
-import ViewRecievingRecord from './ViewRecievingRecord'
-import ViewReturningRecord from './ViewReturningRecord'
 import ViewCashPaymentRecord from './ViewCashPaymentRecord'
 import ViewNonProductiveRecord from './ViewNonProductiveRecord'
+import ViewReturnNonProductive from './ViewReturnNonProductive'
 
 export default function InventoryRecord() {
     return (
         <>
-            <ViewRecievingRecord />
-            <hr /><br />
             <ViewNonProductiveRecord />
             <hr /> <br />
-            <ViewReturningRecord />
-            <hr /><br />
+            <ViewReturnNonProductive/>
+            <hr /> <br />
             <ViewCashPaymentRecord />
+
         </>
     )
 }

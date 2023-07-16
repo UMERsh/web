@@ -40,7 +40,7 @@ export default function ViewNonProductiveRecord() {
     
   return (
    <>
-       <h3 className='fw-bold mb-4 text-info'>Non Productive Record</h3>
+       <h3 className='fw-bold mb-4 text-info'>Non Productive Receiving Record</h3>
       <div className="row mb-3">
         <div className="col text-secondary">
           <h6 >Filters <FilterListTwoToneIcon /></h6>

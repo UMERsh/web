@@ -5,7 +5,7 @@ import moment from 'moment'
 import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 
-export default function ViewRecievingRecord() {
+export default function ViewReturnNonProductive() {
   const [goodsRecieving, setGoodsRecieving] = useState([])
   const [goodsRecievingfltrData, setGoodsRecievingfltrData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -18,7 +18,7 @@ export default function ViewRecievingRecord() {
 
   const gettingData = async () => {
     let array = []
-    const querySnapshot = await getDocs(collection(firestore, "Goods-Receive"));
+    const querySnapshot = await getDocs(collection(firestore, "Return-Non-Productive"));
     querySnapshot.forEach((doc) => {
       array.push(doc.data())
       setGoodsRecieving(array)
@@ -36,11 +36,11 @@ export default function ViewRecievingRecord() {
 
 
   // handleMemberShip
-  const handleMemberShip = e => setGoodsRecievingfltrData(goodsRecieving.filter(item => item.item_type.toLowerCase().includes(e.target.value.toLowerCase()) || item.dateCreated.includes(e.target.value)))
+  const handleMemberShip = e => setGoodsRecievingfltrData(goodsRecieving.filter(item => item.item_name.toLowerCase().includes(e.target.value.toLowerCase()) || item.dateCreated.includes(e.target.value)))
 
   return (
     <>
-      <h3 className='fw-bold mb-4 text-info'>Goods Receiving Note Record</h3>
+      <h3 className='fw-bold mb-4 text-info'>Non Productive Return Record</h3>
       <div className="row mb-3">
         <div className="col text-secondary">
           <h6 >Filters <FilterListTwoToneIcon /></h6>
@@ -80,15 +80,13 @@ export default function ViewRecievingRecord() {
           <table className="table table-light table-striped-columns" id='table-id'>
             <thead>
               <tr>
-                <th scope="col">Item Name</th>
+                <th scope="col">Item Type</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Unit Rate</th>
                 <th scope="col">Gross Amount</th>
                 <th scope="col">Supplier</th>
-                <th scope="col">Store</th>
                 <th scope="col">Date Created</th>
                 <th scope="col">Created By</th>
-                <th scope="col"></th>
               </tr>
             </thead>
             {!goodsRecievingfltrData.length
@@ -100,15 +98,13 @@ export default function ViewRecievingRecord() {
               : <tbody className="table-group-divider">
                 {goodsRecievingfltrData.map((data, i) => {
                   return <tr key={i}>
-                    <td scope="col">{data.item_name}</td>
+                    <td scope="col">{data.item_type}</td>
                     <td scope="col">{data.approved_qty + " " + data.unit}</td>
                     <td scope="col">{data.unit_rate}</td>
                     <td scope="col">{data.gross_amount}</td>
-                    <td scope="col">{data.supplier}</td>
-                    <td scope="col">{data.store}</td>
+                    <td scope="col">{data.supplier}</td>                    
                     <td scope="col">{data.dateCreated}</td>
                     <td scope="col">{data.createdBy.email}</td>
-                    <td scope="col">{data.date?"modified":""}</td>
                   </tr>
                 })}
               </tbody>
