@@ -45,6 +45,7 @@ export default function Navbar() {
                                 <ul className="dropdown-menu">
                                     <li><NavLink className="dropdown-item" to='inventory/goods-receive'>Goods Receiving Note(GRN)</NavLink></li>
                                     <li><NavLink className="dropdown-item" to='inventory/goods-return'>Goods Return Note(GRN)</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to='inventory/issuance'>Issuance</NavLink></li>
                                     <li><NavLink className="dropdown-item" to='inventory/non-productive'>Non Productive</NavLink></li>
                                     <li><NavLink className="dropdown-item bg-success" to='inventory/cash-payment'>Cash Payment</NavLink></li>
                                     <li><NavLink className="dropdown-item bg-danger" to='inventory/cash-receive'>Cash Receive</NavLink></li>
