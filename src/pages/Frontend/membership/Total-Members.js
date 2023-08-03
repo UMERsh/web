@@ -8,6 +8,7 @@ import RefreshData from './Refresh-Data'
 export default function TotalMembers() {
   const [documents, setDocuments] = useState([])
   const [delMemberNo, setDelMemberNo] = useState("")
+  const [filteredData, setFilteredData] = useState([])
   const [isProcessingDelete, setIsProcessingDelete] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -48,6 +49,7 @@ export default function TotalMembers() {
     <>
       <div className="container py-5">
         <RefreshData />
+     
         <h1 className='fw-bold  pb-3 text-info'>Total Members___</h1>
         {isLoading
           ? <div className='d-flex justify-content-center my-5'>
@@ -59,7 +61,7 @@ export default function TotalMembers() {
             {documents.map((items, i) => {
               return <div className="row shadow-lg text-center rounded overflow-hidden d-flex align-items-center mt-3" key={i}>
                 <div className="col-6 mb-4 mb-sm-0 col-md-2 col-lg-1 py-1">
-                  <img src={items.profile_pic === "" ? "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" : items.profile_pic} className='w-100 rounded-circle' height="100px" alt="" />
+                  <img src={items.profile_pic === "" ? "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" : items.profile_pic} className='w-100 rounded' height="100px" alt="" />
                 </div>
                 <div className="col-6 mb-4 mb-sm-0 col-sm-3 ">
                   <h6>{items.member_name}</h6>
@@ -97,6 +99,7 @@ export default function TotalMembers() {
                           </div>
                         </div>
                       }
+       
 
                     </div>
                   </div>
@@ -106,6 +109,7 @@ export default function TotalMembers() {
           </>
         }
       </div>
+     
     </>
   )
 }

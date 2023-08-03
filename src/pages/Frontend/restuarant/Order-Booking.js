@@ -12,6 +12,7 @@ import { ComponentToPrint } from './New';
 import { StaffComponentPrint } from './StaffComponentPrint';
 import { Select } from 'antd';
 import moment from 'moment';
+import { useAuthContext } from 'context/AuthContext';
 
 const intitalState = {
   shift: "",
@@ -48,7 +49,7 @@ export default function OrderBooking(props) {
   const [showAddedProducts, setShowAddedProducts] = useState(false)
   const [delModalValue, setDelModalValue] = useState([])
   const [isSaveLoading, setIsSaveLoading] = useState(false)
-
+const {userData} = useAuthContext()
 
   var componentRef = useRef(null)
   var staffComponentPrint = useRef(null)
@@ -152,6 +153,7 @@ export default function OrderBooking(props) {
   // handle submit
   const handleSubmit = (e) => {
     e.preventDefault()
+  
 
     let previousLocalStorageItems = JSON.parse(localStorage.getItem("orders")) || []
 
@@ -191,7 +193,8 @@ export default function OrderBooking(props) {
       quantity,
       amount,
       dateCreated: serverTimestamp(),
-      id: window.getRandomId()
+      id: window.getRandomId(),
+      email: userData.email
     }
 
     if (previousLocalStorageItems[0] == undefined) {
@@ -216,11 +219,14 @@ export default function OrderBooking(props) {
     state.item_title = ""
     state.item_name_urdu = ""
     state.quantity = 1
+     
+  
     setItemCode("")
     setQuantity(1)
     setAmount(0)
     window.toastify("Item added Successfully", "success")
     setShowAddedProducts(false)
+    
   }
 
 
