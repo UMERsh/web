@@ -18,7 +18,7 @@ export default function Index() {
         <Routes>
 
             <Route path='/' element={userRole !== "" && userRole == 'restuarant_manager' ? <AddFoodItem /> : <Navigate to="/management/utility-bills" />} />
-            <Route path='/records' element={userRole !== "" && userRole == 'restuarant_manager' ? <ViewRestuarantRecord /> : <div className='text-danger'>This page is not for you</div>} />
+            <Route path='/records' element={userRole !== "" && userRole == 'restuarant_manager' || userRole == 'restuarant_staff' ? <ViewRestuarantRecord /> : <div className='text-danger'>This page is not for you</div>} />
             <Route path='/utility-bills' element={userRole !== "" && userRole == 'manager' ? <ViewUtilityBillsRecord /> : <div className='text-danger'>This page is not for you</div>} />
             <Route path='/salaries' element={userRole !== "" && userRole == 'manager' ? <ViewSaleryRecord /> : <div className='text-danger'>This page is not for you</div>} />
             <Route path='/construction' element={userRole !== "" && userRole == 'manager' ? <ViewConstructionRecord /> : <div className='text-danger'>This page is not for you</div>} />

@@ -10,7 +10,7 @@ export const StaffComponentPrint = React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div className="container my-5 text-end" style={{ paddingLeft: 80, paddingRight: 80 }} ref={ref}>
+            <div className="container my-5 mx-1 text-end"  ref={ref}>
                 <h2>NBC Burewala</h2>
                 <p><u>ORDER</u></p>
                 <div className="row mt-5">
@@ -25,7 +25,7 @@ export const StaffComponentPrint = React.forwardRef((props, ref) => {
                 </div>
                 <table className="table mt-4" >
                     <thead>
-                        <tr>
+                        <tr className="border border-dark">
                             {!data[0] ? "" : data[0].serving_area == 'take_away' || data[0].serving_area === 'home_delivery' ? <th scope="col">قیمت</th> : ""}
                             <th scope="col">تعداد</th>
                             <th scope="col">اشیا کا انگریزی نام</th>

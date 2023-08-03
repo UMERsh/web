@@ -20,7 +20,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div className="container m-5" ref={ref}>
+            <div className="container my-5 mx-1" ref={ref}>
                 <h2>NBC Burewala</h2>
                 <p><u>COMPLETE ORDER</u></p>
                 <div className="row mt-5">
@@ -41,9 +41,9 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                     <div className="col"><b>Time: </b>{time}</div>
                 </div>
 
-                <table className="table mt-3" >
+                <table className="table mt-5" >
                     <thead>
-                        <tr>
+                        <tr className="border border-dark">
                             <th scope="col">Code</th>
                             <th scope="col">Item Name</th>
                             <th scope="col">Quantity</th>

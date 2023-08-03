@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './_management.scss'
 import Routes from 'pages/Frontend/management/Routes'
 import { NavLink } from 'react-router-dom'
@@ -23,7 +23,7 @@ export default function Index() {
                                     <NavLink className="nav-link text-primary border-0 " to="/management" end>Add Food Items</NavLink>
                                 </li>
                             }
-                            {userRole !== "" && userRole == 'restuarant_manager'
+                            {userRole !== "" && (userRole == 'restuarant_manager' || userRole == 'restuarant_staff')
                                 && <li className="nav-item pe-3">
                                     <NavLink className="nav-link text-primary border-0 " to='/management/records'>Restuarant Record</NavLink>
                                 </li>

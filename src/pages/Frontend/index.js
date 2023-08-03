@@ -25,7 +25,7 @@ export default function Index() {
                         <Routes>
                             <Route path='/' element={<Home />} />
                             <Route path='restuarant/*' element={userRole !== "" && userRole == 'restuarant_staff' || userRole == 'restuarant_manager' ? <Restuarant /> : <Home />} />
-                            <Route path='management/*' element={userRole !== "" && userRole == 'manager' || userRole == 'restuarant_manager' ? <Management /> : <Home />} />
+                            <Route path='management/*' element={userRole !== "" && userRole == 'manager' || userRole == 'restuarant_manager' || userRole == 'restuarant_staff' ? <Management /> : <Home />} />
                             <Route path='membership/*' element={userRole !== "" && userRole == 'staff' || userRole == 'manager' ? <Membership /> : <Home />} />
                             <Route path='expenses/*' element={userRole !== "" && userRole == 'manager' ? <Expenses /> : <Home />} />
                             <Route path='inventory/*' element={userRole !== "" && userRole == 'manager' ? <Inventory /> : <Home />} />
