@@ -166,6 +166,7 @@ export default function ViewRestuarantRecord() {
                 <th scope="col">Serving Area</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Amount</th>
+                <th scope="col">CreatedBy</th>
               </tr>
             </thead>
             {!filteredData.length
@@ -186,6 +187,9 @@ export default function ViewRestuarantRecord() {
                     <td scope="col">{data.serving_area}</td>
                     <td scope="col">{data.quantity}</td>
                     <th scope="col"><span className='fw-light'>Rs. </span>{data.amount}</th>
+                    <td scope="col">{data.email}</td>
+
+
                   </tr>
                 })}
               </tbody>
