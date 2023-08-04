@@ -15,6 +15,7 @@ export default function FoodItemOptions() {
             <option value="burger">Burger</option>
             <option value="shawarma">Shawarma</option>
             <option value="saled-bar">Saled Bar</option>
+            <option value="fried-chicken">Fried Chicken</option>
             <option value="hot-wings">Hot Wings</option>
             <option value="fries">Fries</option>
             <option value="tandoor">Tandoor</option>

@@ -37,7 +37,7 @@ export default function Navbar() {
                             </li>
                             : ""
                         }
-                        {userRole === "manager"
+                        {userRole === "manager" || userRole === "restuarant_staff"
                             ? <li className="nav-item dropdown">
                                 <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Inventory
@@ -53,7 +53,7 @@ export default function Navbar() {
                             </li>
                             : ""
                         }
-                        {userRole === "manager"
+                        {userRole === "manager" || userRole === "restuarant_staff"
                             ? <li className="nav-item dropdown">
                                 <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     PayRoll
@@ -66,7 +66,7 @@ export default function Navbar() {
                             </li>
                             : ""
                         }
-                        {userRole === "manager" || userRole === "staff"
+                        {userRole === "manager" 
                             ? <li className="nav-item dropdown">
                                 <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Membership

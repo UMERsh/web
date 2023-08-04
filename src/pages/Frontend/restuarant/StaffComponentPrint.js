@@ -14,7 +14,7 @@ export const StaffComponentPrint = React.forwardRef((props, ref) => {
                 <h2>NBC Burewala</h2>
                 <p><u>ORDER</u></p>
                 <div className="row mt-5">
-                    <div className="col ">{!data[0] ? "" : data[0].customer_name} <b> :سیل مین</b></div>
+                    <div className="col ">{!data[0] ? "" : data[0].sales_man_name} <b> :سیل مین</b></div>
                 </div>
                 <div className="row mt-3">
                     <div className="col">{!data[0] ? "" : data[0].surving_unit}<b> :یونٹ</b></div>

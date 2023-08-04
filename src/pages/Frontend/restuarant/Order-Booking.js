@@ -74,6 +74,11 @@ const {userData} = useAuthContext()
     setTime(hours + ':' + mints + ':' + sec + ' ' + amPm)
   }, [changeTime])
 
+  // useEffect(() => {
+  //   setAmount(state.quantity * state.amount)
+  // }, [state.amount, state.quantity])
+
+
 
   // This useEffect is used to get data from firebase and it is also used to get data from localstorage for once 
   useEffect(() => {
@@ -264,6 +269,7 @@ const {userData} = useAuthContext()
     if (state.item_title === "") {
       return window.toastify("Please Select Item First", "error")
     } else {
+      
       switch (condition) {
         case -1:
           setQuantity(quantity === 1 ? quantity : quantity - 1)
@@ -556,7 +562,7 @@ const {userData} = useAuthContext()
                   </div>
                   <div className="col mt-4 mt-md-0">
                     <label htmlFor="amount" className="form-label">Amount</label>
-                    <input type="text" className="form-control shadow-none bg-light" id="amount" name='amount' readOnly value={isAmount} />
+                    <input type="text" className="form-control shadow-none bg-light" id="amount" name='amount' readOnly  value={isAmount}/>
                   </div>
                 </div>
                 <div className="row mt-4">
