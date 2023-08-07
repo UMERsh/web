@@ -53,7 +53,7 @@ export default function Navbar() {
                             </li>
                             : ""
                         }
-                        {userRole === "manager" || userRole === "restuarant_staff"
+                        {userRole === "manager" || userRole === "restuarant_staff" 
                             ? <li className="nav-item dropdown">
                                 <a className="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     PayRoll
@@ -61,6 +61,8 @@ export default function Navbar() {
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to='payroll/employe-info'>Employe Information</Link></li>
                                     <li><Link className="dropdown-item" to='payroll/advance-salery'>Advance Salery</Link></li>
+                                    <li><Link className="dropdown-item" to='payroll/emp-salery'>Monthly Salery</Link></li>
+
 
                                 </ul>
                             </li>
