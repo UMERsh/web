@@ -11,25 +11,17 @@ const initialState = {
   unit: "",
   approved_qty: 0,
   unit_rate: 0,
-  store: ""
+  store: "",
+  discount: ""
 
 }
 
 export default function GoodsReceive() {
   const [state, setState] = useState(initialState)
-  const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [totalAmount, setTotalAmount] = useState(0)
   const { userData } = useAuthContext()
 
-  // const gettingData = async () => {
-  //   let array = []
-  //   const querySnapshot = await getDocs(collection(firestore, "ProductiveItems"));
-  //   querySnapshot.forEach((doc) => {
-  //     array.push(doc.data())
-  //     setDocuments(array)
-  //   });
-  // }
   useEffect(() => {
     // gettingData()
     state.approved_qty = Number(state.approved_qty)
@@ -40,20 +32,6 @@ export default function GoodsReceive() {
 
 
 
-  // handleItemType
-  const handleItemType = async (e) => {
-    let ItemName = e.target.value
-    state.item_name = ItemName;
-
-    let array = []
-    const q = query(collection(firestore, "ProductiveItems"), where("item_name", "==", ItemName));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      array.push(doc.data())
-      setData(array)
-    });
-
-  }
 
   const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }));
   //handleSubmit
@@ -102,13 +80,13 @@ export default function GoodsReceive() {
                   <div className="col mt-3 mt-md-0">
                     <label htmlFor="item-type" className="form-label"> Item Type</label>
                     {/* <input type="text" className="form-control" id="item_name" name='item_name' value={state.item_name} onChange={handleChange} required /> */}
-                   <select className="form-select shadow-none" id='item_name' name='item_name' value={state.item_name} onChange={handleChange} aria-label="Default select example">
+                    <select className="form-select shadow-none" id='item_name' name='item_name' value={state.item_name} onChange={handleChange} aria-label="Default select example">
                       <option value="" ></option>
-                       <ProductiveItemsOptions />
-                   </select> 
+                      <ProductiveItemsOptions />
+                    </select>
                   </div>
                 </div>
-                      
+
                 {/* Unit*/}
                 <div className="row row-cols-1 row-cols-md-2 mb-3">
                   <div className="col">
@@ -135,11 +113,16 @@ export default function GoodsReceive() {
                   </div>
                 </div>
 
-                <div className="row">
+                <div className="row row-cols-1 row-cols-md-2 mb-3">
                   <div className="col">
                     {/* Store */}
                     <label htmlFor="store" className="form-label">Store <span className="text-danger">*</span></label>
                     <input type="text" className="form-control" id="store" name='store' value={state.store} onChange={handleChange} required />
+                  </div>
+                  <div className="col mt-3 mt-md-0">
+                    {/* Discount*/}
+                    <label htmlFor="discount" className="form-label">Discount </label>
+                    <input type="text" className="form-control" id="discount" name='discount' value={state.discount} onChange={handleChange} />
                   </div>
                 </div>
                 <div className="row mt-4">

@@ -11,6 +11,7 @@ const initialState = {
   approved_qty: 0,
   unit_rate: 0,
   store: "",
+  discount: "",
   date: ""
 
 }
@@ -48,7 +49,7 @@ export default function GoodsReturn() {
   //handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    var { supplier, item_name, unit, approved_qty, unit_rate, store, date } = state
+    var { supplier, item_name, unit, approved_qty, unit_rate, store, date, discount } = state
     supplier = supplier.trim()
     item_name = item_name.trim()
     unit = unit.trim()
@@ -57,7 +58,7 @@ export default function GoodsReturn() {
     store = store.trim()
 
     let data = {
-      supplier, item_name, unit, approved_qty, unit_rate, store, date,
+      supplier, item_name, unit, approved_qty, unit_rate, store, date, discount,
       gross_amount: totalAmount,
       dateCreated: moment().format('YYYY-MM-DD,h:mm:ss a'),
       createdBy: {
@@ -112,8 +113,8 @@ export default function GoodsReturn() {
                     {/* <input type="text" className="form-control" id="item_name" name='item_name' value={state.item_name} onChange={handleChange} required /> */}
                     <select className="form-select shadow-none" id='item_name' name='item_name' value={state.item_name} onChange={handleChange} aria-label="Default select example">
                       <option value="" ></option>
-                       <ProductiveItemsOptions />
-                   </select>
+                      <ProductiveItemsOptions />
+                    </select>
                   </div>
                 </div>
 
@@ -151,10 +152,19 @@ export default function GoodsReturn() {
                   </div>
                   <div className="col mt-3 mt-md-0">
                     {/* Gross Amount */}
+                    <label htmlFor="discount" className="form-label">Discount</label>
+                    <input type="text" className="form-control" id="discount" name='discount' value={state.discount} onChange={handleChange} />
+                  </div>
+                </div>
+
+                <div className="row mt-3">
+                  <div className="col-12 col-md-6">
+                    {/* Gross Amount */}
                     <label htmlFor="date" className="form-label">Enter Date of Received Goods<span className="text-danger">*</span></label>
                     <input type="date" className="form-control" id="date" name='date' value={state.date} onChange={handleChange} required />
                   </div>
                 </div>
+
                 <div className="row mt-4">
                   <div className="col-8 col-md-3 offset-2 offset-md-9">
                     <button className='btn btn-info text-white w-100' disabled={isLoading}>
@@ -172,6 +182,8 @@ export default function GoodsReturn() {
             </div>
           </div>
         </div >
+
+
       </div >
     </>
   )
