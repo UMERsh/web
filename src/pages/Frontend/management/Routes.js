@@ -22,9 +22,9 @@ export default function Index() {
             <Route path='/utility-bills' element={userRole !== "" && userRole == 'manager' ? <ViewUtilityBillsRecord /> : <div className='text-danger'>This page is not for you</div>} />
             <Route path='/salaries' element={userRole !== "" && userRole == 'manager' ? <ViewSaleryRecord /> : <div className='text-danger'>This page is not for you</div>} />
             <Route path='/construction' element={userRole !== "" && userRole == 'manager' ? <ViewConstructionRecord /> : <div className='text-danger'>This page is not for you</div>} />
-            <Route path='/inventory-goods' element={userRole !== "" && userRole == 'manager' ? <InventoryGoodsRecord /> : <div className='text-danger'>This page is not for you</div>} />
-            <Route path='/inventory' element={userRole !== "" && userRole == 'manager' ? <InventoryRecord /> : <div className='text-danger'>This page is not for you</div>} />
-            <Route path='/payroll' element={userRole !== "" && userRole == 'manager' ? <ViewPayRoll /> : <div className='text-danger'>This page is not for you</div>} />
+            <Route path='/inventory-goods' element={userRole !== "" && userRole == 'manager' || userRole == 'restuarant_staff' ? <InventoryGoodsRecord /> : <div className='text-danger'>This page is not for you</div>} />
+            <Route path='/inventory' element={userRole !== "" && userRole == 'manager' || userRole == 'restuarant_staff' ? <InventoryRecord /> : <div className='text-danger'>This page is not for you</div>} />
+            <Route path='/payroll' element={userRole !== "" && userRole == 'manager' || userRole=='restuarant_staff' ?  <ViewPayRoll /> : <div className='text-danger'>This page is not for you</div>} />
         </Routes>
     )
 }

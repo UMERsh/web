@@ -19,6 +19,7 @@ const intitalState = {
   sales_man_name: "",
   surving_unit: "",
   surving_unit_details: "",
+  address: "",
   serving_area: "",
   membership_number: "",
   customer_name: "",
@@ -73,6 +74,11 @@ const {userData} = useAuthContext()
     var sec = new Date().getSeconds()
     setTime(hours + ':' + mints + ':' + sec + ' ' + amPm)
   }, [changeTime])
+
+  // useEffect(() => {
+  //   setAmount(state.quantity * state.amount)
+  // }, [state.amount, state.quantity])
+
 
 
   // This useEffect is used to get data from firebase and it is also used to get data from localstorage for once 
@@ -157,7 +163,7 @@ const {userData} = useAuthContext()
 
     let previousLocalStorageItems = JSON.parse(localStorage.getItem("orders")) || []
 
-    let { shift, sales_man_name, surving_unit, surving_unit_details, serving_area, membership_number, customer_name, order_type, order_code, item_title, item_name_urdu, quantity, amount } = state
+    let { shift, sales_man_name, surving_unit, surving_unit_details,address, serving_area, membership_number, customer_name, order_type, order_code, item_title, item_name_urdu, quantity, amount } = state
     shift = shift.trim()
     sales_man_name = sales_man_name.trim()
     surving_unit = surving_unit.trim()
@@ -183,6 +189,7 @@ const {userData} = useAuthContext()
       sales_man_name,
       surving_unit,
       surving_unit_details,
+      address,
       serving_area,
       membership_number,
       customer_name,
@@ -264,6 +271,7 @@ const {userData} = useAuthContext()
     if (state.item_title === "") {
       return window.toastify("Please Select Item First", "error")
     } else {
+      
       switch (condition) {
         case -1:
           setQuantity(quantity === 1 ? quantity : quantity - 1)
@@ -483,7 +491,10 @@ const {userData} = useAuthContext()
                           <label htmlFor="membership-number" className="form-label ">Membership Number <span className="text-danger">*</span></label>
                           <input type="text" className="form-control bg-light" id="membership-number" name='membership_number' value={state.membership_number} required onChange={handleChange} />
                         </div>
+                        
+                        
                       </div>
+                      
                     </div>
 
                   </div>
@@ -501,6 +512,12 @@ const {userData} = useAuthContext()
                         <div className='d-flex '>
                           <input type="number" className="form-control bg-light me-2" id="surving-unit" name='surving_unit' value={state.surving_unit} required onChange={handleChange} />
                           <input type="text" className="form-control bg-light" name='surving_unit_details' placeholder='E.g. H1' value={state.surving_unit_details} required onChange={handleChange} />
+                        </div>
+                      </div>
+                      <div className="col">
+                      <div className="mb-3">
+                      <label htmlFor="address" className='form-label'>Address</label>
+                      <input type="text" name="address" className="form-control bg-light" id="address" value={state.address} onChange={handleChange}/>
                         </div>
                       </div>
                     </div>
@@ -556,7 +573,7 @@ const {userData} = useAuthContext()
                   </div>
                   <div className="col mt-4 mt-md-0">
                     <label htmlFor="amount" className="form-label">Amount</label>
-                    <input type="text" className="form-control shadow-none bg-light" id="amount" name='amount' readOnly value={isAmount} />
+                    <input type="text" className="form-control shadow-none bg-light" id="amount" name='amount' readOnly  value={isAmount}/>
                   </div>
                 </div>
                 <div className="row mt-4">
@@ -590,6 +607,7 @@ const {userData} = useAuthContext()
                         <th scope="col" className='px-3' >Quantity</th>
                         <th scope="col" className='px-3' >Date</th>
                         <th scope="col" className='px-3' >Price</th>
+                        <th scope="col" className='px-3' >Address</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -609,6 +627,7 @@ const {userData} = useAuthContext()
                           <td scope="col" className='text-center'>{items.quantity}</td>
                           <td scope="col">{items.date}</td>
                           <td scope="col">{"Rs. " + items.amount}</td>
+                          <td scope="col">{ items.address}</td>
                         </tr>
                       })}
                     </tbody>
@@ -922,10 +941,26 @@ const {userData} = useAuthContext()
                   </tbody>
                 </table>
               </div>
+
+              
             </div>
           </div>
         </div>
+
+        
+
       </div >
+
+
+
+
+
+
+
+
+
+
+      
     </>
   )
 }

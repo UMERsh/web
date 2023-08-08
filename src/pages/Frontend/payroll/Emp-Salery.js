@@ -9,19 +9,15 @@ const initialState = {
   business_unit: "",
   employe_name: "",
   designation: "",
-  monthly_salery: "",
-  advance_salery: "",
-  
+  month: "",
+  salery: "",
 }
-export default function AdvanceSalery() {
+export default function EmpSalery() {
   const [state, setState] = useState(initialState)
   const [isLoading, setIsLoading] = useState(false)
-  const[newSalery, setNewSalery] = useState(0)
   const { userData } = useAuthContext()
 
-useEffect(()=>{
- setNewSalery(state.monthly_salery - state.advance_salery)
-},[state.monthly_salery,state.advance_salery]) 
+
 
   const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }));
   //handleSubmit
@@ -31,7 +27,6 @@ useEffect(()=>{
     let data = {
       ...state,
       dateCreated: moment().format('YYYY-MM-DD,h:mm:ss a'),
-      ex_salery: newSalery,
       createdBy: {
         email: userData.email,
         uid: userData.uid,
@@ -39,7 +34,7 @@ useEffect(()=>{
     }
     setIsLoading(true)
     try {
-      await setDoc(doc(firestore, "Advance-Salery", moment().format('YYYY-MM-DD,h:mm:ss')), data)
+      await setDoc(doc(firestore, "Monthly-Salery", moment().format('YYYY-MM-DD,h:mm:ss')), data)
         .then(() => {
           setIsLoading(false)
           window.toastify("Record Added Successfully", "success")
@@ -56,7 +51,7 @@ useEffect(()=>{
         <div className="row ">
           <div className="col">
             <div className="card rounded-4 shadow-lg border-0 pb-5 px-3 px-md-4">
-              <h1 className='pt-3 pb-5 fw-bold text-info'>Advance Salery</h1>
+              <h1 className='pt-3 pb-5 fw-bold text-info'>Monthly Salery</h1>
               <form onSubmit={handleSubmit} >
 
                 {/* Business Unit */}
@@ -81,22 +76,18 @@ useEffect(()=>{
                   </div>
                   {/* //Monthyly Salery */}
                   <div className="col mt-3 mt-md-0">
-                    <label htmlFor="person_name" className="form-label">Monthly Salery<span className="text-danger">*</span></label>
-                    <input type="number" className="form-control" id="monthly_salery" name='monthly_salery' value={state.monthly_salery} onChange={handleChange} required />
+                    <label htmlFor="person_name" className="form-label"> Month<span className="text-danger">*</span></label>
+                    <input type="date" className="form-control" id="month" name='month' onChange={handleChange} required />
                   </div>
                 </div>
 
-                <div className="row row-cols-1 row-cols-md-2 mb-3">
+                <div className="row row-cols-12">
                   <div className="col">
                     {/* Advance Salery*/}
-                    <label htmlFor="person_name" className="form-label">Advance Salery<span className="text-danger">*</span></label>
-                    <input type="number" className="form-control" id="advance_salery" name='advance_salery' value={state.advance_salery} onChange={handleChange} required />
+                    <label htmlFor="person_name" className="form-label">Salery<span className="text-danger">*</span></label>
+                    <input type="number" className="form-control" id="salery" name='salery'  onChange={handleChange} required />
                   </div>
-                  <div className="col mt-3 mt-md-0">
-                    {/* New Sal*/}
-                    <label htmlFor="person_name" className="form-label">New Ex Salery of Month<span className="text-danger">*</span></label>
-                    <input type="number" className="form-control" id="ex_salery" name='ex_salery' readOnly value={newSalery} required />
-                  </div>
+                  
                 </div>
 
                 <div className="row mt-4">

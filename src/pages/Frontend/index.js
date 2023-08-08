@@ -28,7 +28,7 @@ export default function Index() {
                             <Route path='management/*' element={userRole !== "" && userRole == 'manager' || userRole == 'restuarant_manager' || userRole == 'restuarant_staff' ? <Management /> : <Home />} />
                             <Route path='membership/*' element={userRole !== "" && userRole == 'staff' || userRole == 'manager' ? <Membership /> : <Home />} />
                             <Route path='expenses/*' element={userRole !== "" && userRole == 'manager' ? <Expenses /> : <Home />} />
-                            <Route path='inventory/*' element={userRole !== "" && userRole == 'manager' ? <Inventory /> : <Home />} />
+                            <Route path='inventory/*' element={userRole !== "" && userRole == 'manager' || userRole == 'restuarant_staff' ? <Inventory /> : <Home />} />
                             <Route path='payroll/*' element={userRole !== "" && userRole == 'manager' ? <PayRoll /> : <Home />} />
                             <Route path='*' element={<Nopage />} />
                         </Routes>
