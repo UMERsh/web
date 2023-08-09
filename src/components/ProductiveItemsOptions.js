@@ -37,7 +37,10 @@ export default function ProductiveItemsOptions() {
       <option value="mitha-soda">Mitha Soda</option>
       <option value="kalwanji">Kalwanji</option>
       <option value="white-paper">White Paper</option>
-      <option value="mineral-water">Mineral Water</option>
+      <option value="mineral-water">Mineral Water(pet)</option>
+      <option value="mineral-water1">Mineral Water(1.5)(pet)</option>
+      <option value="mineral-water2">Mineral Water(2.5)(pet)</option>
+      <option value="mineral-water3">Mineral Water(500ML)(pet)</option>
       <option value="kala-zeera">Kala Zeera</option>
       <option value="tissue-boxes">Tissue Boxes</option>
       <option value="cherry">Cherry</option>
@@ -93,9 +96,11 @@ export default function ProductiveItemsOptions() {
       <option value="adhrak-powdr">Adhark Powder(50gm)</option>
       <option value="ketchup">Ketchup</option>
       <option value="tooth-pick">Tooth Pick</option>
-      <option value="coke-reg">Coke Reg</option>
-      <option value="coke-1.5">Coke 1.5L</option>
-      <option value="teen-pack">Teen Pack</option>
+      <option value="coke-reg">Coke Reg(pet)</option>
+      <option value="coke-1.5">Coke 1.5L(pet)</option>
+      <option value="coke-2.15">Coke 2.15L(pet)</option>
+      <option value="coke-sugerf">Coke Zero SGR Can 259ML(pet)</option>
+      <option value="teen-pack">Teen Pack(pet)</option>
       <option value="custard">Custard</option>
       <option value="podene">Podena</option>
       <option value="garam-masala">Garam Masala</option>
@@ -108,6 +113,7 @@ export default function ProductiveItemsOptions() {
       <option value="cheese">Cheese</option>
       <option value="matar">Matar</option>
       <option value="achar">Achar</option>
+      <option value="surf">Surf</option>
       <option value="makhan">Makhan</option>
       <option value="khoya">Khoya</option>
       <option value="white-sirka">White Sirka</option>
@@ -123,6 +129,7 @@ export default function ProductiveItemsOptions() {
       <option value="dahi">Dahi</option>
       <option value="milk">Milk</option>
       <option value="khera">Khera</option>
+      <option value="sagu-dana">Sagu Dana</option>
       <option value="lemon">Lemon</option>
       <option value="shimlah-mirch">Shimla Mirch</option>
       <option value="kajo">Kajo</option>
