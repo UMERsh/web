@@ -4,13 +4,19 @@ import { collection, getDocs } from 'firebase/firestore/lite'
 import moment from 'moment'
 import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
+import ReactToPrint from 'react-to-print'
+
+import { PrintScreen } from './PrintScreen(GRN)';
 
 export default function ViewRecievingRecord() {
   const [goodsRecieving, setGoodsRecieving] = useState([])
+  const [filteredData, setFilteredData] = useState([])
+
   const [goodsRecievingfltrData, setGoodsRecievingfltrData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [viewMore, setViewMore] = useState(true)
   const durationRef = useRef()
+  var componentRef = useRef(null)
 
   useEffect(() => {
     gettingData()
@@ -47,6 +53,14 @@ export default function ViewRecievingRecord() {
         </div>
         <div className="col text-end text-secondary pe-3 pe-sm-5">
           <h6 >Total Results: {goodsRecievingfltrData.length}</h6>
+          <ReactToPrint
+            trigger={() => <div className='btn btn-info btn-sm px-4 py-2 rounded-pill text-white buttons'>Print</div>}
+            content={() => componentRef}
+          />
+          <div className='d-none'>
+            <PrintScreen ref={(el) => (componentRef= el)} dataForPrint={goodsRecievingfltrData} />
+          </div>
+
         </div>
       </div>
       <div className="row g-2">

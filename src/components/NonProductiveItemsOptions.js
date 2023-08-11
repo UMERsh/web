@@ -53,7 +53,15 @@ export default function NonProductiveItemsOptions() {
       <option value="disposible-cup">Disposible Cup</option>
       <option value="serving-handi-steel">Serving Handi Steel</option>
       <option value="saled-cutter">Saled Cutter</option>
+      <option value="hazri-register">Hazri Register </option>
+      <option value="foker">Foker  </option>
+      <option value="sabun">Sabun  </option>
+      <option value="paint-brush">Paint Brush  </option>
+      <option value="washing-clothes">Washing Clothes</option>
+      <option value="packing-roll">Packing Roll </option>
+      <option value="butter-paper">Butter Paper </option>
       <option value="cutting-board-lg">Cutting Board lg</option>
+      <option value="king-tox-spray">King tox Spray</option>
       <option value="chinese-karahi">Chinese Karahi(Lohay Wali)</option>
       <option value="frying-pan">Frying Pan</option>
       <option value="pizza-pan">Pizza Pan(8*7)</option>

@@ -118,6 +118,7 @@ export default function ProductiveItemsOptions() {
       <option value="khoya">Khoya</option>
       <option value="white-sirka">White Sirka</option>
       <option value="desi-ghee">Desi Ghee</option>
+      <option value="milk-cream">Milk Cream </option>
       <option value="chilli-souce">Chilli Souce (4L)</option>
       <option value="pista">Pista</option>
       <option value="kajo">Kajo</option>
