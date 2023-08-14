@@ -59,6 +59,7 @@ export default function NonProductiveItemsOptions() {
       <option value="paint-brush">Paint Brush  </option>
       <option value="washing-clothes">Washing Clothes</option>
       <option value="packing-roll">Packing Roll </option>
+      <option value="straw">Straw</option>
       <option value="butter-paper">Butter Paper </option>
       <option value="cutting-board-lg">Cutting Board lg</option>
       <option value="king-tox-spray">King tox Spray</option>

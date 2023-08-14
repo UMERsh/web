@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import FoodItemOptions from 'components/FoodItemOptions'
 import { firestore } from 'config/Firebase'
-import { collection, getDocs } from 'firebase/firestore/lite'
+import { collection, doc, getDocs } from 'firebase/firestore/lite'
 import moment from 'moment/moment'
 import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
@@ -90,10 +90,10 @@ export default function ViewRestuarantRecord() {
         break;
       case "year":
         filterd = documents.filter(doc => doc.date >= moment().subtract(1, 'year').format('YYYY-MM-DD') && doc.date <= currentFullDate)
-        setFilteredData(filterd.filter(doc => doc.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || doc.serving_area.includes(e.target.value.toLowerCase())))
+        setFilteredData(filterd.filter(doc => doc.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || doc.serving_area.includes(e.target.value.toLowerCase())|| doc.date.includes(e.target.value.toLowerCase()) ))
         break;
       default:
-        setFilteredData(documents.filter(item => item.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || item.serving_area.includes(e.target.value.toLowerCase())))
+        setFilteredData(documents.filter(item => item.customer_name.toLowerCase().includes(e.target.value.toLowerCase()) || item.serving_area.includes(e.target.value.toLowerCase()) ))
         break;
     }
 

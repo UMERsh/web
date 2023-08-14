@@ -99,6 +99,9 @@ export default function ProductiveItemsOptions() {
       <option value="coke-reg">Coke Reg(pet)</option>
       <option value="coke-1.5">Coke 1.5L(pet)</option>
       <option value="coke-2.15">Coke 2.15L(pet)</option>
+      <option value="1.5-pet">1.5L(pet)</option>
+      <option value="reg-pet">Reg Bottle(pet)</option>
+      <option value="teen-pet">Teen Pack(pet)</option>
       <option value="coke-sugerf">Coke Zero SGR Can 259ML(pet)</option>
       <option value="teen-pack">Teen Pack(pet)</option>
       <option value="custard">Custard</option>

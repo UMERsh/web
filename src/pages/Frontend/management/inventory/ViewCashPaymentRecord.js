@@ -4,6 +4,9 @@ import { collection, getDocs } from 'firebase/firestore/lite'
 import moment from 'moment'
 import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
+import ReactToPrint from 'react-to-print'
+
+import { PrintScreen } from './PrintScreens/PrintScreen(Cash)';
 
 export default function ViewCashPaymentRecord() {
   const [goodsRecieving, setGoodsRecieving] = useState([])
@@ -11,6 +14,8 @@ export default function ViewCashPaymentRecord() {
   const [isLoading, setIsLoading] = useState(true)
   const [viewMore, setViewMore] = useState(true)
   const durationRef = useRef()
+  var componentRef = useRef(null)
+
 
   useEffect(() => {
     gettingData()
@@ -47,6 +52,14 @@ export default function ViewCashPaymentRecord() {
         </div>
         <div className="col text-end text-secondary pe-3 pe-sm-5">
           <h6 >Total Results: {goodsRecievingfltrData.length}</h6>
+          <ReactToPrint
+            trigger={() => <div className='btn btn-info btn-sm px-4 py-2 rounded-pill text-white buttons'>Print</div>}
+            content={() => componentRef}
+          />
+          <div className='d-none'>
+            <PrintScreen ref={(el) => (componentRef= el)} dataForPrint={goodsRecievingfltrData} />
+          </div>
+
         </div>
       </div>
       <div className="row g-2">
@@ -84,6 +97,7 @@ export default function ViewCashPaymentRecord() {
                 <th scope="col">Amount</th>
                 <th scope="col">Account Name</th>
                 <th scope="col">Date</th>
+                <th scope="col">Description</th>
                 <th scope="col">Date Created</th>
                 <th scope="col">Created By</th>
               </tr>
@@ -101,6 +115,7 @@ export default function ViewCashPaymentRecord() {
                     <td scope="col">{data.amount}</td>
                     <td scope="col">{data.account_name}</td>
                     <td scope="col">{data.date}</td>
+                    <td scope="col">{data.description}</td>
                     <td scope="col">{data.dateCreated}</td>
                     <td scope="col">{data.createdBy.email}</td>
                   </tr>

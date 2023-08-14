@@ -6,7 +6,7 @@ import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import ReactToPrint from 'react-to-print'
 
-import { PrintScreen } from './PrintScreen(NonPro)';
+import { PrintScreen } from './PrintScreens/PrintScreen(NonPro)';
 
 
 export default function ViewNonProductiveRecord() {

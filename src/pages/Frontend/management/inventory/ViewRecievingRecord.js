@@ -6,7 +6,7 @@ import FilterListTwoToneIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import ReactToPrint from 'react-to-print'
 
-import { PrintScreen } from './PrintScreen(GRN)';
+import { PrintScreen } from './PrintScreens/PrintScreen(GRN)';
 
 export default function ViewRecievingRecord() {
   const [goodsRecieving, setGoodsRecieving] = useState([])
